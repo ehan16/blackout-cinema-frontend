@@ -2,22 +2,19 @@ import React from "react";
 
 function Banner(props) {
     return (
-        <div className={ bannerStyle }>
-        
-            <p>asdasdasds</p>
-            <h1>{ props.name }</h1>
-            <h1>{ props.name }</h1>
-            <h1>{ props.name }</h1>
-            <h1>{ props.name }</h1>
-            <p>adsdasdasdsd</p>
-        
+        <div className="banner">
+            <div style={ nameStyle }>
+                <h6>{ props.name }</h6>
+            </div>
         </div>
         );
 }
 
-const bannerStyle = {
-    height: '50vh',
-    backgroundImage: `url(${this.props.background})`
+const nameStyle = {
+    color: 'white',
+    background: '#292b2c',
+    textAlign: 'center',
+    padding: '5px'
 }
 
 export default Banner;

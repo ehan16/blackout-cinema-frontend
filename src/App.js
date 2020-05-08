@@ -3,37 +3,26 @@ import './App.css';
 import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Home from './components/Home'
+import Home from './components/pages/Home'
 
 function App() {
   return (
     
-    <div className="container-fluid"> 
+    <div className=""> 
       <Router>
 
-      <div className="row">
-        <div className="col">
-          <Navbar />
-        </div>
-      </div>
+        <Navbar className="d-block"/>
 
-      <div className="section">
-          
-          <Home />
-          <p>asdas</p>
+        <div style={{ minHeight: '100vh', marginTop: '7vh' }}>
 
           <Switch>
-            {/* <Route path='/' exact={true} component={Home}/> */}
+            * <Route path='/' exact={true} component={Home}/>
             {/* <Route component={CiudadForm} path='/create/ciudad'/> */}
           </Switch>
 
-      </div>
-
-      <div className="row">
-        <div className="col p-0">
-          <Footer />
         </div>
-      </div>
+
+        <Footer className="d-block"/>
 
       </Router> 
     </div>

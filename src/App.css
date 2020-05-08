@@ -9,8 +9,14 @@ body {
   background-color: rgb(236, 236, 236);
 }
 
-.section {
-  margin-top: 7vh;
-  min-height: 100vh;
+.banner {
+  height: 80vh;
+  background-image: url(/assets/13530-min.jpg);
+  background-size: contain;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
+@media (max-width: 1035px) { .banner { height: 60vh; } }
+@media (max-width: 750px) { .banner { height: 45vh; } }
+@media (max-width: 520px) { .banner { height: 35vh; } }
