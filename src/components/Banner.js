@@ -11,8 +11,10 @@ function Banner(props) {
 }
 
 const nameStyle = {
-    color: 'white',
-    background: '#280547',
+    color: 'red',
+    // background: '#280547',
+    // background: '#5e1212',
+    background: '#111',
     textAlign: 'center',
     padding: '8px'
 }

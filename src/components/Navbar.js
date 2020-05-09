@@ -6,8 +6,8 @@ class Navbar extends React.Component {
     render() {
         return (
         
-            <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ background: '#280547' }}>
-                <a className="navbar-brand">Blackout cinema</a>
+            <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ background: '#111' }}>
+                <h1 className="navbar-brand" style={{ color: 'red', fontWeight: 'bolder'}}>Blackout cinema</h1>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -23,5 +23,8 @@ class Navbar extends React.Component {
     }
 
 }
+
+// '#280547' dark purple
+// '#470505' dark red
 
 export default Navbar;
