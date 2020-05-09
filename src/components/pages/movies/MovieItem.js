@@ -1,27 +1,33 @@
 import React from 'react'
-import cinema from '../../../assets/cinema.jpeg'
 
 function MovieItem(props) {
     return (
-        <div style={ containerStyle }>
-            <img src={ cinema } style={{ width: '85%' , borderRadius: '10px'}} />
-            <div style={ infoStyle }>
-                <h2>No te lo pierdas</h2>
+        <div className="movie">
+            <div>
+                <h4>{ props.movie.title } <span className="text-capitalize">({ props.movie.language })</span></h4>
+                <ul className="mb-0" style={{ listStyleType: 'none' }}>
+                    <li>Año: { props.movie.year }</li>
+                    <li>Género: { props.movie.genre }</li>
+                    <li>Duración: { props.movie.duration }</li>
+                    <li>Puestos: { props.movie.lots }</li>
+                    <li>Subtítulos: { props.movie.subtitles ? 'Español' : 'No' }</li>
+                </ul>
+                { props.movie.on_air 
+                    ? <button style={ btnStyle } disabled={ props.movie.lots == 0 } >Reservar</button> 
+                    : null
+                }
             </div>
         </div>
     )
 }
 
-const containerStyle = {
-    position: 'relative',
-    textAlign: 'center',
-    margin: '10px'
-}
-
-const infoStyle = {
-    position: 'absolute',
-    top: '20px',
-    left: '15%'
+const btnStyle = {
+    background: 'red',
+    marginTop: '10px',
+    color: 'white',
+    padding: '5px',
+    borderRadius: '5px',
+    border: 'red'
 }
 
 export default MovieItem;

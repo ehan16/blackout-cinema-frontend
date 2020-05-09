@@ -6,16 +6,18 @@ import Movie from './movies/MovieItem'
 function Home() {
     return (
         <div>
-            <Banner name="Home" background="../assest/13530-min.jpg"/>
-            <div className="container-fluid">
+            <Banner name="Home"/>
+            <div className="container-fluid p-m-5">
 
-                <div className="row" style={{ padding: '40px' }}>
+                <div className="row" style={{ padding: '50px 100px' }}>
                     <div className="col text-center">
                         <h2 className="mb-4" style={{ fontWeight: 'bold' }}>¡BIENVENIDOS!</h2>
-                        <p><strong><em>Blackout Cinema</em></strong> es un autocine que busca retomar todas las soñadas escenas del 
-                            pasado al presente, combinando la simplicidad junto a nuevas tecnologías e invenciones.</p>
+                        <p><em style={{ color: 'red', fontWeight: 'bolder' }}>Blackout Cinema</em> es un autocine que busca retomar todas las soñadas escenas del 
+                            pasado al presente, combinando la simplicidad junto a nuevas tecnologías e invenciones, creando un ambiente
+                            de ensueño para el disfrute de todos nuestros clientes.</p>
                         <p>Contando con (X) sucursales, distribuidas en toda la ciudad, queremos brindarle la 
-                            mejor atención y servicio para que pueda disfrutar de una noche inolvidable.</p>
+                            mejor atención y servicio para que pueda disfrutar de una noche inolvidable fuera de 
+                            lo común.</p>
                         <p><em>Veámos juntos los créditos en el cielo nocturno</em></p>
                     </div>
                 </div>
@@ -40,10 +42,10 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="row" style={{ padding: '40px' }}>
+                <div className="row" style={{ padding: '50px 100px' }}>
                     <div className="col text-center">
                         <h3 className="mb-4" style={{ fontWeight: 'bold' }}>¡SOBRE NOSOTROS!</h3>
-                        <p><strong><em>Blackout Cinema</em></strong> fue creado por un grupo de estudiantes de la Universidad Metropolitana
+                        <p><em style={{ color: 'red', fontWeight: 'bolder' }}>Blackout Cinema</em> fue creado por un grupo de estudiantes de la Universidad Metropolitana
                             como resultado de un proyecto dirigido a profundizar sobre las bases de datos.
                             </p>
                         <p>Todo esto como resultado de nuestros deseas de revivir y ofrecer una forma de entretenimiento para las personas. Ha sido el 
@@ -55,21 +57,12 @@ function Home() {
 
                 <div style={ cinemaStyle }>
                     <img src={ back } style={{ width: '80%' , borderRadius: '20px'}} />
-                    <h1 style={ centerStyle }>No te lo pierdas</h1>
+                    <h3 style={ centerStyle }>No te lo pierdas</h3>
                 </div>
-
-                <Movie movie="movie"/>
 
             </div>
         </div>
     )
-}
-
-const movie = {
-    title: 'Peter Rabbit',
-    year: '2018',
-    lots: '30',
-    
 }
 
 const cinemaStyle = {

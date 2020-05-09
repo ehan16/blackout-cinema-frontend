@@ -27,6 +27,14 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
   background-color: #301515;
 }
 
+.movie {
+  background-image: url(/assets/cinema.jpg);
+  padding: 30px 50px;
+  border-radius: 20px;
+  margin: 20px 10vw;
+}
+
 @media (max-width: 1035px) { .banner { height: 60vh; } }
-@media (max-width: 750px) { .banner { height: 45vh; } }
+@media (max-width: 750px) { .banner { height: 45vh; } .movie { margin: 20px 3vw } }
 @media (max-width: 520px) { .banner { height: 35vh; } }
+@media (max-width: 380px) { .banner { height: 30vh; } }
