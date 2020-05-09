@@ -12,9 +12,9 @@ function Banner(props) {
 
 const nameStyle = {
     color: 'white',
-    background: '#292b2c',
+    background: '#280547',
     textAlign: 'center',
-    padding: '5px'
+    padding: '8px'
 }
 
 export default Banner;
