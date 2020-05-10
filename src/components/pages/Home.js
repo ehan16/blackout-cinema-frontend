@@ -1,7 +1,6 @@
 import React from 'react'
 import Banner from '../Banner'
 import back from '../../assets/autocinema.jpg'
-import Movie from './movies/MovieItem'
 
 function Home() {
     return (
@@ -45,7 +44,8 @@ function Home() {
                 <div className="row" style={{ padding: '50px 100px' }}>
                     <div className="col text-center">
                         <h3 className="mb-4" style={{ fontWeight: 'bold' }}>¡SOBRE NOSOTROS!</h3>
-                        <p><em style={{ color: 'red', fontWeight: 'bolder' }}>Blackout Cinema</em> fue creado por un grupo de estudiantes de la Universidad Metropolitana
+                        <p><em style={{ color: 'red', fontWeight: 'bolder' }}>Blackout Cinema</em> fue creado por un grupo de estudiantes 
+                            de la Universidad Metropolitana
                             como resultado de un proyecto dirigido a profundizar sobre las bases de datos.
                             </p>
                         <p>Todo esto como resultado de nuestros deseas de revivir y ofrecer una forma de entretenimiento para las personas. Ha sido el 

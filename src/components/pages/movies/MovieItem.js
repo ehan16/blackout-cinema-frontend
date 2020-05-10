@@ -8,7 +8,7 @@ function MovieItem(props) {
                 <ul className="mb-0" style={{ listStyleType: 'none' }}>
                     <li>Año: { props.movie.year }</li>
                     <li>Género: { props.movie.genre }</li>
-                    <li>Duración: { props.movie.duration }</li>
+                    <li>Duración: { props.movie.duration } min</li>
                     <li>Puestos: { props.movie.lots }</li>
                     <li>Subtítulos: { props.movie.subtitles ? 'Español' : 'No' }</li>
                 </ul>

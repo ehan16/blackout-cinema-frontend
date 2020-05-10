@@ -14,7 +14,16 @@ class Navbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ml-4">
                         <Link to='/' class="nav-item nav-link" >Inicio</Link>
-                        <Link to='/movies' class="nav-item nav-link">Películas</Link> 
+                        <Link to='/movies/on-air' class="nav-item nav-link">Películas</Link> 
+                        <Link to='/movies/to-release' class="nav-item nav-link">Estrenos</Link> 
+
+
+                        <div className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" id="dropMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div className="dropdown-menu mb-2" style={{ background: '#181818' }} aria-labelledby="dropMenu">
+                                <Link to='/movies/to-release' className="dropdown-item text-white newHover" href="#">Estrenos</Link> 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>

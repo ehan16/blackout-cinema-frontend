@@ -34,6 +34,10 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
   margin: 20px 10vw;
 }
 
+.newHover:hover {
+  background-color: #3a3a3a;
+}
+
 @media (max-width: 1035px) { .banner { height: 60vh; } }
 @media (max-width: 750px) { .banner { height: 45vh; } .movie { margin: 20px 3vw } }
 @media (max-width: 520px) { .banner { height: 35vh; } }

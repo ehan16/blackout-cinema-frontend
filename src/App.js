@@ -18,7 +18,9 @@ function App() {
 
           <Switch>
             <Route path='/' exact={true} component={Home}/>
-            <Route component={ MovieList } path='/movies'/>
+            {/* <Route path='/admin/movies' render={(props) => <MovieList {...props} mode='' />} /> */}
+            <Route path='/movies/on-air' render={(props) => <MovieList {...props} mode='on-air' />} />
+            <Route path='/movies/to-release' render={(props) => <MovieList {...props} mode='to-release' />} />
           </Switch>
 
         </div>
