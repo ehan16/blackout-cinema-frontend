@@ -22,23 +22,23 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
 }
 
 .card-style:hover {
-  /* background-color: #5e4574; */
-  /* background-color: #804343; */
   background-color: #301515;
 }
 
-.movie {
-  background-image: url(/assets/cinema.jpg);
+.card {
   padding: 30px 50px;
   border-radius: 20px;
   margin: 20px 10vw;
 }
+
+.movie { background-image: url(/assets/cinema.jpg) }
+.branch { background-image: url(/assets/map.png);}
 
 .newHover:hover {
   background-color: #3a3a3a;
 }
 
 @media (max-width: 1035px) { .banner { height: 60vh; } }
-@media (max-width: 750px) { .banner { height: 45vh; } .movie { margin: 20px 3vw } }
+@media (max-width: 750px) { .banner { height: 45vh; } .card { margin: 20px 3vw } }
 @media (max-width: 520px) { .banner { height: 35vh; } }
 @media (max-width: 380px) { .banner { height: 30vh; } }

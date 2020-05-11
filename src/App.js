@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './components/pages/Home'
 import MovieList from './components/pages/movies/MovieList';
+import BranchList from './components/pages/branches/BranchList';
 
 function App() {
   return (
@@ -18,9 +19,11 @@ function App() {
 
           <Switch>
             <Route path='/' exact={true} component={Home}/>
-            {/* <Route path='/admin/movies' render={(props) => <MovieList {...props} mode='' />} /> */}
+            <Route path='/admin/movies' render={(props) => <MovieList {...props} mode='' />} />
             <Route path='/movies/on-air' render={(props) => <MovieList {...props} mode='on-air' />} />
             <Route path='/movies/to-release' render={(props) => <MovieList {...props} mode='to-release' />} />
+            <Route path='/branches' component={BranchList} />} />
+            <Route path='/admin/branches' render={(props) => <BranchList {...props} admin='True' />} />
           </Switch>
 
         </div>

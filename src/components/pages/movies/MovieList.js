@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import MovieItem from './MovieItem'
+import Banner from '../../Banner'
 
 export class MovieList extends Component {
 
@@ -9,16 +10,14 @@ export class MovieList extends Component {
         this.state = {
             movies: [
                 {
+                    id: 1,
                     title: 'Peter Rabbit',
                     year: 2018,
                     lots: 5,
-                    id: 1,
                     genre: 'infantil',
                     duration: 90,
                     language: 'inglés',
-                    subtitles: 'True',
-                    on_air: 'True',
-                    released: 'True'
+                    subtitles: 'True'
                 }
             ]
         };
@@ -30,7 +29,7 @@ export class MovieList extends Component {
                 const movies = res.data;
                 this.setState({ movies });
             })
-        } else {
+        } else { //Cambiar para que busque segun la tabla
             axios.get(`http://127.0.0.1:8000/api/movies/${this.props.mode}/`).then(res => {
                 this.setState({ ...this.state, movies: res.data });
             })
@@ -40,16 +39,12 @@ export class MovieList extends Component {
     render() {
         return (
             <div>
+                <Banner name="Películas"/>
                 <p>{ this.props.mode }</p>
-                <p>{ this.props.mode }</p>
-                <p>{ this.props.mode }</p>
-                <p>{ this.props.mode }</p>
-                <p>{ this.props.mode }</p>
-                <p>{ this.props.mode }</p>
-                <div className="container-fluid pt-5">
+                <div className="container-fluid p-3">
                     { 
                         this.state.movies.map( (movie) => (
-                            <MovieItem movie={ movie } /> 
+                            <MovieItem movie={ movie } mode={ this.props.mode } /> 
                         ))
                     }
                 </div>

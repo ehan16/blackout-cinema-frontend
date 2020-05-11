@@ -2,32 +2,57 @@ import React from 'react'
 
 function MovieItem(props) {
     return (
-        <div className="movie">
+        <div className="card movie">
             <div>
                 <h4>{ props.movie.title } <span className="text-capitalize">({ props.movie.language })</span></h4>
-                <ul className="mb-0" style={{ listStyleType: 'none' }}>
+                <ul className="mb-0" style={{ listStyleType: 'none', paddingBottom: '10px' }}>
+                    { props.mode === '' ? <li>ID: { props.movie.id }</li> : null }
                     <li>Año: { props.movie.year }</li>
                     <li>Género: { props.movie.genre }</li>
                     <li>Duración: { props.movie.duration } min</li>
-                    <li>Puestos: { props.movie.lots }</li>
-                    <li>Subtítulos: { props.movie.subtitles ? 'Español' : 'No' }</li>
+                    { props.mode === 'on-air' ? <li>Puestos: { props.movie.lots }</li> : null }
+                    { props.mode === 'on-air' ? <li>Sucursal: { props.movie.lots }</li> : null }
+                    { props.mode !== 'to-release' ? <li>Subtítulos: { props.movie.subtitles ? 'Español' : 'No' }</li> : null }
+                    { props.mode === 'to-release' ? <li>Fecha de estreno: { props.movie.date }</li> : null }
                 </ul>
-                { props.movie.on_air 
-                    ? <button style={ btnStyle } disabled={ props.movie.lots == 0 } >Reservar</button> 
-                    : null
-                }
+                <div style={{ display: 'flex' }}>
+                    { props.mode === 'on-air'  ? <button style={ deleteStyle } disabled={ props.movie.lots == 0 } >Reservar</button> : null }
+                    { props.mode === ''  ?  <button style={ deleteStyle }>Eliminar</button> : null } 
+                    { props.mode === ''  ?  <button style={ editStyle }>Editar</button> : null } 
+                    { props.movie.date !== undefined ? <button style={ launchStyle }>Estrenar</button> : null }
+                    { props.movie.lots !== undefined ? <button style={ launchStyle }>Culminar</button> : null }
+                </div>
             </div>
         </div>
     )
 }
 
-const btnStyle = {
+const deleteStyle = {
     background: 'red',
-    marginTop: '10px',
+    margin: '5px',
     color: 'white',
     padding: '5px',
     borderRadius: '5px',
     border: 'red'
+}
+
+const launchStyle = {
+    background: 'darkgreen',
+    margin: '5px',
+    color: 'white',
+    padding: '5px',
+    borderRadius: '5px',
+    border: 'darkgreen'
+}
+
+const editStyle = {
+    background: 'darkgoldenrod',
+    margin: '5px',
+    color: 'white',
+    padding: '5px',
+    borderRadius: '5px',
+    border: 'darkgoldenrod',
+    padding: '0px 15px'
 }
 
 export default MovieItem;
