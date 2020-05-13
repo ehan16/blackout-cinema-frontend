@@ -6,7 +6,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  /* background-color: #414950; */
   background-color: #272727;
   color: #fff;
 }
@@ -33,12 +32,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
 
 .movie { background-image: url(/assets/cinema.jpg) }
 .branch { background-image: url(/assets/map.png);}
+.newHover:hover { background-color: #3a3a3a; }
+.list { margin: auto; font-family: 'Raleway', sans-serif; }
+.continue { width: 100%; }
 
-.newHover:hover {
-  background-color: #3a3a3a;
-}
 
 @media (max-width: 1035px) { .banner { height: 60vh; } }
 @media (max-width: 750px) { .banner { height: 45vh; } .card { margin: 20px 3vw } }
+@media (max-width: 580px) { .list { width: fit-content; } .continue { width: 70%; } }
 @media (max-width: 520px) { .banner { height: 35vh; } }
-@media (max-width: 380px) { .banner { height: 30vh; } }
+@media (max-width: 380px) { .banner { height: 30vh; } .list { width: initial; } .continue { width: 100%; } }

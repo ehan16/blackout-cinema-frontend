@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Home from './components/pages/Home'
 import MovieList from './components/pages/movies/MovieList';
 import BranchList from './components/pages/branches/BranchList';
+import ProductsList from './components/pages/products/ProductsList';
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
             <Route path='/movies/on-air' render={(props) => <MovieList {...props} mode='on-air' />} />
             <Route path='/movies/to-release' render={(props) => <MovieList {...props} mode='to-release' />} />
             <Route path='/branches' component={BranchList} />} />
+            <Route path='/products' component={ProductsList} />} />
             <Route path='/admin/branches' render={(props) => <BranchList {...props} admin='True' />} />
+            <Route path='/admin/products' render={(props) => <ProductsList {...props} admin='True' />} />
           </Switch>
 
         </div>

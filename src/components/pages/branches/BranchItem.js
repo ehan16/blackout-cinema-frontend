@@ -8,7 +8,7 @@ function BranchItem(props) {
                 <ul className="mb-0" style={{ listStyleType: 'none', paddingBottom: '10px' }}>
                     { props.admin ? <li>ID: { props.branch.id }</li> : null}
                     <li>Estado: { props.branch.state }</li>
-                    <li>City: { props.branch.city }</li>
+                    <li>Ciudad: { props.branch.city }</li>
                     <li>Zona: { props.branch.zone }</li>
                     <li>Teléfono: { props.branch.number }</li>
                     { props.admin ? <li>Número de empleados: { props.branch.employees }</li> : null}
@@ -20,8 +20,6 @@ function BranchItem(props) {
             </div>
         </div>
     )
-
-    
 }
 
 const deleteStyle = {

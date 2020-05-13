@@ -17,7 +17,7 @@ function MovieItem(props) {
                 </ul>
                 <div style={{ display: 'flex' }}>
                     { props.mode === 'on-air'  ? <button style={ deleteStyle } disabled={ props.movie.lots == 0 } >Reservar</button> : null }
-                    { props.mode === ''  ?  <button style={ deleteStyle }>Eliminar</button> : null } 
+                    {/* { props.mode === ''  ?  <button style={ deleteStyle }>Eliminar</button> : null }  */}
                     { props.mode === ''  ?  <button style={ editStyle }>Editar</button> : null } 
                     { props.movie.date !== undefined ? <button style={ launchStyle }>Estrenar</button> : null }
                     { props.movie.lots !== undefined ? <button style={ launchStyle }>Culminar</button> : null }
