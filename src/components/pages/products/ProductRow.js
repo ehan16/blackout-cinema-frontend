@@ -9,6 +9,9 @@ export default function ProductRow(props) {
         <tr>
             { props.admin ? <th scope="row">1</th> : null }
             <td>Hola</td>
+            { props.admin ? <th scope="row">
+               { item.category === 'combo' ? item.items : 'N/A' } 
+            </th> : null }
             <td>Hola</td>
             <td>Hola</td>
             <td>

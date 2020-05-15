@@ -26,8 +26,7 @@ export class MovieList extends Component {
     componentDidMount() {
         if (this.props.mode === '') {
             axios.get('http://127.0.0.1:8000/api/movies/').then(res => {
-                const movies = res.data;
-                this.setState({ movies });
+                this.setState({ ...this.state, movies: res.data });
             })
         } else { //Cambiar para que busque segun la tabla
             axios.get(`http://127.0.0.1:8000/api/movies/${this.props.mode}/`).then(res => {

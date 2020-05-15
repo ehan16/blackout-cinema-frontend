@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Banner from '../../Banner'
 import ProductRow from './ProductRow'
+import axios from 'axios'
 
 export class ProductsList extends Component {
 
@@ -9,14 +10,19 @@ export class ProductsList extends Component {
         super(props);
         this.state = {
             products: [],
-            combos: [],
             buyList: ['joli'],
             nume: [1]
         }
     }
 
     componentDidMount() {
+        axios.get('http://127.0.0.1:8000/api/products/').then(res => {
+            this.setState({...this.state, products: res.data})
+        });
 
+        axios.get('http://127.0.0.1:8000/api/combos/').then(res => {
+            this.setState({...this.state, product: [...this.state.products, res.data]})
+        })
     }
 
     render() {
@@ -32,6 +38,7 @@ export class ProductsList extends Component {
                                     <tr className="bg-danger">
                                         { this.props.admin ? <th scope="col">ID</th> : null}
                                         <th scope="col">Nombre</th>
+                                        { this.props.admin ? <th scope="col">IDs : Qty</th> : null}
                                         <th scope="col">Categoría</th>
                                         <th scope="col">Precio</th>
                                         <th scope="col">Acción { this.state.nume }</th>
@@ -39,7 +46,7 @@ export class ProductsList extends Component {
                                 </thead>
                                 <tbody>
                                     { this.state.buyList.map((item, index) => 
-                                        <ProductRow item={index} index={index} buy={false} addToBuyList={this.addToBuyList}/>
+                                        <ProductRow admin={this.props.admin} item={index} index={index} buy={false} addToBuyList={this.addToBuyList}/>
                                     ) }
                                 </tbody>
                             </table>
@@ -58,7 +65,7 @@ export class ProductsList extends Component {
                                 </thead>
                                 <tbody>
                                     { this.state.buyList.map((item, index) => 
-                                        <ProductRow item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
+                                        <ProductRow admin={this.props.admin} item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
                                     ) }
                                 </tbody>
                             </table>

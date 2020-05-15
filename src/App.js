@@ -7,6 +7,7 @@ import Home from './components/pages/Home'
 import MovieList from './components/pages/movies/MovieList';
 import BranchList from './components/pages/branches/BranchList';
 import ProductsList from './components/pages/products/ProductsList';
+import ClientForm from './components/pages/orders/ClientForm';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
             <Route path='/admin/branches' render={(props) => <BranchList {...props} admin='True' />} />
             <Route path='/admin/products' render={(props) => <ProductsList {...props} admin='True' />} />
           </Switch>
+
+          <ClientForm/>
 
         </div>
 
