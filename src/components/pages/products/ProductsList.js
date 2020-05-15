@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Banner from '../../Banner'
+import ProductRow from './ProductRow'
 
 export class ProductsList extends Component {
 
@@ -9,7 +10,8 @@ export class ProductsList extends Component {
         this.state = {
             products: [],
             combos: [],
-            toBuy: []
+            buyList: ['joli'],
+            nume: [1]
         }
     }
 
@@ -32,23 +34,13 @@ export class ProductsList extends Component {
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Categoría</th>
                                         <th scope="col">Precio</th>
-                                        <th scope="col">Acción</th>
+                                        <th scope="col">Acción { this.state.nume }</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        { this.props.admin ? <th scope="row">1</th> : null }
-                                        <td>Hola</td>
-                                        <td>Hola</td>
-                                        <td>Hola</td>
-                                        <td>
-                                            <div className="btn-group btn-group-sm">
-                                                { !this.props.admin ? <button className="btn" style={{ background: '#292929', color: 'red' }}><i className="fa fa-plus"></i></button> : null}
-                                                { this.props.admin ? <button className="btn" style={{ background: '#292929', color: 'red' }}><i className="fa fa-pencil"></i></button> : null}
-                                                { this.props.admin ? <button className="btn" style={{ background: '#292929', color: 'red' }}><i className="fa fa-trash"></i></button> : null}
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    { this.state.buyList.map((item, index) => 
+                                        <ProductRow item={index} index={index} buy={false} addToBuyList={this.addToBuyList}/>
+                                    ) }
                                 </tbody>
                             </table>
                         </div>
@@ -65,16 +57,9 @@ export class ProductsList extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Hola</td>
-                                        <td>Hola</td>
-                                        <td>
-                                            <div className="btn-group btn-group-sm">
-                                                <button className="btn" style={{ background: '#292929', color: 'red' }}><i className="fa fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    { this.state.buyList.map((item, index) => 
+                                        <ProductRow item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
+                                    ) }
                                 </tbody>
                             </table>
                             <button className="continue" style={ continueStyle }>Continuar</button>
@@ -86,6 +71,14 @@ export class ProductsList extends Component {
             </div>
         )
     }
+
+    addToBuyList = (newProduct) => { this.setState({ buyList: [...this.state.buyList, newProduct] }) };
+
+    deleteInBuyList = (index) => { this.setState(state => {
+        const buyList = state.buyList.filter((item, i) => index !== i);
+        return { buyList, };
+    }) }
+
 }
 
 const continueStyle = {
@@ -95,6 +88,11 @@ const continueStyle = {
     padding: '5px',
     borderRadius: '5px',
     border: 'red'
+}
+
+const btnStyle = {
+    background: '#292929',
+    color: 'red'
 }
 
 export default ProductsList
