@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
 .form-field {
   background-color: transparent;
   color: white;
-  padding: 8px;
+  padding: 7px;
   width: 100%;
   border-top: 0;
   border-right: 0;
@@ -63,10 +63,18 @@ form {
 label {
   margin: 10px 0px 8px 0px;
   display: block;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 textarea { resize: vertical; }
+
+.btn-form {
+  padding: 5px;
+  border: 1px solid red;
+  color: white;
+  background-color: red;
+  margin: 6px;
+}
 
 @media (max-width: 1035px) { .banner { height: 60vh; } }
 @media (max-width: 750px) { .banner { height: 45vh; } .card { margin: 20px 3vw } }
