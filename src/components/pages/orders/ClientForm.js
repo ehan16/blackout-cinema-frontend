@@ -65,7 +65,8 @@ export class ClientForm extends Component {
         super(props);
         this.state = {
             orderID: '',
-            clientID: '',
+            clientID: '', // Cedula
+            plate: '',
             email: '',
             number: '',
             amount: '',
@@ -88,6 +89,10 @@ export class ClientForm extends Component {
         return (
             <div>
                 <form>
+                    <div className="form-group">
+                        <label>Cédula</label>
+                        <input type="number" className="form-field"></input>
+                    </div>
                     <div className="form-group">
                         <label>Placa del carro</label>
                         <input type="text" className="form-field"></input>

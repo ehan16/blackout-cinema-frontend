@@ -35,7 +35,6 @@ const editStyle = {
     background: 'darkgoldenrod',
     margin: '5px',
     color: 'white',
-    padding: '5px',
     borderRadius: '5px',
     border: 'darkgoldenrod',
     padding: '0px 15px'

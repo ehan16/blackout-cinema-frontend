@@ -20,9 +20,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
   flex-direction: column-reverse;
 }
 
-.card-style:hover {
-  background-color: #301515;
-}
+.card-style:hover { background-color: #301515; }
 
 .card {
   padding: 30px 50px;
@@ -69,12 +67,17 @@ label {
 textarea { resize: vertical; }
 
 .btn-form {
-  padding: 5px;
-  border: 1px solid red;
+  padding: 5px 10px;
+  border: 1px solid olive;
   color: white;
-  background-color: red;
-  margin: 6px;
+  background-color: olive;
+  margin: 8px;
+  border-radius: 10px;
 }
+
+.btn-submit { background-color: red; border: 1px solid red}
+
+.title-style { color: red; padding: 50px 0 20px 0; text-align: center;}
 
 @media (max-width: 1035px) { .banner { height: 60vh; } }
 @media (max-width: 750px) { .banner { height: 45vh; } .card { margin: 20px 3vw } }

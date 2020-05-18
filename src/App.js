@@ -8,6 +8,7 @@ import MovieList from './components/pages/movies/MovieList';
 import BranchList from './components/pages/branches/BranchList';
 import ProductsList from './components/pages/products/ProductsList';
 import ClientForm from './components/pages/orders/ClientForm';
+import MovieForm from './components/pages/movies/MovieForm';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path='/products' component={ProductsList} />} />
             <Route path='/admin/branches' render={(props) => <BranchList {...props} admin='True' />} />
             <Route path='/admin/products' render={(props) => <ProductsList {...props} admin='True' />} />
+            <Route path='/admin/add-movie' component={MovieForm} />
           </Switch>
 
           <ClientForm/>
