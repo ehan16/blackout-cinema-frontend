@@ -13,11 +13,13 @@ export class MovieList extends Component {
                     id: 1,
                     title: 'Peter Rabbit',
                     year: 2018,
-                    lots: 5,
                     genre: 'infantil',
                     duration: 90,
                     language: 'inglés',
-                    subtitles: 'True'
+                    subtitles: 'true',
+                    synopsys: 'Asdasda',
+                    date: 'no se',
+                    mode: 'estreno'
                 }
             ]
         };
@@ -25,7 +27,7 @@ export class MovieList extends Component {
 
     componentDidMount() {
         if (this.props.mode === '') {
-            axios.get('http://127.0.0.1:8000/api/movies/').then(res => {
+            axios.get('/movieshttp://127.0.0.1:8000/api/').then(res => {
                 this.setState({ ...this.state, movies: res.data });
             })
         } else { //Cambiar para que busque segun la tabla
