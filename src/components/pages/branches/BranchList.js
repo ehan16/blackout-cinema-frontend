@@ -14,7 +14,7 @@ export class BranchList extends Component {
                     city: 'Caracas',
                     zone: 'Las Mercedes',
                     place: 'Plaza Alfredo Sadel',
-                    number: '0212-315132',
+                    phone: '0212-315132',
                     employees: 5
                 },
                 {
@@ -23,7 +23,7 @@ export class BranchList extends Component {
                     city: 'Caracas',
                     zone: 'Las Mercedes',
                     place: 'Plaza Alfredo Sadel',
-                    number: '0212-315132',
+                    phone: '0212-315132',
                     employees: 5
                 }
             ]

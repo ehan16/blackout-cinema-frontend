@@ -1,87 +1,19 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
-
-// const ClientForm = (props) => {
-
-//     const orderID, movieID, functionID, products;
-//     const [email, setEmail] = useState("");
-//     const [number, setNumber] = useState(0);
-//     const [amount, setAmount] = useState(0);
-//     const [vehicleType, setVehicleType] = useState("");
-//     const [clientID, setClientID] = useState("");
-
-//     handleChange = (e) => {
-//         e.preventDefault();
-//         const {name, value} = e.currentTarget;
-//         switch (name) {
-
-//         }
-//     }
-
-//     return (
-//                     <div>
-//                         <form>
-//                             <div className="form-group">
-//                                 <label>Placa del carro</label>
-//                                 <input type="text" className="form-field"></input>
-//                             </div>
-//                             <div className="form-group">
-//                                 <label>Correo electrónico</label>
-//                                 <input type="email" className="form-field"></input>
-//                             </div>
-//                             <div className="form-group">
-//                                 <label>Número de teléfono</label>
-//                                 <input type="number" className="form-field"></input>
-//                             </div>
-//                             <div className="form-group">
-//                                 <label>Tipo de vehículo</label>
-//                                 <select name="carType" className="form-field">
-//                                     <option value="small">Sedan</option>
-//                                     <option value="small">Compacto</option>
-//                                     <option value="small">Coupe</option>
-//                                     <option value="small">Hatchback</option>
-//                                     <option value="big">SUV</option>
-//                                     <option value="big">Pickup</option>
-//                                     <option value="big">Familiar</option>
-//                                     <option value="big">Crossover</option>
-//                                 </select>
-//                             </div>
-//                             <div className="btn-group">
-//                                 <button type="button">Cancelar</button>
-//                                 <button type="submit">Aceptar</button>
-//                             </div>
-//                     </form>
-//                   </div>
-//                 );
-
-
-
-// }
-
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 const ClientForm = (props) => {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         orderID: '',
-    //         clientID: '', // Cedula
-    //         plate: '',
-    //         email: '',
-    //         number: '',
-    //         amount: '',
-    //         movieID: '',
-    //         functionID: '',
-    //         vehicleType: '',
-    //         products: []
-    //     }
-    // }
-    // const orderID, movieID, functionID, products, amount;
+    const showHideClassName = props.show ? 'modal d-block' : 'd-none';
+    // movieID, functionID, products, amount informacion necesaria obtenidos por params o por props
     const [plate, setPlate] = useState("")
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState(0);
     const [vehicleType, setVehicleType] = useState("");
-    const [id, setId] = useState("");
+    const [id, setId] = useState(4);
+    const history = useHistory();
+    // const movieId = props.match.params.movieId;
+    // const functionId = props.match.params.functionId;
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -90,7 +22,7 @@ const ClientForm = (props) => {
             case 'email':
                 setEmail(value)
                 break;
-            case 'number':
+            case 'phone':
                 setNumber(value)
                 break;
             case 'vehicleType':
@@ -107,53 +39,65 @@ const ClientForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-    }
-
-    const getParams = async() => {
+        axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)
+        .then(res => {
+            // Significa que el cliente ya se encuentra en la base de datos y no se registra en la tabla de clientes
+            history.push("/products");
+        })
+        .catch(err => console.log(err))
         
     }
 
     return (
-        <div>
-            <form>
-                <div className="form-group">
-                    <label htmlFor="id">Cédula</label>
-                    <input type="number" className="form-field" name="id" id="id"></input>
+        <div className={showHideClassName} style={modalStyle}>
+        <p>{ props.test }</p>
+            <section className="">
+                <div className="title-style">
+                    <h3>Información del cliente</h3>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="plate">Placa del carro</label>
-                    <input type="text" className="form-field" name="plate" id="plate"></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Correo electrónico</label>
-                    <input type="email" className="form-field" name="email" id="email"></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="number">Número de teléfono</label>
-                    <input type="number" className="form-field" name="number" id="number"></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="vehicleType">Tipo de vehículo</label>
-                    <select name="carType" className="form-field" name="vehicleType" id="vehicleType">
-                        <option value="small">Sedan</option>
-                        <option value="small">Compacto</option>
-                        <option value="small">Coupe</option>
-                        <option value="small">Hatchback</option>
-                        <option value="big">SUV</option>
-                        <option value="big">Pickup</option>
-                        <option value="big">Familiar</option>
-                        <option value="big">Crossover</option>
-                    </select>
-                </div>
-                <div className="btn-group">
-                    <button className="btn-form" type="button">Cancelar</button>
-                    <button className="btn-form btn-submit" type="submit">Aceptar</button>
-                </div>
-            </form>
+                <form>
+                    <div className="form-group">
+                        <label htmlFor="id">Cédula</label>
+                        <input type="number" className="form-field" name="id" id="id" onChange={(e) => handleChange(e)}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="plate">Placa del carro</label>
+                        <input type="text" className="form-field" name="plate" id="plate" onChange={(e) => handleChange(e)}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Correo electrónico</label>
+                        <input type="email" className="form-field" name="email" id="email" onChange={(e) => handleChange(e)}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="phone">Número de teléfono</label>
+                        <input type="number" className="form-field" name="phone" id="phone" onChange={(e) => handleChange(e)}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="vehicleType">Tipo de vehículo</label>
+                        <select name="carType" className="form-field" name="vehicleType" id="vehicleType" onChange={(e) => handleChange(e)}>
+                            <option value="1">Sedan</option>
+                            <option value="1">Compacto</option>
+                            <option value="1">Coupe</option>
+                            <option value="1">Hatchback</option>
+                            <option value="2">SUV</option>
+                            <option value="2">Pickup</option>
+                            <option value="2">Familiar</option>
+                            <option value="2">Crossover</option>
+                        </select>
+                    </div>
+                    <div className="btn-group">
+                        <button className="btn-form" type="button" onClick={props.handleClose}>Cancelar</button>
+                        <button className="btn-form btn-submit" type="submit" onClick={ handleSubmit }>Aceptar</button>
+                    </div>
+                </form>
+            </section>
         </div>
     );
 
+}
+
+const modalStyle = {
+    background: 'rgba(0, 0, 0, 0.8)'
 }
 
 export default ClientForm;

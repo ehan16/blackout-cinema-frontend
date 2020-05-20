@@ -12,6 +12,7 @@ const MovieForm = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('estreno');
     const [synopsys, setSynopsys] = useState("");
+    const [year, setYear] = useState(0)
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -23,7 +24,10 @@ const MovieForm = (props) => {
             case 'genre':
                 setGenre(value)
                 break;
-            case 'duration':
+            case 'year':
+                setYear(value)
+                break;
+            case 'duration':    
                 setDuration(value)
                 break;
             case 'language':
@@ -54,7 +58,8 @@ const MovieForm = (props) => {
             subtitles: subtitles,
             date: date,
             mode: mode,
-            synopsys: synopsys
+            synopsys: synopsys,
+            year: year
         }
         // axios.post(`http://127.0.0.1:8000/api/movies/`, data)
         console.log(data)
@@ -62,18 +67,19 @@ const MovieForm = (props) => {
 
     const getMovie = async() => {
         const id = 4
-        await axios.get(`/movieshttp://127.0.0.1:8000/api/movies/${id}/`)
-        .then(res => {
-            // movie = res.data;
-            setTitle(res.data.title);
-            setGenre(res.data.genre);
-            setDuration(res.data.duration);
-            setLanguage(res.data.language);
-            setSubtitles(res.data.subtitles);
-            setDate(res.data.date);
-            setMode(res.data.mode);
-            setSynopsys(res.data.synopsys);
-        })
+        // await axios.get(`/movieshttp://127.0.0.1:8000/api/movies/${id}/`)
+        // .then(res => {
+        //     // movie = res.data;
+        //     setTitle(res.data.title);
+        //     setGenre(res.data.genre);
+        //     setDuration(res.data.duration);
+        //     setLanguage(res.data.language);
+        //     setSubtitles(res.data.subtitles);
+        //     setDate(res.data.date);
+        //     setMode(res.data.mode);
+        //     setSynopsys(res.data.synopsys);
+        // })
+        // .catch(err => alert(err))
     }
 
     // useEffect(() => {
@@ -97,6 +103,10 @@ const MovieForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="duration">Duración</label>
                     <input type="number" className="form-field" name="duration" id="duration" onChange={(e) => handleChange(e)}></input>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="year">Año</label>
+                    <input type="number" className="form-field" name="year" id="year" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="synopsys">Descripción</label>

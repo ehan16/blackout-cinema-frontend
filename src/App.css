@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
 }
 
 form {
-  padding: 20px 40px;
+  padding: 10px 40px 20px 40px;
   max-width: 650px;
   margin-left: auto;
   margin-right: auto;
@@ -77,7 +77,7 @@ textarea { resize: vertical; }
 
 .btn-submit { background-color: red; border: 1px solid red}
 
-.title-style { color: red; padding: 50px 0 20px 0; text-align: center;}
+.title-style { color: red; padding: 25px 10px 10px 10px; text-align: center;}
 
 @media (max-width: 1035px) { .banner { height: 60vh; } }
 @media (max-width: 750px) { .banner { height: 45vh; } .card { margin: 20px 3vw } }

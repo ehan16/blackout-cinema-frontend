@@ -10,7 +10,7 @@ function BranchItem(props) {
                     <li>Estado: { props.branch.state }</li>
                     <li>Ciudad: { props.branch.city }</li>
                     <li>Zona: { props.branch.zone }</li>
-                    <li>Teléfono: { props.branch.number }</li>
+                    <li>Teléfono: { props.branch.phone }</li>
                     { props.admin ? <li>Número de empleados: { props.branch.employees }</li> : null}
                 </ul>
                 <div style={{ display: 'flex' }}>

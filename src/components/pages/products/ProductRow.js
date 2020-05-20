@@ -4,16 +4,17 @@ export default function ProductRow(props) {
 
     let item = props.item;
     let index = props.index;
+    let items = [props.item.product_1, 2] // And so on
 
     return (
         <tr>
-            { props.admin ? <th scope="row">1</th> : null }
-            <td>Hola</td>
-            { props.admin ? <th scope="row">
-               { item.category === 'combo' ? item.items : 'N/A' } 
+            { props.admin ? <th scope="row">{ item.id }</th> : null }
+            <td>{ item.name_ }</td>
+            { props.admin ? <th>
+               { item.category === 'combo' ?  items : 'N/A' } 
             </th> : null }
-            <td>Hola</td>
-            <td>Hola</td>
+            <td>{ item.category }</td>
+            <td>{ item.price }</td>
             <td>
                 <div className="btn-group btn-group-sm">
                     { !props.admin && !props.buy ? <button className="btn" style={ btnStyle } onClick={() => props.addToBuyList(item)}><i className="fa fa-plus"></i></button> : null}

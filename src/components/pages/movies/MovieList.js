@@ -26,22 +26,21 @@ export class MovieList extends Component {
     }
 
     componentDidMount() {
-        if (this.props.mode === '') {
-            axios.get('/movieshttp://127.0.0.1:8000/api/').then(res => {
-                this.setState({ ...this.state, movies: res.data });
-            })
-        } else { //Cambiar para que busque segun la tabla
-            axios.get(`http://127.0.0.1:8000/api/movies/${this.props.mode}/`).then(res => {
-                this.setState({ ...this.state, movies: res.data });
-            })
-        }
+        // if (this.props.mode === '') {
+        //     axios.get('/movieshttp://127.0.0.1:8000/api/').then(res => {
+        //         this.setState({ ...this.state, movies: res.data });
+        //     })
+        // } else { //Cambiar para que busque segun la tabla
+        //     axios.get(`http://127.0.0.1:8000/api/movies/${this.props.mode}/`).then(res => {
+        //         this.setState({ ...this.state, movies: res.data });
+        //     })
+        // }
     }
 
     render() {
         return (
             <div>
                 <Banner name="Películas"/>
-                <p>{ this.props.mode }</p>
                 <div className="container-fluid p-3">
                     { 
                         this.state.movies.map( (movie) => (
