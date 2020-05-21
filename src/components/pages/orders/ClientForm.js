@@ -5,15 +5,19 @@ import { useHistory } from "react-router-dom";
 const ClientForm = (props) => {
 
     const showHideClassName = props.show ? 'modal d-block' : 'd-none';
-    // movieID, functionID, products, amount informacion necesaria obtenidos por params o por props
     const [plate, setPlate] = useState("")
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState(0);
     const [vehicleType, setVehicleType] = useState("");
     const [id, setId] = useState(4);
     const history = useHistory();
+    const products = props.buyList.map(item => {
+        return item.id
+    });
+    const amount = props.amount;
     // const movieId = props.match.params.movieId;
     // const functionId = props.match.params.functionId;
+    // const branchId = props.match.params.branchId;
 
     const handleChange = (e) => {
         e.preventDefault();
