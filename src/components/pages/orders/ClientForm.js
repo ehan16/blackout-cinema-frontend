@@ -5,29 +5,31 @@ import { useHistory } from "react-router-dom";
 const ClientForm = (props) => {
 
     const showHideClassName = props.show ? 'modal d-block' : 'd-none';
+    const [name, setName] = useState("")
     const [plate, setPlate] = useState("")
     const [email, setEmail] = useState("");
-    const [number, setNumber] = useState(0);
-    const [vehicleType, setVehicleType] = useState("");
-    const [id, setId] = useState(4);
+    const [phone, setPhone] = useState(0);
+    const [vehicleType, setVehicleType] = useState("1");
+    const [id, setId] = useState(23);
     const history = useHistory();
-    const products = props.buyList.map(item => {
-        return item.id
-    });
-    const amount = props.amount;
+    const products = props.buyList.map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
     // const movieId = props.match.params.movieId;
     // const functionId = props.match.params.functionId;
     // const branchId = props.match.params.branchId;
 
     const handleChange = (e) => {
+
         e.preventDefault();
         const {name, value} = e.currentTarget;
         switch (name) {
+            case 'name':
+                setName(value)
+                break;
             case 'email':
                 setEmail(value)
                 break;
             case 'phone':
-                setNumber(value)
+                setPhone(value)
                 break;
             case 'vehicleType':
                 setVehicleType(value)
@@ -39,27 +41,79 @@ const ClientForm = (props) => {
                 setPlate(value)
                 break;
         }
+
     }
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
-        axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)
-        .then(res => {
-            // Significa que el cliente ya se encuentra en la base de datos y no se registra en la tabla de clientes
-            history.push("/products");
-        })
-        .catch(err => console.log(err))
+        if (name === '' || email === '' || phone < 1 || id < 1 || plate === '') {
+
+            alert("ERROR: existen campos inválidos"); // Se valida que ningun campo este vacio
+
+        } else {
+
+            const price = 10;
+            const orderId = "";
+            // const aux = parseInt(props.amount, 10); // Se convierte el monto de los productos en int
+            if (vehicleType == '2') { price = 20; }
+            const amount = 20 + price; 
+
+            const order = {
+                // 'movie_id': movieId,
+                client_id: id,
+                // products: 
+                amount: amount,
+                // function_id = functionID,
+            };
+
+            axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)
+            .then(res => {
+                // Significa que el cliente ya se encuentra en la base de datos y no se registra en la tabla de clientes
+                // axios.post('http://127.0.0.1:8000/api/orders/', order)
+                // .then(res => console.log(res.data));
+                console.log(order)
+                
+                alert("Compra existosa. Su orden de compra es " + orderId);
+                history.push("/");
+            })
+            .catch(err => {
+                // Se agrega el nuevo cliente
+                const client = {
+                    'id': id,
+                    'name': name,
+                    'email': email,
+                    'phone': phone,
+                    'vehicleType': vehicleType,
+                    'plate': plate
+                };
+                
+                // axios.post('http://127.0.0.1:8000/api/clients/', client);
+                console.log(client)
+                
+                // axios.post('http://127.0.0.1:8000/api/orders/', order)
+                // .then(res => console.log(res.data));
+                alert("Compra existosa. Su orden de compra es " + orderId);
+                console.log(order)
+                
+            });
+            
+        }
         
     }
 
     return (
+
         <div className={showHideClassName} style={modalStyle}>
-        <p>{ props.test }</p>
             <section className="">
                 <div className="title-style">
                     <h3>Información del cliente</h3>
                 </div>
                 <form>
+                    <div className="form-group">
+                        <label htmlFor="name">Nombre</label>
+                        <input type="text" className="form-field" name="name" id="name" onChange={(e) => handleChange(e)}></input>
+                    </div>
                     <div className="form-group">
                         <label htmlFor="id">Cédula</label>
                         <input type="number" className="form-field" name="id" id="id" onChange={(e) => handleChange(e)}></input>
@@ -101,7 +155,8 @@ const ClientForm = (props) => {
 }
 
 const modalStyle = {
-    background: 'rgba(0, 0, 0, 0.8)'
+    background: 'rgba(0, 0, 0, 0.9)',
+    overflow: 'auto'
 }
 
 export default ClientForm;

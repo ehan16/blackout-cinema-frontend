@@ -35,7 +35,7 @@ export class ProductsList extends Component {
         return (
             <div>
                 <Banner name={ this.props.admin ? 'Inventario - Combos' : 'Caramelería'} />
-                <ClientForm show={this.state.show} handleClose={this.hideModal} test={this.state.buyList}/>
+                <ClientForm show={this.state.show} handleClose={this.hideModal} buyList={this.state.buyList}/>
                 <div className="container-fluid p-3 text-center">
                         
                     { this.props.admin ? <button style={continueStyle} >Agregar</button> : null }

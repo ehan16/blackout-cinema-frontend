@@ -61,7 +61,7 @@ const MovieForm = (props) => {
             synopsys: synopsys,
             year: year
         }
-        // axios.post(`http://127.0.0.1:8000/api/movies/`, data)
+        axios.post(`http://127.0.0.1:8000/api/movies/`, data);
         console.log(data)
     }
 
@@ -94,40 +94,40 @@ const MovieForm = (props) => {
             <form method="post">
                 <div className="form-group">
                     <label htmlFor="title">Nombre de la película</label>
-                    <input type="text" className="form-field" name="title" id="title" onChange={(e) => handleChange(e)}></input>
+                    <input type="text" className="form-field" value={title} name="title" id="title" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="genre">Género</label>
-                    <input type="email" className="form-field" name="genre" id="genre" onChange={(e) => handleChange(e)}></input>
+                    <input type="text" className="form-field" value={genre} name="genre" id="genre" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="duration">Duración</label>
-                    <input type="number" className="form-field" name="duration" id="duration" onChange={(e) => handleChange(e)}></input>
+                    <input type="number" className="form-field" value={duration} name="duration" id="duration" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="year">Año</label>
-                    <input type="number" className="form-field" name="year" id="year" onChange={(e) => handleChange(e)}></input>
+                    <input type="number" className="form-field" value={year} name="year" id="year" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="synopsys">Descripción</label>
-                    <textarea className="form-field" name="synopsys" id="synopsys" onChange={(e) => handleChange(e)}></textarea>
+                    <textarea className="form-field" value={synopsys} name="synopsys" id="synopsys" onChange={(e) => handleChange(e)}></textarea>
                 </div>
                 <div className="form-group">
                     <label htmlFor="language">Lenguaje</label>
-                    <input type="text" className="form-field" name="language" id="language" onChange={(e) => handleChange(e)}></input>
+                    <input type="text" className="form-field" value={language} name="language" id="language" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="subtitles">Subtítulos</label>
-                    <input type="checkbox" name="subtitles" id="subtitles" onChange={(e) => handleChange(e)}></input>
+                    <input type="checkbox" value={subtitles} name="subtitles" id="subtitles" onChange={(e) => handleChange(e)}></input>
                     <span className="ml-2">Español</span>
                 </div>
                 <div className="form-group">
                     <label htmlFor="date">Fecha de estreno</label>
-                    <input type="date" className="form-field" name="date" id="date" onChange={(e) => handleChange(e)}></input>
+                    <input type="date" className="form-field" value={date} name="date" id="date" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="mode">Estado</label>
-                    <select name="mode" id="mode" className="form-field" onChange={(e) => handleChange(e)}>
+                    <select value={mode} name="mode" id="mode" className="form-field" onChange={(e) => handleChange(e)}>
                         <option value="estreno">Estreno</option>
                         <option value="cartelera">Cartelera</option>
                         <option value="pasada">Pasada</option>
