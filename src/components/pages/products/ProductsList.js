@@ -21,7 +21,6 @@ export class ProductsList extends Component {
     componentDidMount() {
 
         //No hay conexion
-
         // axios.get('http://127.0.0.1:8000/api/products/').then(res => {
         //     this.setState({...this.state, products: res.data})
         // });
@@ -29,6 +28,7 @@ export class ProductsList extends Component {
         // axios.get('http://127.0.0.1:8000/api/combos/').then(res => {
         //     this.setState({...this.state, product: [...this.state.products, res.data]})
         // })
+        
     }
 
     render() {
@@ -79,8 +79,6 @@ export class ProductsList extends Component {
                                     ) }
                                 </tbody>
                             </table>
-                            {/* <Link to='/'><button className="continue" style={ continueStyle }>Continuar</button></Link> */}
-                            {/* ruta para pruebas */}
                             <button className="continue" style={ continueStyle } onClick={this.showModal}>Continuar</button>
                         </div>
                         : null }

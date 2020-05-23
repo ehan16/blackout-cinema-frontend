@@ -91,6 +91,7 @@ const ClientForm = (props) => {
                 // axios.post('http://127.0.0.1:8000/api/clients/', client);
                 console.log(client)
                 
+                // Se agrega la orden de compra
                 // axios.post('http://127.0.0.1:8000/api/orders/', order)
                 // .then(res => console.log(res.data));
                 alert("Compra existosa. Su orden de compra es " + orderId);

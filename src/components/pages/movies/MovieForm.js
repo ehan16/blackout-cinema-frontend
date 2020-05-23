@@ -13,6 +13,7 @@ const MovieForm = (props) => {
     const [mode, setMode] = useState('estreno');
     const [synopsys, setSynopsys] = useState("");
     const [year, setYear] = useState(0)
+    const movieId = 4; // PLACEHOLDER
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -61,17 +62,24 @@ const MovieForm = (props) => {
             synopsys: synopsys,
             year: year
         }
-        axios.post(`http://127.0.0.1:8000/api/movies/`, data);
-        console.log(data)
+
+        if (props.edit) {
+            // const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
+            axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data);
+            console.log(data)
+        } else {
+            axios.post(`http://127.0.0.1:8000/api/movies/`, data);
+            console.log(data)
+        }
     }
 
     const getMovie = async() => {
-        const id = 4
-        // await axios.get(`/movieshttp://127.0.0.1:8000/api/movies/${id}/`)
+        // const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
+        // await axios.get(`http://127.0.0.1:8000/api/movies/${movieId}/`)
         // .then(res => {
-        //     // movie = res.data;
         //     setTitle(res.data.title);
         //     setGenre(res.data.genre);
+        //     setYear(res.data.year);
         //     setDuration(res.data.duration);
         //     setLanguage(res.data.language);
         //     setSubtitles(res.data.subtitles);
@@ -79,17 +87,20 @@ const MovieForm = (props) => {
         //     setMode(res.data.mode);
         //     setSynopsys(res.data.synopsys);
         // })
-        // .catch(err => alert(err))
+        // .catch(err => console.log(err))
     }
 
-    // useEffect(() => {
-        // Metodo
-    // }, [])
+    useEffect(() => {
+    //     if (props.edit) {
+    //         getMovie();
+    //     }
+        alert("Inicializado")
+    }, [])
 
     return (
         <div>
             <div className="title-style">
-                <h1>Agregar película</h1>
+                { props.edit ? <h1>Editar película</h1> : <h1>Agregar película</h1> }
             </div>
             <form method="post">
                 <div className="form-group">

@@ -1,6 +1,7 @@
 import React from 'react'
 
 function MovieItem(props) {
+
     return (
         <div className="card movie">
             <div>
@@ -10,8 +11,6 @@ function MovieItem(props) {
                     <li>Año: { props.movie.year }</li>
                     <li>Género: { props.movie.genre }</li>
                     <li>Duración: { props.movie.duration } min</li>
-                    {/* { props.mode === 'on-air' ? <li>Puestos: { props.movie.lots }</li> : null } */}
-                    {/* { props.mode === 'on-air' ? <li>Sucursal: { props.movie.lots }</li> : null } */}
                     <li>Subtítulos: { props.movie.subtitles ? 'Español' : 'No' }</li>
                     { props.mode === 'to-release' ? <li>Fecha de estreno: { props.movie.date }</li> : null }
                 </ul>
@@ -25,6 +24,12 @@ function MovieItem(props) {
             </div>
         </div>
     )
+
+    
+}
+
+function launchMovie() {
+    
 }
 
 const deleteStyle = {
