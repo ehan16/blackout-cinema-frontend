@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Banner from '../../Banner'
-import ProductRow from './ProductRow'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
+import Banner from '../../Banner'
+import ProductRow from './ProductRow'
 import ClientForm from '../orders/ClientForm'
 
 export class ProductsList extends Component {
@@ -20,7 +20,6 @@ export class ProductsList extends Component {
 
     componentDidMount() {
 
-        //No hay conexion
         // axios.get('http://127.0.0.1:8000/api/products/').then(res => {
         //     this.setState({...this.state, products: res.data})
         // });
@@ -35,14 +34,20 @@ export class ProductsList extends Component {
         return (
             <div>
                 <Banner name={ this.props.admin ? 'Inventario - Combos' : 'Caramelería'} />
-                <ClientForm show={this.state.show} handleClose={this.hideModal} buyList={this.state.buyList}/>
+                { !this.props.admin ? <ClientForm show={this.state.show} handleClose={this.hideModal} buyList={this.state.buyList}/> : null }
                 <div className="container-fluid p-3 text-center">
-                        
-                    { this.props.admin ? <button style={continueStyle} >Agregar</button> : null }
+                    
+                    {
+                        this.props.admin ?
+                        <div className="text-center">
+                            <Link to="/admin/add-product/"><button className="btn-add" >Agregar producto</button></Link>
+                        </div>
+                        : null
+                    }
 
                     <div className="row px-sm-3 pb-3 pt-2">
 
-                        <div className="col-md mx-sm-3 my-3 text-center">
+                        <div className="col-md mx-md-3 my-3 text-center">
                             <table className="table table-responsive-sm table-hover table-dark list">
                                 <thead>
                                     <tr className="bg-danger">
@@ -56,14 +61,14 @@ export class ProductsList extends Component {
                                 </thead>
                                 <tbody>
                                     { this.state.buyList.map((item, index) => 
-                                        <ProductRow admin={this.props.admin} item={index} index={index} buy={false} addToBuyList={this.addToBuyList}/>
+                                        <ProductRow key={item.id} admin={this.props.admin} item={index} index={index} buy={false} addToBuyList={this.addToBuyList}/>
                                     ) }
                                 </tbody>
                             </table>
                         </div>
                         
                         { !this.props.admin ?
-                        <div className="col-md mx-sm-3 my-3 text-center">
+                        <div className="col-md mx-md-3 my-3 text-center">
                             <table className="table table-responsive-sm table-hover table-dark list">
                                 <thead>
                                     <tr className="bg-danger">
@@ -75,7 +80,7 @@ export class ProductsList extends Component {
                                 </thead>
                                 <tbody>
                                     { this.state.buyList.map((item, index) => 
-                                        <ProductRow admin={this.props.admin} item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
+                                        <ProductRow key={item.id} admin={this.props.admin} item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
                                     ) }
                                 </tbody>
                             </table>

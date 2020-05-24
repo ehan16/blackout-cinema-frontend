@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 function MovieItem(props) {
 
@@ -15,8 +17,8 @@ function MovieItem(props) {
                     { props.mode === 'to-release' ? <li>Fecha de estreno: { props.movie.date }</li> : null }
                 </ul>
                 <div style={{ display: 'flex' }}>
-                    { props.mode === 'on-air'  ? <button style={ deleteStyle } disabled={ props.movie.lots == 0 } >Reservar</button> : null }
-                    { props.mode === ''  ?  <button style={ editStyle }>Editar</button> : null } 
+                    { props.mode === 'on-air'  ? <button style={ deleteStyle }>Detalles</button> : null }
+                    { props.mode === ''  ?  <Link to={`/admin/movies/${props.movie.id}`}><button style={ editStyle }>Editar</button></Link> : null } 
                     { props.mode === '' && props.movie.mode === 'estreno' ? <button style={ launchStyle }>Estrenar</button> : null }
                     { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ launchStyle }>Culminar</button> : null }
                     { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ launchStyle }>Añadir función</button> : null }
@@ -28,8 +30,12 @@ function MovieItem(props) {
     
 }
 
-function launchMovie() {
+function launchMovie(id) {
     
+}
+
+function takeOutMovie(id) {
+
 }
 
 const deleteStyle = {

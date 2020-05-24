@@ -50,7 +50,7 @@ const MovieForm = (props) => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        if (title === "" || genre === "" || duration < 1 || language === "" || date === null || synopsys === "" || year < 1000) {
+        if (title === "" || genre === "" || duration < 1 || language === "" || synopsys === "" || year < 1) {
 
             alert("ERROR: existen campos inválidos"); // Se valida que ningun campo este vacio
 
@@ -71,10 +71,10 @@ const MovieForm = (props) => {
             if (props.edit) {
                 const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
                 axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data);
-                console.log(data)
+                console.log(data, 'Modo edicion');
             } else {
-                axios.post(`http://127.0.0.1:8000/api/movies/`, data);
-                console.log(data)
+                axios.post('http://127.0.0.1:8000/api/movies/', data);
+                console.log(data, 'Modo agregar');
             }
         
         }

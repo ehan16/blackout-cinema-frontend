@@ -75,12 +75,23 @@ textarea { resize: vertical; }
   border-radius: 10px;
 }
 
-.btn-submit { background-color: red; border: 1px solid red}
-
 .title-style { color: red; padding: 25px 10px 10px 10px; text-align: center;}
+
+.btn-add {
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+button, .btn-submit {
+  background-color: red;
+  border: 1px solid red;
+}
 
 @media (max-width: 1035px) { .banner { height: 60vh; } }
 @media (max-width: 750px) { .banner { height: 45vh; } .card { margin: 20px 3vw } }
 @media (max-width: 580px) { .list { width: fit-content; } .continue { width: 70%; } }
 @media (max-width: 520px) { .banner { height: 35vh; } }
+@media (max-width: 480px) { .list { width: auto; } }
 @media (max-width: 380px) { .banner { height: 30vh; } .list { width: initial; } .continue { width: 100%; } }

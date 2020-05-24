@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 function BranchItem(props) {
     return (
@@ -15,11 +17,17 @@ function BranchItem(props) {
                 </ul>
                 <div style={{ display: 'flex' }}>
                     { props.admin ? <button style={ deleteStyle }>Eliminar</button> : null }
-                    { props.admin ? <button style={ editStyle }>Editar</button> : null }
+                    { props.admin ? <Link to={`/admin/branches/${props.branch.id}`}><button style={ editStyle }>Editar</button></Link> : null }
                 </div>
             </div>
         </div>
     )
+}
+
+// Lo mejor seria ponerle un estado de cerrado no?
+function deleteBranch(id) {
+    axios.delete(`http://127.0.0.1:8000/api/branches/${id}`);
+    alert("Se ha borrado con exito")
 }
 
 const deleteStyle = {

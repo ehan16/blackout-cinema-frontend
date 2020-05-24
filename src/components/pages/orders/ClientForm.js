@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 
@@ -53,18 +53,19 @@ const ClientForm = (props) => {
 
         } else {
 
-            const price = 10;
+            let price = 10;
             const orderId = "";
             const aux = parseInt(props.amount, 10); // Se convierte el monto de los productos en int
-            if (vehicleType == '2') { price = 20; }
+            if (vehicleType === '2') { price = 20; }
             const amount = aux + price; 
 
             const order = {
-                // 'movie_id': movieId,
+                // movie_id: movieId,
                 client_id: id,
-                // products: 
+                // products: products,
                 amount: amount,
-                // function_id = functionID,
+                // function_id: functionId,
+                // branch_id: branchId
             };
 
             axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)

@@ -12,7 +12,7 @@ const ProductForm = (props) => {
     const [product3, setProduct3] = useState("");
     const [product4, setProduct4] = useState("");
     const [product5, setProduct5] = useState("");
-    const products = [];
+    let products = [];
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -60,7 +60,7 @@ const ProductForm = (props) => {
             if (category === "combo" && product1 === "" && product2 === "" && product3 === "" && product4 === "" && product5 === "") {
                 alert("ERROR: combo se encuentra vacío");
             } else {
-                data = {
+                const data = {
                     'name_': name,
                     'price': price,
                     'category': category,

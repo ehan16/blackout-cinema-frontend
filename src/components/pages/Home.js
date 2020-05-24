@@ -41,7 +41,7 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="row" style={{ padding: '50px 100px' }}>
+                <div className="row" style={{ padding: '50px' }}>
                     <div className="col text-center">
                         <h4 className="mb-4" style={{ fontWeight: 'bold' }}>¡SOBRE NOSOTROS!</h4>
                         <p><em style={{ color: 'red', fontWeight: 'bolder' }}>Blackout Cinema</em> fue creado por un grupo de estudiantes 

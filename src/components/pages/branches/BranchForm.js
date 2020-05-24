@@ -44,7 +44,7 @@ const BranchForm = (props) => {
 
         } else {
 
-            data = {
+            const data = {
                 'state': state,
                 'city': city,
                 'zone': zone,

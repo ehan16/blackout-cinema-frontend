@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import MovieItem from './MovieItem'
-import Banner from '../../Banner'
+import React, { Component } from 'react';
+import axios from 'axios';
+import MovieItem from './MovieItem';
+import Banner from '../../Banner';
+import {Link} from 'react-router-dom';
 
 export class MovieList extends Component {
 
@@ -42,9 +43,16 @@ export class MovieList extends Component {
             <div>
                 <Banner name="Películas"/>
                 <div className="container-fluid p-3">
+                    {
+                        this.props.mode === '' ?
+                        <div className="text-center">
+                            <Link to="/admin/add-movie/"><button className="btn-add" >Agregar película</button></Link>
+                        </div>
+                        : null
+                    }
                     { 
                         this.state.movies.map( (movie) => (
-                            <MovieItem movie={ movie } mode={ this.props.mode } /> 
+                            <MovieItem key={movie.id} movie={ movie } mode={ this.props.mode } /> 
                         ))
                     }
                 </div>
@@ -53,6 +61,5 @@ export class MovieList extends Component {
     }
     
 }
-
 
 export default MovieList;
