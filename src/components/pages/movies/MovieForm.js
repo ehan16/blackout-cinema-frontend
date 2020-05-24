@@ -81,27 +81,26 @@ const MovieForm = (props) => {
     }
 
     const getMovie = async() => {
-        // const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
-        // await axios.get(`http://127.0.0.1:8000/api/movies/${movieId}/`)
-        // .then(res => {
-        //     setTitle(res.data.title);
-        //     setGenre(res.data.genre);
-        //     setYear(res.data.year);
-        //     setDuration(res.data.duration);
-        //     setLanguage(res.data.language);
-        //     setSubtitles(res.data.subtitles);
-        //     setDate(res.data.date);
-        //     setMode(res.data.mode);
-        //     setSynopsys(res.data.synopsys);
-        // })
-        // .catch(err => console.log(err))
+        const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
+        await axios.get(`http://127.0.0.1:8000/api/movies/${movieId}/`)
+        .then(res => {
+            setTitle(res.data.title);
+            setGenre(res.data.genre);
+            setYear(res.data.year);
+            setDuration(res.data.duration);
+            setLanguage(res.data.language);
+            setSubtitles(res.data.subtitles);
+            setDate(res.data.date);
+            setMode(res.data.mode);
+            setSynopsys(res.data.synopsys);
+        })
+        .catch(err => console.log(err))
     }
 
     useEffect(() => {
-    //     if (props.edit) {
-    //         getMovie();
-    //     }
-        alert("Inicializado");
+        if (props.edit) {
+            getMovie();
+        }
     }, [])
 
     return (

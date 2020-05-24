@@ -75,19 +75,19 @@ const ProductForm = (props) => {
         
                 if (props.edit) {
         
-                    // const productId = props.match.params.productId; // Se identifica el id del producto a editar
+                    const productId = props.match.params.productId; // Se identifica el id del producto a editar
                     if (props.combo) {
-                        // axios.put(`http://127.0.0.1:8000/api/combos/${productId}/`, data);
+                        axios.put(`http://127.0.0.1:8000/api/combos/${productId}/`, data);
                     } else {
-                        // axios.put(`http://127.0.0.1:8000/api/products/${productId}/`, data);
+                        axios.put(`http://127.0.0.1:8000/api/products/${productId}/`, data);
                     }
         
                 } else {
 
                     if (category === 'combo') {
-                        // axios.post('http://127.0.0.1:8000/api/combos/', data);
+                        axios.post('http://127.0.0.1:8000/api/combos/', data);
                     } else {
-                        // axios.post('http://127.0.0.1:8000/api/products/', data);
+                        axios.post('http://127.0.0.1:8000/api/products/', data);
                     }
         
                 }
@@ -156,17 +156,15 @@ const ProductForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="category">Categoría</label>
                     <select value={category} className="form-field" name="category" id="category" onChange={(e) => handleChange(e)}>
-                            <option value="drink">Bebida</option>
-                            <option value="popcorn">Cotufa</option>
-                            <option value="combo">Combo</option>
-                            <option value="sweet">Dulce</option>
-                            <option value="food">Comida</option>
-                        </select>
+                        <option value="drink">Bebida</option>
+                        <option value="popcorn">Cotufa</option>
+                        <option value="combo">Combo</option>
+                        <option value="sweet">Dulce</option>
+                        <option value="food">Comida</option>
+                    </select>
                 </div>
-
                 {
-                    category === 'combo' 
-                    ? 
+                    category === 'combo' ? 
                     <div>
                         <label>Productos del combo</label>
                         <select value={product1} className="form-field" name="product1" id="product1" onChange={(e) => handleChange(e)}>

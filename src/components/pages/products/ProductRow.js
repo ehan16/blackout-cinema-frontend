@@ -4,7 +4,7 @@ export default function ProductRow(props) {
 
     let item = props.item;
     let index = props.index;
-    let items = [props.item.product_1, 2] // And so on
+    let items = [item.product1, item.product2, item.product3, item.product4, item.product1];
 
     return (
         <tr>
