@@ -3,7 +3,6 @@ import axios from 'axios'
 
 const MovieForm = (props) => {
 
-    // const movie;
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [duration, setDuration] = useState(0);
@@ -13,7 +12,6 @@ const MovieForm = (props) => {
     const [mode, setMode] = useState('estreno');
     const [synopsys, setSynopsys] = useState("");
     const [year, setYear] = useState(0)
-    const movieId = 4; // PLACEHOLDER
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -50,26 +48,35 @@ const MovieForm = (props) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = {
-            title: title,
-            genre: genre,
-            duration: duration,
-            language: language,
-            subtitles: subtitles,
-            date: date,
-            mode: mode,
-            synopsys: synopsys,
-            year: year
-        }
 
-        if (props.edit) {
-            // const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
-            axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data);
-            console.log(data)
+        e.preventDefault();
+        if (title === "" || genre === "" || duration < 1 || language === "" || date === null || synopsys === "" || year < 1000) {
+
+            alert("ERROR: existen campos inválidos"); // Se valida que ningun campo este vacio
+
         } else {
-            axios.post(`http://127.0.0.1:8000/api/movies/`, data);
-            console.log(data)
+            
+            const data = {
+                title: title,
+                genre: genre,
+                duration: duration,
+                language: language,
+                subtitles: subtitles,
+                date: date,
+                mode: mode,
+                synopsys: synopsys,
+                year: year
+            }
+    
+            if (props.edit) {
+                const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
+                axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data);
+                console.log(data)
+            } else {
+                axios.post(`http://127.0.0.1:8000/api/movies/`, data);
+                console.log(data)
+            }
+        
         }
     }
 
@@ -94,7 +101,7 @@ const MovieForm = (props) => {
     //     if (props.edit) {
     //         getMovie();
     //     }
-        alert("Inicializado")
+        alert("Inicializado");
     }, [])
 
     return (

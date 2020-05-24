@@ -9,7 +9,6 @@ const BranchForm = (props) => {
     const [place, setPlace] = useState("");
     const [phone, setPhone] = useState(0);
     const [employees, setEmployees] = useState(0);
-    const branchId = 4; // PLACEHOLDER
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -39,23 +38,30 @@ const BranchForm = (props) => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
+        if (state === "" || city === "" || zone === "" || place === "" || phone < 1 || employees < 1) {
 
-        data = {
-            'state': state,
-            'city': city,
-            'zone': zone,
-            'place': place,
-            'phone': phone,
-            'employees': employees
-        }
+            alert("ERROR: existen campos inválidos"); // Se valida que ningun campo este vacio
 
-        if (props.edit) {
-            // const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
-            // axios.put(`http://127.0.0.1:8000/api/branches/${movieId}/`, data);
-            console.log(data)
         } else {
-            // axios.post(`http://127.0.0.1:8000/api/branches/`, data);
-            console.log(data)
+
+            data = {
+                'state': state,
+                'city': city,
+                'zone': zone,
+                'place': place,
+                'phone': phone,
+                'employees': employees
+            }
+    
+            if (props.edit) {
+                // const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
+                // axios.put(`http://127.0.0.1:8000/api/branches/${movieId}/`, data);
+                console.log(data)
+            } else {
+                // axios.post(`http://127.0.0.1:8000/api/branches/`, data);
+                console.log(data)
+            }
+
         }
 
     }

@@ -10,7 +10,7 @@ const ClientForm = (props) => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState(0);
     const [vehicleType, setVehicleType] = useState("1");
-    const [id, setId] = useState(23);
+    const [id, setId] = useState(0);
     const history = useHistory();
     const products = props.buyList.map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
     // const movieId = props.match.params.movieId;
@@ -55,9 +55,9 @@ const ClientForm = (props) => {
 
             const price = 10;
             const orderId = "";
-            // const aux = parseInt(props.amount, 10); // Se convierte el monto de los productos en int
+            const aux = parseInt(props.amount, 10); // Se convierte el monto de los productos en int
             if (vehicleType == '2') { price = 20; }
-            const amount = 20 + price; 
+            const amount = aux + price; 
 
             const order = {
                 // 'movie_id': movieId,
@@ -133,7 +133,7 @@ const ClientForm = (props) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="vehicleType">Tipo de vehículo</label>
-                        <select name="carType" className="form-field" name="vehicleType" id="vehicleType" onChange={(e) => handleChange(e)}>
+                        <select className="form-field" name="vehicleType" id="vehicleType" onChange={(e) => handleChange(e)}>
                             <option value="1">Sedan</option>
                             <option value="1">Compacto</option>
                             <option value="1">Coupe</option>
