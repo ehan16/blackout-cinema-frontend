@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const MovieForm = (props) => {
 
@@ -11,7 +12,7 @@ const MovieForm = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('estreno');
     const [synopsys, setSynopsys] = useState("");
-    const [year, setYear] = useState(0)
+    const [year, setYear] = useState(0);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -151,7 +152,7 @@ const MovieForm = (props) => {
                     </select>
                 </div>
                 <div className="btn-group">
-                    <button type="button" className="btn-form">Cancelar</button>
+                    <Link to="/admin/movies"><button type="button" className="btn-form">Cancelar</button></Link>
                     <button type="submit" className="btn-form btn-submit" onClick={ handleSubmit }>Aceptar</button>
                 </div>
             </form>

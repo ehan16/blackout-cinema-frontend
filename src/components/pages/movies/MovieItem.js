@@ -16,12 +16,12 @@ function MovieItem(props) {
                     <li>Subtítulos: { props.movie.subtitles ? 'Español' : 'No' }</li>
                     { props.mode === 'to-release' ? <li>Fecha de estreno: { props.movie.date }</li> : null }
                 </ul>
-                <div style={{ display: 'flex' }}>
-                    { props.mode === 'on-air'  ? <button style={ deleteStyle }>Detalles</button> : null }
+                <div >
+                    { props.mode === 'on-air'  ? <button style={ buttonStyle }>Detalles</button> : null }
                     { props.mode === ''  ?  <Link to={`/admin/movies/${props.movie.id}`}><button style={ editStyle }>Editar</button></Link> : null } 
-                    { props.mode === '' && props.movie.mode === 'estreno' ? <button style={ launchStyle }>Estrenar</button> : null }
-                    { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ launchStyle }>Culminar</button> : null }
-                    { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ launchStyle }>Añadir función</button> : null }
+                    { props.mode === '' && props.movie.mode === 'estreno' ? <button style={ buttonStyle } onClick={() => launchMovie(props.movie)}>Estrenar</button> : null }
+                    { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ buttonStyle } onClick={() => takeOutMovie(props.movie)}>Culminar</button> : null }
+                    { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ buttonStyle }> + Función</button> : null }
                 </div>
             </div>
         </div>
@@ -30,15 +30,39 @@ function MovieItem(props) {
     
 }
 
-function launchMovie(id) {
-    
+function launchMovie(movie) {
+    const data = {
+        title: movie.title,
+        year: movie.year,
+        genre: movie.genre,
+        duration: movie.duration,
+        language: movie.language,
+        subtitles: movie.language,
+        synopsys: movie.synopsys,
+        date: movie.date,
+        mode: 'cartelera'
+    };
+    console.log(movie);
+    // axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data);
 }
 
-function takeOutMovie(id) {
-
+function takeOutMovie(movie) {
+    const data = {
+        title: movie.title,
+        year: movie.year,
+        genre: movie.genre,
+        duration: movie.duration,
+        language: movie.language,
+        subtitles: movie.language,
+        synopsys: movie.synopsys,
+        date: movie.date,
+        mode: 'pasada'
+    };
+    console.log(movie);
+    // axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data);
 }
 
-const deleteStyle = {
+const buttonStyle = {
     background: 'red',
     margin: '5px',
     color: 'white',
@@ -47,23 +71,14 @@ const deleteStyle = {
     border: 'red'
 }
 
-const launchStyle = {
+const editStyle = {
+    // background: 'darkgoldenrod',
     background: 'darkgreen',
     margin: '5px',
     color: 'white',
-    padding: '5px',
     borderRadius: '5px',
-    border: 'darkgreen'
-}
-
-const editStyle = {
-    background: 'darkgoldenrod',
-    margin: '5px',
-    color: 'white',
-    padding: '5px',
-    borderRadius: '5px',
-    border: 'darkgoldenrod',
-    padding: '0px 15px'
+    border: 'darkgreen',
+    padding: '5px 15px'
 }
 
 export default MovieItem;

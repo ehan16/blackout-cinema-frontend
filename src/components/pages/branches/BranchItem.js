@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 function BranchItem(props) {
+
     return (
         <div className="card branch">
             <div>
@@ -45,7 +46,7 @@ const editStyle = {
     color: 'white',
     borderRadius: '5px',
     border: 'darkgoldenrod',
-    padding: '0px 15px'
+    padding: '5px 15px'
 }
 
 export default BranchItem;

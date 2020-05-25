@@ -61,7 +61,7 @@ export class ProductsList extends Component {
                                 </thead>
                                 <tbody>
                                     { this.state.buyList.map((item, index) => 
-                                        <ProductRow key={item.id} admin={this.props.admin} item={index} index={index} buy={false} addToBuyList={this.addToBuyList}/>
+                                        <ProductRow admin={this.props.admin} item={item} index={index} buy={false} addToBuyList={this.addToBuyList}/>
                                     ) }
                                 </tbody>
                             </table>
@@ -80,7 +80,7 @@ export class ProductsList extends Component {
                                 </thead>
                                 <tbody>
                                     { this.state.buyList.map((item, index) => 
-                                        <ProductRow key={item.id} admin={this.props.admin} item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
+                                        <ProductRow admin={this.props.admin} item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
                                     ) }
                                 </tbody>
                             </table>

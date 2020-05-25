@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const BranchForm = (props) => {
 
@@ -117,7 +118,7 @@ const BranchForm = (props) => {
                     <input type="number" className="form-field" value={employees} name="employees" id="employees" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="btn-group">
-                    <button type="button" className="btn-form">Cancelar</button>
+                    <Link to="/admin/branches"><button type="button" className="btn-form">Cancelar</button></Link>
                     <button type="submit" className="btn-form btn-submit" onClick={ handleSubmit }>Aceptar</button>
                 </div>
             </form>

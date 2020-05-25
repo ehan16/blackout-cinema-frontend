@@ -21,6 +21,18 @@ export class MovieList extends Component {
                     synopsys: 'Asdasda',
                     date: 'no se',
                     mode: 'estreno'
+                },
+                {
+                    id: 2,
+                    title: 'Peter Dog',
+                    year: 2018,
+                    genre: 'infantil',
+                    duration: 90,
+                    language: 'inglés',
+                    subtitles: 'true',
+                    synopsys: 'Asdasda',
+                    date: 'no se',
+                    mode: 'cartelera'
                 }
             ]
         };
@@ -28,7 +40,7 @@ export class MovieList extends Component {
 
     componentDidMount() {
         // if (this.props.mode === '') {
-        //     axios.get('/movieshttp://127.0.0.1:8000/api/').then(res => {
+        //     axios.get('http://127.0.0.1:8000/api/movies').then(res => {
         //         this.setState({ ...this.state, movies: res.data });
         //     })
         // } else { //Cambiar para que busque segun la tabla

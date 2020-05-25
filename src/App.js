@@ -29,13 +29,13 @@ function App() {
             <Route path='/movie/:movieId/:branchId/:functionId/products' component={ProductsList} />} />
             <Route path='/branches' component={BranchList} />} />
             {/* Rutas del admin */}
-            <Route path='/admin/movies' render={(props) => <MovieList {...props} mode='' />} />
+            <Route path='/admin/movies' exact={true} render={(props) => <MovieList {...props} mode='' />} />
             <Route path='/admin/add-movie' component={MovieForm} />
             <Route path='/admin/movies/:movieId' render={(props) => <MovieForm {...props} edit={true} />} />
-            <Route path='/admin/branches' render={(props) => <BranchList {...props} admin={true} />} />
+            <Route path='/admin/branches' exact={true} render={(props) => <BranchList {...props} admin={true} />} />
             <Route path='/admin/add-branch' component={BranchForm} />
             <Route path='/admin/branches/:branchId' render={(props) => <BranchForm {...props} edit={true} />} />
-            <Route path='/admin/products' render={(props) => <ProductsList {...props} admin={true} />} />
+            <Route path='/admin/products' exact={true} render={(props) => <ProductsList {...props} admin={true} />} />
             <Route path='/admin/add-product' component={ProductForm} />
             <Route path='/admin/products/:productId' render={(props) => <ProductForm {...props} edit={true} />} />
             <Route path='/admin/combos/:productId' render={(props) => <ProductForm {...props} edit={true} combo={true} />} />

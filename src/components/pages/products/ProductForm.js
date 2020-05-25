@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const ProductForm = (props) => {
 
@@ -99,7 +100,7 @@ const ProductForm = (props) => {
 
     useEffect(() => {
         products = axios.get('http://127.0.0.1:8000/api/products/').then(res => {
-            res.data.map(product => <option value={product.id} key={product.id} className="text-capitalize">{product.name_}</option>);
+            res.data.map(product => <option value={product.id} className="text-capitalize">{product.name_}</option>);
         })
 
         if (props.edit) {
@@ -190,8 +191,8 @@ const ProductForm = (props) => {
                     </div>
                     : null
                 }
-                <div className="btn-group">
-                    <button type="button" className="btn-form">Cancelar</button>
+                <div className="btn-group mt-3">
+                    <Link to="/admin/products"><button type="button" className="btn-form">Cancelar</button></Link>
                     <button type="submit" className="btn-form btn-submit" onClick={ handleSubmit }>Aceptar</button>
                 </div>
             </form>
