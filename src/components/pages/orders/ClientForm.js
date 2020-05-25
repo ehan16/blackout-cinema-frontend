@@ -13,9 +13,9 @@ const ClientForm = (props) => {
     const [id, setId] = useState(0);
     const history = useHistory();
     const products = props.buyList.map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
-    // const movieId = props.match.params.movieId;
-    // const functionId = props.match.params.functionId;
-    // const branchId = props.match.params.branchId;
+    const movieId = props.match.params.movieId;
+    const functionId = props.match.params.functionId;
+    const branchId = props.match.params.branchId;
 
     const handleChange = (e) => {
 
@@ -60,26 +60,26 @@ const ClientForm = (props) => {
             const amount = aux + price; 
 
             const order = {
-                // movie_id: movieId,
+                movie_id: movieId,
                 client_id: id,
-                // products: products,
+                products: products,
                 amount: amount,
-                // function_id: functionId,
-                // branch_id: branchId
+                function_id: functionId,
+                branch_id: branchId
             };
 
             axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)
             .then(res => {
                 // Significa que el cliente ya se encuentra en la base de datos y no se registra en la tabla de clientes
-                // axios.post('http://127.0.0.1:8000/api/orders/', order)
-                // .then(res => console.log(res.data));
+                axios.post('http://127.0.0.1:8000/api/orders/', order)
+                .then(res => console.log(res.data));
                 console.log(order)
                 
                 alert("Compra existosa. Su orden de compra es " + orderId);
                 history.push("/");
             })
             .catch(err => {
-                // Se agrega el nuevo cliente
+
                 const client = {
                     'id': id,
                     'name': name,
@@ -89,12 +89,13 @@ const ClientForm = (props) => {
                     'plate': plate
                 };
                 
-                // axios.post('http://127.0.0.1:8000/api/clients/', client);
+                // Se agrega al nuevo cliente
+                axios.post('http://127.0.0.1:8000/api/clients/', client);
                 console.log(client)
                 
                 // Se agrega la orden de compra
-                // axios.post('http://127.0.0.1:8000/api/orders/', order)
-                // .then(res => console.log(res.data));
+                axios.post('http://127.0.0.1:8000/api/orders/', order)
+                .then(res => console.log(res.data)); // Se consigue cual es el id de la orden de compra
                 alert("Compra existosa. Su orden de compra es " + orderId);
                 console.log(order)
                 

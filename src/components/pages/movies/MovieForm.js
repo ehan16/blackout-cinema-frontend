@@ -95,7 +95,7 @@ const MovieForm = (props) => {
             setMode(res.data.mode);
             setSynopsys(res.data.synopsys);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
 
     useEffect(() => {

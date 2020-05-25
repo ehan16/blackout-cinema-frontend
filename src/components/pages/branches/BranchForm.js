@@ -55,11 +55,11 @@ const BranchForm = (props) => {
             }
     
             if (props.edit) {
-                // const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
-                // axios.put(`http://127.0.0.1:8000/api/branches/${movieId}/`, data);
+                const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
+                axios.put(`http://127.0.0.1:8000/api/branches/${movieId}/`, data);
                 console.log(data)
             } else {
-                // axios.post(`http://127.0.0.1:8000/api/branches/`, data);
+                axios.post(`http://127.0.0.1:8000/api/branches/`, data);
                 console.log(data)
             }
 
@@ -69,22 +69,22 @@ const BranchForm = (props) => {
 
     useEffect(() => {
         if (props.edit) {
-            // getBranch();
+            getBranch();
         }
     }, []);
 
     const getBranch = async() => {
-        // const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
-        // await axios.get(`http://127.0.0.1:8000/api/branches/${movieId}/`)
-        // .then(res => {
-        // setState(res.data.state);
-        // setCity(res.data.city);
-        // setZone(res.data.zone);
-        // setPlace(res.data.place);
-        // setPhone(res.data.phone);
-        // setEmployees(res.data.employees);
-        // })
-        // .catch(err => console.log(err));
+        const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
+        await axios.get(`http://127.0.0.1:8000/api/branches/${movieId}/`)
+        .then(res => {
+        setState(res.data.state);
+        setCity(res.data.city);
+        setZone(res.data.zone);
+        setPlace(res.data.place);
+        setPhone(res.data.phone);
+        setEmployees(res.data.employees);
+        })
+        .catch(err => console.log(err));
     }
 
     return (
