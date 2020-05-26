@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const ProductForm = (props) => {
 
@@ -13,7 +14,9 @@ const ProductForm = (props) => {
     const [product3, setProduct3] = useState("");
     const [product4, setProduct4] = useState("");
     const [product5, setProduct5] = useState("");
-    let products = [];
+    const [enable, setEnable] = useState(true);
+    let products = []; // Para mostrarle a la persona los productos que pueden conformar el combo
+    const history = useHistory();
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -46,6 +49,9 @@ const ProductForm = (props) => {
             case 'product5':
                 setProduct5(value)
                 break;
+            case 'enable':
+                setEnable(value)
+                break;
         }
     }
 
@@ -54,25 +60,32 @@ const ProductForm = (props) => {
         e.preventDefault();
         if (name === "" || price < 1 || availability < 1) {
 
-            alert("ERROR: existen campos inválidos"); // Se valida que ningun campo este vacio
+            // Se valida que ningun campo este vacio
+            swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
 
         } else {
 
             if (category === "combo" && product1 === "" && product2 === "" && product3 === "" && product4 === "" && product5 === "") {
-                alert("ERROR: combo se encuentra vacío");
+
+                // Si es un combo, por lo menos uno de los productos tiene que estar seleccionado
+                swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
+
             } else {
+
                 const data = {
-                    'name_': name,
+                    'name': name,
                     'price': price,
                     'category': category,
                     'availability': availability,
-                    'product1': product1,
-                    'product2': product2,
-                    'product3': product3,
-                    'product4': product4,
-                    'product5': product5,
+                    'product_1': product1,
+                    'product_2': product2,
+                    'product_3': product3,
+                    'product_4': product4,
+                    'product_5': product5,
+                    'enable': enable
                 }
-                console.log(data)
+
+                console.log(data);
         
                 if (props.edit) {
         
@@ -82,16 +95,18 @@ const ProductForm = (props) => {
                     } else {
                         axios.put(`http://127.0.0.1:8000/api/products/${productId}/`, data);
                     }
-        
+                    
                 } else {
-
+                    
                     if (category === 'combo') {
                         axios.post('http://127.0.0.1:8000/api/combos/', data);
                     } else {
                         axios.post('http://127.0.0.1:8000/api/products/', data);
                     }
-        
+                    
                 }
+
+                history.push('/admin/products');
             }
 
         }
@@ -99,8 +114,9 @@ const ProductForm = (props) => {
     }
 
     useEffect(() => {
+        // Se tiene que buscar todos los productos de la BBDD para presentarlos
         products = axios.get('http://127.0.0.1:8000/api/products/').then(res => {
-            res.data.map(product => <option value={product.id} className="text-capitalize">{product.name_}</option>);
+            res.data.map(product => <option value={product.name} className="text-capitalize">{product.name_}</option>);
         })
 
         if (props.edit) {
@@ -109,8 +125,10 @@ const ProductForm = (props) => {
     }, []);
 
     const getProduct = async() => {
-        const productId = props.match.params.productId; // Se identifica el id de la pelicula a editar
+
+        const productId = props.match.params.productId; // Se identifica el id del producto a editar
         if (props.combo) {
+
             await axios.get(`http://127.0.0.1:8000/api/products/${productId}/`)
             .then(res => {
             setName(res.data.name_);
@@ -124,7 +142,9 @@ const ProductForm = (props) => {
             setProduct5(res.data.product5);
             })
             .catch(err => console.log(err));
+
         } else {
+
             await axios.get(`http://127.0.0.1:8000/api/products/${productId}/`)
             .then(res => {
             setName(res.data.name_);
@@ -133,7 +153,9 @@ const ProductForm = (props) => {
             setCategory(res.data.category);
             })
             .catch(err => console.log(err));
+            
         }
+
     }
 
     return (
@@ -191,6 +213,11 @@ const ProductForm = (props) => {
                     </div>
                     : null
                 }
+                <div className="form-group">
+                    <label htmlFor="enable">Estado del producto</label>
+                    <input type="checkbox" value={enable} name="enable" id="enable" onChange={(e) => handleChange(e)}></input>
+                    <span className="ml-2">Habilitar</span>
+                </div>
                 <div className="btn-group mt-3">
                     <Link to="/admin/products"><button type="button" className="btn-form">Cancelar</button></Link>
                     <button type="submit" className="btn-form btn-submit" onClick={ handleSubmit }>Aceptar</button>

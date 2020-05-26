@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
+import swal from 'sweetalert';
 
 const BranchForm = (props) => {
 
@@ -10,6 +11,8 @@ const BranchForm = (props) => {
     const [place, setPlace] = useState("");
     const [phone, setPhone] = useState(0);
     const [employees, setEmployees] = useState(0);
+    const [enable, setEnable] = useState(true);
+    const history = useHistory();
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -33,6 +36,9 @@ const BranchForm = (props) => {
             case 'employees':
                 setEmployees(value)
                 break;
+            case 'enable':
+                setEnable(value)
+                break;
         }
     }
 
@@ -41,27 +47,31 @@ const BranchForm = (props) => {
         e.preventDefault();
         if (state === "" || city === "" || zone === "" || place === "" || phone < 1 || employees < 1) {
 
-            alert("ERROR: existen campos inválidos"); // Se valida que ningun campo este vacio
+            // Se valida que ningun campo este vacio o con valor erroneo
+            swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
 
         } else {
 
             const data = {
-                'state': state,
+                'state_field': state,
                 'city': city,
                 'zone': zone,
                 'place': place,
-                'phone': phone,
-                'employees': employees
+                'number_field': phone,
+                'employee': employees,
+                'enable': enable
             }
     
             if (props.edit) {
                 const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
-                axios.put(`http://127.0.0.1:8000/api/branches/${movieId}/`, data);
-                console.log(data)
+                axios.put(`http://127.0.0.1:8000/api/branches/${branchId}/`, data); 
+                console.log(data);
             } else {
-                axios.post(`http://127.0.0.1:8000/api/branches/`, data);
-                console.log(data)
+                axios.post(`http://127.0.0.1:8000/api/branches/`, data); 
+                console.log(data);
             }
+            
+            history.push('/admin/branches'); // Se devuelve a la lista de sucursales
 
         }
 
@@ -75,14 +85,14 @@ const BranchForm = (props) => {
 
     const getBranch = async() => {
         const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
-        await axios.get(`http://127.0.0.1:8000/api/branches/${movieId}/`)
+        await axios.get(`http://127.0.0.1:8000/api/branches/${branchId}/`)
         .then(res => {
-        setState(res.data.state);
-        setCity(res.data.city);
-        setZone(res.data.zone);
-        setPlace(res.data.place);
-        setPhone(res.data.phone);
-        setEmployees(res.data.employees);
+            setState(res.data.state);
+            setCity(res.data.city);
+            setZone(res.data.zone);
+            setPlace(res.data.place);
+            setPhone(res.data.phone);
+            setEmployees(res.data.employees);
         })
         .catch(err => console.log(err));
     }
@@ -116,6 +126,11 @@ const BranchForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="employees">Número de empleados</label>
                     <input type="number" className="form-field" value={employees} name="employees" id="employees" onChange={(e) => handleChange(e)}></input>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="enable">Estado de la sucursal</label>
+                    <input type="checkbox" value={enable} name="enable" id="enable" onChange={(e) => handleChange(e)}></input>
+                    <span className="ml-2">Habilitar</span>
                 </div>
                 <div className="btn-group">
                     <Link to="/admin/branches"><button type="button" className="btn-form">Cancelar</button></Link>

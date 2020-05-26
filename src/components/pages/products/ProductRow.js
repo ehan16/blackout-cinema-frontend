@@ -10,11 +10,11 @@ export default function ProductRow(props) {
     return (
         <tr>
             { props.admin ? <th scope="row">{ item.id }</th> : null }
-            <td>{ item.name_ }</td>
-            { props.admin ? <th>
-               { item.category === 'combo' ?  items : 'N/A' } 
-            </th> : null }
-            <td>{ item.category }</td>
+            <td className="text-capitalize">{ item.name_ }</td>
+            { props.admin ? 
+                <th className="text-capitalize">{ item.category === 'combo' ?  items : 'N/A' } </th> 
+            : null }
+            <td className="text-capitalize">{ item.category }</td>
             <td>{ item.price }</td>
             <td>
                 <div className="btn-group btn-group-sm">

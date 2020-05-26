@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 
 const ClientForm = (props) => {
 
@@ -13,9 +14,9 @@ const ClientForm = (props) => {
     const [id, setId] = useState(0);
     const history = useHistory();
     const products = props.buyList.map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
-    const movieId = props.match.params.movieId;
-    const functionId = props.match.params.functionId;
-    const branchId = props.match.params.branchId;
+    const movieId = props.movieId;
+    const functionId = props.functionId;
+    const branchId = props.branchId;
 
     const handleChange = (e) => {
 
@@ -49,7 +50,8 @@ const ClientForm = (props) => {
         e.preventDefault();
         if (name === '' || email === '' || phone < 1 || id < 1 || plate === '') {
 
-            alert("ERROR: existen campos inválidos"); // Se valida que ningun campo este vacio
+            // Se valida que ningun campo este vacio
+            swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
 
         } else {
 

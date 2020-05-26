@@ -11,7 +11,7 @@ function MovieItem(props) {
                 <ul className="mb-0" style={{ listStyleType: 'none', paddingBottom: '10px' }}>
                     { props.mode === '' ? <li>ID: { props.movie.id }</li> : null }
                     <li>Año: { props.movie.year }</li>
-                    <li>Género: { props.movie.genre }</li>
+                    <li className="text-capitalize">Género: { props.movie.genre }</li>
                     <li>Duración: { props.movie.duration } min</li>
                     <li>Subtítulos: { props.movie.subtitles ? 'Español' : 'No' }</li>
                     { props.mode === 'to-release' ? <li>Fecha de estreno: { props.movie.date }</li> : null }

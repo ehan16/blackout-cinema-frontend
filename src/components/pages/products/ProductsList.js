@@ -31,10 +31,18 @@ export class ProductsList extends Component {
     }
 
     render() {
+
+        const movieId = this.props.match.movieId;
+        const functionId = this.props.match.params.functionId;
+        const branchId = this.props.match.params.branchId;
+
         return (
             <div>
                 <Banner name={ this.props.admin ? 'Inventario - Combos' : 'Caramelería'} />
-                { !this.props.admin ? <ClientForm show={this.state.show} handleClose={this.hideModal} buyList={this.state.buyList}/> : null }
+                { !this.props.admin 
+                    ? <ClientForm show={this.state.show} handleClose={this.hideModal} buyList={this.state.buyList} movieId={movieId} branchId={branchId} functionId={functionId} /> 
+                    : null 
+                }
                 <div className="container-fluid p-3 text-center">
                     
                     {

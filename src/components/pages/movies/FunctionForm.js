@@ -1,9 +1,15 @@
+// class Function(models.Model):
+//     id = models.AutoField(primary_key=True)
+//     movie_id = models.ForeignKey('Movie', models.DO_NOTHING, blank=True, null=True)
+//     lot = models.PositiveIntegerField()
+//     branch = models.ForeignKey('Branch', models.DO_NOTHING, blank=True, null=True)
+
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
 import swal from 'sweetalert';
 
-const MovieForm = (props) => {
+const FunctionForm = (props) => {
 
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("comedia");
@@ -173,4 +179,4 @@ const MovieForm = (props) => {
 
 }
 
-export default MovieForm;
+export default FunctionForm;
