@@ -68,7 +68,7 @@ const MovieForm = (props) => {
                 genre: genre,
                 duration: duration,
                 language_field: language,
-                subtitles: subtitles,
+                subtitle: subtitles,
                 date: date,
                 state_now: mode,
                 synopsys: synopsys,

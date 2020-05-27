@@ -3,14 +3,14 @@ import {Link} from 'react-router-dom';
 
 export default function ProductRow(props) {
 
-    let item = props.item;
-    let index = props.index;
-    let items = [item.product1, item.product2, item.product3, item.product4, item.product1];
+    const item = props.item;
+    const index = props.index;
+    const items = [item.product_1, item.product_2, item.product_3, item.product_4, item.product_1];
 
     return (
         <tr>
             { props.admin ? <th scope="row">{ item.id }</th> : null }
-            <td className="text-capitalize">{ item.name_ }</td>
+            <td className="text-capitalize">{ item.name }</td>
             { props.admin ? 
                 <th className="text-capitalize">{ item.category === 'combo' ?  items : 'N/A' } </th> 
             : null }
@@ -22,7 +22,6 @@ export default function ProductRow(props) {
                     { !props.admin && props.buy ? <button className="btn" style={ btnStyle }><i className="fa fa-trash" onClick={() => props.deleteInBuyList(index)}></i></button> : null}
                     { props.admin && !item.category === 'combo' ? <Link to={`/admin/products/${item.id}`}><button className="btn" style={ btnStyle }><i className="fa fa-pencil"></i></button></Link> : null}
                     { props.admin && item.category === 'combo' ? <Link to={`/admin/combos/${item.id}`}><button className="btn" style={ btnStyle }><i className="fa fa-pencil"></i></button></Link> : null}
-                    { props.admin ? <button className="btn" style={ btnStyle }><i className="fa fa-trash"></i></button> : null}
                 </div>
             </td>
         </tr>

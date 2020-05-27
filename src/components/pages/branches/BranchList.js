@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import BranchItem from './BranchItem'
-import Banner from '../../Banner'
+import BranchItem from './BranchItem';
+import Banner from '../../Banner';
 
 export class BranchList extends Component {
 
@@ -12,12 +12,13 @@ export class BranchList extends Component {
             branches: [
                 {
                     id: 2,
-                    state: 'Miranda',
+                    state_field: 'Miranda',
                     city: 'Caracas',
                     zone: 'Las Mercedes',
                     place: 'Plaza Alfredo Sadel',
-                    phone: '0212-315132',
-                    employees: 5
+                    number_field: '0212-315132',
+                    employee: 5,
+                    enable: true
                 },
             ]
         }

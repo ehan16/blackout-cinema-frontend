@@ -56,7 +56,7 @@ const OrdersList = (props) => {
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Película</th>
-                                <th scope="col">Sucursal</th>
+                                {/* <th scope="col">Sucursal</th> */}
                                 <th scope="col">Monto</th>
                             </tr>
                         </thead>
@@ -66,9 +66,9 @@ const OrdersList = (props) => {
                                     <tr>
                                         <th scope="row">{ order.id }</th>
                                         <td className="text-capitalize">{ order.date }</td>
-                                        <td className="text-capitalize">{ category }</td>
-                                        <td className="text-capitalize">{ category }</td>
-                                        <td className="text-capitalize">{ category }</td>
+                                        <td className="text-capitalize">{ order.client_id }</td>
+                                        <td className="text-capitalize">{ order.movie_id }</td>
+                                        {/* <td className="text-capitalize">{ order.branch_id }</td> */}
                                         <td className="text-capitalize">{ order.amount }</td>
                                         <td>{ item.price }</td>
                                     </tr>

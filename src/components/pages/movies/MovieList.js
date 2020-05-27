@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 import MovieItem from './MovieItem';
 import Banner from '../../Banner';
-import {Link} from 'react-router-dom';
 
 export class MovieList extends Component {
 
@@ -16,11 +17,11 @@ export class MovieList extends Component {
                     year: 2018,
                     genre: 'infantil',
                     duration: 90,
-                    language: 'inglés',
-                    subtitles: 'true',
+                    language_field: 'inglés',
+                    subtitle: 'true',
                     synopsys: 'Asdasda',
                     date: 'no se',
-                    mode: 'estreno'
+                    state_now: 'estreno'
                 },
                 {
                     id: 2,
@@ -28,17 +29,22 @@ export class MovieList extends Component {
                     year: 2018,
                     genre: 'infantil',
                     duration: 90,
-                    language: 'inglés',
-                    subtitles: 'true',
+                    language_field: 'inglés',
+                    subtitle: 'true',
                     synopsys: 'Asdasda',
                     date: 'no se',
-                    mode: 'cartelera'
+                    state_now: 'cartelera'
                 }
             ]
         };
     }
 
     componentDidMount() {
+        this.getMovies();
+    }
+    
+    getMovies = () => {
+        // Se buscan las peliculas dependiendo de la modalidad
         // if (this.props.mode === '') {
         //     axios.get('http://127.0.0.1:8000/api/movies').then(res => {
         //         this.setState({ ...this.state, movies: res.data });
@@ -48,9 +54,11 @@ export class MovieList extends Component {
         //         this.setState({ ...this.state, movies: res.data });
         //     })
         // }
+        alert("HOLAAA");
     }
 
     render() {
+
         return (
             <div>
                 <Banner name="Películas"/>
@@ -63,13 +71,54 @@ export class MovieList extends Component {
                         : null
                     }
                     { 
-                        this.state.movies.map( (movie) => (
-                            <MovieItem key={movie.id} movie={ movie } mode={ this.props.mode } /> 
+                        this.state.movies.map( (movie,index) => (
+                            <MovieItem key={movie.id} movie={ movie } mode={ this.props.mode } index={index} launchMovie={this.launchMovie} takeOutMovie={this.takeOutMovie} /> 
                         ))
                     }
                 </div>
             </div>
         )
+
+    }
+
+    launchMovie = (movie, index) => {
+
+        const data = {
+            title: movie.title,
+            year: movie.year,
+            genre: movie.genre,
+            duration: movie.duration,
+            language_field: movie.language_field,
+            subtitle: movie.subtitle,
+            synopsys: movie.synopsys,
+            date: movie.date,
+            state_now: 'cartelera'
+        };
+
+        axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
+        .then(this.getMovies());  // Se actualiza la informacion mostrada
+        swal("Se ha estrenado la película", { dangerMode: true });
+
+    }
+    
+    takeOutMovie = (movie, index) => {
+
+        const data = {
+            title: movie.title,
+            year: movie.year,
+            genre: movie.genre,
+            duration: movie.duration,
+            language_field: movie.language_field,
+            subtitle: movie.subtitle,
+            synopsys: movie.synopsys,
+            date: movie.date,
+            state_now: 'pasada'
+        };
+
+        axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
+        .then(this.getMovies()); // Se actualiza la informacion mostrada
+        swal("Se ha sacado la película del aire", { dangerMode: true });
+
     }
     
 }
