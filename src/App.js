@@ -10,6 +10,7 @@ import ProductsList from './components/pages/products/ProductsList';
 import MovieForm from './components/pages/movies/MovieForm';
 import ProductForm from './components/pages/products/ProductForm';
 import BranchForm from './components/pages/branches/BranchForm';
+import FunctionForm from './components/pages/movies/FunctionForm';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path='/admin/movies' exact={true} render={(props) => <MovieList {...props} mode='' />} />
             <Route path='/admin/add-movie' component={MovieForm} />
             <Route path='/admin/movies/:movieId' render={(props) => <MovieForm {...props} edit={true} />} />
+            <Route path='/admin/movie/:movieId/add-function' render={(props) => <FunctionForm {...props} edit={true} />} />
             <Route path='/admin/branches' exact={true} render={(props) => <BranchList {...props} admin={true} />} />
             <Route path='/admin/add-branch' component={BranchForm} />
             <Route path='/admin/branches/:branchId' render={(props) => <BranchForm {...props} edit={true} />} />

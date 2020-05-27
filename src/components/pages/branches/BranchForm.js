@@ -87,12 +87,12 @@ const BranchForm = (props) => {
         const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
         await axios.get(`http://127.0.0.1:8000/api/branches/${branchId}/`)
         .then(res => {
-            setState(res.data.state);
+            setState(res.data.state_field);
             setCity(res.data.city);
             setZone(res.data.zone);
             setPlace(res.data.place);
-            setPhone(res.data.phone);
-            setEmployees(res.data.employees);
+            setPhone(res.data.number_field);
+            setEmployees(res.data.employee);
         })
         .catch(err => console.log(err));
     }

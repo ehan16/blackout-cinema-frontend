@@ -5,12 +5,15 @@ import swal from 'sweetalert';
 
 const MovieForm = (props) => {
 
+    const curr = new Date();
+    curr.setDate(curr.getDate());
+    const today = curr.toISOString().substr(0,10);
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("comedia");
     const [duration, setDuration] = useState(0);
     const [language, setLanguage] = useState("");
     const [subtitles, setSubtitles] = useState(false);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(today);
     const [mode, setMode] = useState('estreno');
     const [synopsys, setSynopsys] = useState("");
     const [year, setYear] = useState(0);
@@ -94,10 +97,10 @@ const MovieForm = (props) => {
             setGenre(res.data.genre);
             setYear(res.data.year);
             setDuration(res.data.duration);
-            setLanguage(res.data.language);
+            setLanguage(res.data.language_field);
             setSubtitles(res.data.subtitles);
             setDate(res.data.date);
-            setMode(res.data.mode);
+            setMode(res.data.state_now);
             setSynopsys(res.data.synopsys);
         })
         .catch(err => console.log(err));

@@ -1,9 +1,3 @@
-// class Function(models.Model):
-//     id = models.AutoField(primary_key=True)
-//     movie_id = models.ForeignKey('Movie', models.DO_NOTHING, blank=True, null=True)
-//     lot = models.PositiveIntegerField()
-//     branch = models.ForeignKey('Branch', models.DO_NOTHING, blank=True, null=True)
-
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import {Link, useHistory} from 'react-router-dom';
@@ -11,47 +5,28 @@ import swal from 'sweetalert';
 
 const FunctionForm = (props) => {
 
-    const [title, setTitle] = useState("");
-    const [genre, setGenre] = useState("comedia");
-    const [duration, setDuration] = useState(0);
-    const [language, setLanguage] = useState("");
-    const [subtitles, setSubtitles] = useState(false);
-    const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('estreno');
-    const [synopsys, setSynopsys] = useState("");
-    const [year, setYear] = useState(0);
+    const curr = new Date();
+    curr.setDate(curr.getDate() - 1);
+    const today = curr.toISOString().substr(0,10);
+    const [lot, setLot] = useState(50);
+    const [date, setDate] = useState(today);
+    const [branch, setBranch] = useState("");
+    const movieId = props.match.movieId;
+    let branches = [];
     const history = useHistory();
 
     const handleChange = (e) => {
         e.preventDefault();
         const {name, value} = e.currentTarget;
         switch (name) {
-            case 'title':
-                setTitle(value)
+            case 'branch':
+                setBranch(value)
                 break;
-            case 'genre':
-                setGenre(value)
-                break;
-            case 'year':
-                setYear(value)
-                break;
-            case 'duration':    
-                setDuration(value)
-                break;
-            case 'language':
-                setLanguage(value)
-                break;
-            case 'subtitles':
-                setSubtitles(value)
+            case 'lot':
+                setLot(value)
                 break;
             case 'date':
                 setDate(value)
-                break;
-            case 'mode':
-                setMode(value)
-                break;
-            case 'synopsys':
-                setSynopsys(value)
                 break;
         }
     }
@@ -59,7 +34,7 @@ const FunctionForm = (props) => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        if (title === "" || genre === "" || duration < 1 || language === "" || synopsys === "" || year < 1) {
+        if (branch === "") {
 
             // Se valida que ningun campo este vacio
             swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
@@ -67,24 +42,19 @@ const FunctionForm = (props) => {
         } else {
             
             const data = {
-                title: title,
-                genre: genre,
-                duration: duration,
-                language_field: language,
-                subtitles: subtitles,
-                date: date,
-                state_now: mode,
-                synopsys: synopsys,
-                year: year
+                lot: lot,
+                movie_id: movieId,
+                branch: branch,
+                date: date
             }
     
             if (props.edit) {
-                const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
-                axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data);
+                const functionId = props.match.params.functionId; // Se identifica el id de la pelicula a editar
+                axios.put(`http://127.0.0.1:8000/api/functions/${functionId}/`, data);
                 console.log(data, 'Modo edicion');
             } else {
-                axios.post('http://127.0.0.1:8000/api/movies/', data);
-                console.log(data, 'Modo agregar');
+                axios.post('http://127.0.0.1:8000/api/functions/', data);
+                console.log(data);
             }
             
             history.push('/admin/movies');
@@ -92,82 +62,42 @@ const FunctionForm = (props) => {
         }
     }
 
-    const getMovie = async() => {
-        const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
-        await axios.get(`http://127.0.0.1:8000/api/movies/${movieId}/`)
+    const getFunction = async() => {
+        const functionId = props.match.params.functionId; // Se identifica el id de la pelicula a editar
+        await axios.get(`http://127.0.0.1:8000/api/functions/${functionId}/`)
         .then(res => {
-            setTitle(res.data.title);
-            setGenre(res.data.genre);
-            setYear(res.data.year);
-            setDuration(res.data.duration);
-            setLanguage(res.data.language);
-            setSubtitles(res.data.subtitles);
-            setDate(res.data.date);
-            setMode(res.data.mode);
-            setSynopsys(res.data.synopsys);
+            setLot(res.data.lot);
         })
         .catch(err => console.log(err));
     }
 
     useEffect(() => {
-        if (props.edit) {
-            getMovie();
-        }
+        branches = axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
+            res.data.map(branch => <option value={branch.id} className="text-capitalize">{branch.zone} - {branch.place}</option>);
+        });
+        swal("hola");
     }, [])
 
     return (
         <div>
             <div className="title-style">
-                { props.edit ? <h1>Editar película</h1> : <h1>Agregar película</h1> }
+                { props.edit ? <h1>Editar función</h1> : <h1>Agregar función</h1> }
             </div>
             <form method="post">
                 <div className="form-group">
-                    <label htmlFor="title">Nombre de la película</label>
-                    <input type="text" className="form-field" value={title} name="title" id="title" onChange={(e) => handleChange(e)}></input>
+                    <label htmlFor="lot">Puestos</label>
+                    <input type="number" className="form-field" value={lot} name="lot" id="lot" disabled={true} onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="genre">Género</label>
-                    <select value={genre} name="genre" id="genre" className="form-field" onChange={(e) => handleChange(e)}>
-                        <option value="comedia">Comedia</option>
-                        <option value="accion">Acción</option>
-                        <option value="drama">Drama</option>
-                        <option value="romance">Romance</option>
-                        <option value="infantil">Infantil</option>
-                        <option value="terror">Terror</option>
+                    <label htmlFor="branch">Sucursal</label>
+                    <select value={branch} name="branch" id="branch" className="form-field" onChange={(e) => handleChange(e)}>
+                        <option value="">Ninguno</option>
+                        { branches }
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="duration">Duración</label>
-                    <input type="number" className="form-field" value={duration} name="duration" id="duration" onChange={(e) => handleChange(e)}></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="year">Año</label>
-                    <input type="number" className="form-field" value={year} name="year" id="year" onChange={(e) => handleChange(e)}></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="synopsys">Descripción</label>
-                    <textarea className="form-field" value={synopsys} name="synopsys" id="synopsys" onChange={(e) => handleChange(e)}></textarea>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="language">Lenguaje</label>
-                    <input type="text" className="form-field" value={language} name="language" id="language" onChange={(e) => handleChange(e)}></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="subtitles">Subtítulos</label>
-                    <input type="checkbox" value={subtitles} name="subtitles" id="subtitles" onChange={(e) => handleChange(e)}></input>
-                    <span className="ml-2">Español</span>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="date">Fecha de estreno</label>
+                    <label htmlFor="date">Fecha</label>
                     <input type="date" className="form-field" value={date} name="date" id="date" onChange={(e) => handleChange(e)}></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="mode">Estado</label>
-                    <select value={mode} name="mode" id="mode" className="form-field" onChange={(e) => handleChange(e)}>
-                        <option value="estreno">Estreno</option>
-                        <option value="cartelera">Cartelera</option>
-                        <option value="pasada">Pasada</option>
-                    </select>
                 </div>
                 <div className="btn-group">
                     <Link to="/admin/movies"><button type="button" className="btn-form">Cancelar</button></Link>

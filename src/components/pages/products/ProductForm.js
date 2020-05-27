@@ -131,15 +131,16 @@ const ProductForm = (props) => {
 
             await axios.get(`http://127.0.0.1:8000/api/products/${productId}/`)
             .then(res => {
-            setName(res.data.name_);
-            setPrice(res.data.price);
-            setAvailability(res.data.availability);
-            setCategory(res.data.category);
-            setProduct1(res.data.product1);
-            setProduct2(res.data.product2);
-            setProduct3(res.data.product3);
-            setProduct4(res.data.product4);
-            setProduct5(res.data.product5);
+                setName(res.data.name);
+                setPrice(res.data.price);
+                setAvailability(res.data.availability);
+                setCategory(res.data.category);
+                setProduct1(res.data.product_1);
+                setProduct2(res.data.product_2);
+                setProduct3(res.data.product_3);
+                setProduct4(res.data.product_4);
+                setProduct5(res.data.product_5);
+                setEnable(res.data.enable);
             })
             .catch(err => console.log(err));
 
