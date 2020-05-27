@@ -75,7 +75,6 @@ const FunctionForm = (props) => {
         branches = axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
             res.data.map(branch => <option value={branch.id} className="text-capitalize">{branch.zone} - {branch.place}</option>);
         });
-        swal("hola");
     }, [])
 
     return (

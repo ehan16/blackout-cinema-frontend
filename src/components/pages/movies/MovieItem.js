@@ -21,7 +21,7 @@ function MovieItem(props) {
                     { props.mode === ''  ?  <Link to={`/admin/movies/${props.movie.id}`}><button style={ editStyle }>Editar</button></Link> : null } 
                     { props.mode === '' && props.movie.mode === 'estreno' ? <button style={ buttonStyle } onClick={() => launchMovie(props.movie)}>Estrenar</button> : null }
                     { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ buttonStyle } onClick={() => takeOutMovie(props.movie)}>Culminar</button> : null }
-                    { props.mode === '' && props.movie.mode === 'cartelera' ? <button style={ buttonStyle }> + Función</button> : null }
+                    { props.mode === '' && props.movie.mode === 'cartelera' ? <Link to={`/admin/movie/${props.movie.id}/add-function`}><button style={ buttonStyle }> + Función</button></Link> : null }
                 </div>
             </div>
         </div>

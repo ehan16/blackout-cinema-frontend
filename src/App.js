@@ -33,7 +33,7 @@ function App() {
             <Route path='/admin/movies' exact={true} render={(props) => <MovieList {...props} mode='' />} />
             <Route path='/admin/add-movie' component={MovieForm} />
             <Route path='/admin/movies/:movieId' render={(props) => <MovieForm {...props} edit={true} />} />
-            <Route path='/admin/movie/:movieId/add-function' render={(props) => <FunctionForm {...props} edit={true} />} />
+            <Route path='/admin/movie/:movieId/add-function' render={(props) => <FunctionForm {...props} />} />
             <Route path='/admin/branches' exact={true} render={(props) => <BranchList {...props} admin={true} />} />
             <Route path='/admin/add-branch' component={BranchForm} />
             <Route path='/admin/branches/:branchId' render={(props) => <BranchForm {...props} edit={true} />} />
