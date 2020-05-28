@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import Banner from '../../Banner';
 
 const OrdersList = (props) => {
 
@@ -42,13 +43,10 @@ const OrdersList = (props) => {
     return (
         <div>
 
-            <div className="title-style">
-                <h1>Órdenes de compra</h1>
-            </div>
-
+            <Banner name="Órdenes de compra"/>
             <div className="row px-sm-3 pb-3 pt-2">
 
-                <div className="col mx-md-3 my-3 text-center">
+                <div className="col mx-md-3 my-5 text-center">
                     <table className="table table-responsive-sm table-hover table-dark list">
                         <thead>
                             <tr className="bg-danger">
@@ -62,7 +60,7 @@ const OrdersList = (props) => {
                         </thead>
                         <tbody>
                             { orders 
-                                ? orders.map(order => {
+                                ? orders.map(order => 
                                     <tr>
                                         <th scope="row">{ order.id }</th>
                                         <td className="text-capitalize">{ order.date }</td>
@@ -70,9 +68,8 @@ const OrdersList = (props) => {
                                         <td className="text-capitalize">{ order.movie_id }</td>
                                         {/* <td className="text-capitalize">{ order.branch_id }</td> */}
                                         <td className="text-capitalize">{ order.amount }</td>
-                                        <td>{ item.price }</td>
                                     </tr>
-                                    })
+                                    )
                                 : null
                             }
                         </tbody>

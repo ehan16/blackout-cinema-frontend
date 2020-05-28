@@ -15,6 +15,7 @@ const nameStyle = {
     background: '#111',
     textAlign: 'center',
     padding: '8px',
+    fontWeight: 'bolder'
 }
 
 export default Banner;

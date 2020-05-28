@@ -11,7 +11,7 @@ const MovieForm = (props) => {
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("comedia");
     const [duration, setDuration] = useState(0);
-    const [language, setLanguage] = useState("");
+    const [language, setLanguage] = useState("español");
     const [subtitles, setSubtitles] = useState(false);
     const [date, setDate] = useState(today);
     const [mode, setMode] = useState('estreno');
@@ -148,6 +148,12 @@ const MovieForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="language">Lenguaje</label>
                     <input type="text" className="form-field" value={language} name="language" id="language" onChange={(e) => handleChange(e)}></input>
+                    <select value={language} name="language" id="language" className="form-field" onChange={(e) => handleChange(e)}>
+                        <option value="español">Español</option>
+                        <option value="ingles">Inglés</option>
+                        <option value="frances">Francés</option>
+                        <option value="aleman">Alemán</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="subtitles">Subtítulos</label>

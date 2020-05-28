@@ -54,7 +54,6 @@ export class MovieList extends Component {
         //         this.setState({ ...this.state, movies: res.data });
         //     })
         // }
-        alert("HOLAAA");
     }
 
     render() {

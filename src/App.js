@@ -11,6 +11,8 @@ import MovieForm from './components/pages/movies/MovieForm';
 import ProductForm from './components/pages/products/ProductForm';
 import BranchForm from './components/pages/branches/BranchForm';
 import FunctionForm from './components/pages/movies/FunctionForm';
+import OrdersList from './components/pages/orders/OrdersList';
+import ClientsList from './components/pages/orders/ClientsList';
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
             <Route path='/admin/add-product' component={ProductForm} />
             <Route path='/admin/products/:productId' render={(props) => <ProductForm {...props} edit={true} />} />
             <Route path='/admin/combos/:productId' render={(props) => <ProductForm {...props} edit={true} combo={true} />} />
+            <Route path='/admin/orders' component={OrdersList} />
+            <Route path='/admin/clients' component={ClientsList} />
           </Switch>
 
         </div>
