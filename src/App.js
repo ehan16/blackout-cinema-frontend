@@ -46,6 +46,7 @@ function App() {
             <Route path='/admin/combos/:productId' render={(props) => <ProductForm {...props} edit={true} combo={true} />} />
             <Route path='/admin/orders' component={OrdersList} />
             <Route path='/admin/clients' component={ClientsList} />
+            <Route path='/admin/statistics' component={ClientsList} />
           </Switch>
 
         </div>

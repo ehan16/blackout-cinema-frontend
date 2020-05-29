@@ -18,7 +18,7 @@ export default function ProductRow(props) {
             <td>{ item.price }</td>
             <td>
                 <div className="btn-group btn-group-sm">
-                    { !props.admin && !props.buy ? <button className="btn" style={ btnStyle } onClick={() => props.addToBuyList(item)}><i className="fa fa-plus"></i></button> : null}
+                    { !props.admin && !props.buy ? <button className="btn" style={ btnStyle } onClick={() => props.addToBuyList(item)} disabled={item.availability === 0}><i className="fa fa-plus"></i></button> : null}
                     { !props.admin && props.buy ? <button className="btn" style={ btnStyle }><i className="fa fa-trash" onClick={() => props.deleteInBuyList(index)}></i></button> : null}
                     { props.admin && !item.category === 'combo' ? <Link to={`/admin/products/${item.id}`}><button className="btn" style={ btnStyle }><i className="fa fa-pencil"></i></button></Link> : null}
                     { props.admin && item.category === 'combo' ? <Link to={`/admin/combos/${item.id}`}><button className="btn" style={ btnStyle }><i className="fa fa-pencil"></i></button></Link> : null}
@@ -29,8 +29,8 @@ export default function ProductRow(props) {
  
 }
 
-
 const btnStyle = {
     background: '#292929',
-    color: 'red'
+    color: 'red',
+    width: 'auto'
 }

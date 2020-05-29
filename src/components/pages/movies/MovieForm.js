@@ -7,7 +7,7 @@ const MovieForm = (props) => {
 
     const curr = new Date();
     curr.setDate(curr.getDate());
-    const today = curr.toISOString().substr(0,10);
+    const today = curr.toISOString().substr(0,10); // Se obtiene la fecha en formato string
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("comedia");
     const [duration, setDuration] = useState(0);
@@ -56,7 +56,7 @@ const MovieForm = (props) => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        if (title === "" || genre === "" || duration < 1 || language === "" || synopsys === "" || year < 1) {
+        if (title === "" || genre === "" || duration < 1 || language === "" || synopsys === "" || year < 2000) {
 
             // Se valida que ningun campo este vacio
             swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
@@ -64,7 +64,7 @@ const MovieForm = (props) => {
         } else {
             
             const data = {
-                title: title,
+                title: title.toLowerCase(),
                 genre: genre,
                 duration: duration,
                 language_field: language,
@@ -147,7 +147,6 @@ const MovieForm = (props) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="language">Lenguaje</label>
-                    <input type="text" className="form-field" value={language} name="language" id="language" onChange={(e) => handleChange(e)}></input>
                     <select value={language} name="language" id="language" className="form-field" onChange={(e) => handleChange(e)}>
                         <option value="español">Español</option>
                         <option value="ingles">Inglés</option>
@@ -162,7 +161,7 @@ const MovieForm = (props) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="date">Fecha de estreno</label>
-                    <input type="date" className="form-field" value={date} name="date" id="date" onChange={(e) => handleChange(e)}></input>
+                    <input type="date" className="form-field" min={today} value={date} name="date" id="date" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="mode">Estado</label>

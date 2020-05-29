@@ -7,13 +7,13 @@ const FunctionForm = (props) => {
 
     const curr = new Date();
     curr.setDate(curr.getDate() - 1);
-    const today = curr.toISOString().substr(0,10);
+    const today = curr.toISOString().substr(0,10); // Se obtiene la fecha actual en string para validaciones
     const [lot, setLot] = useState(50);
     const [date, setDate] = useState(today);
     const [branch, setBranch] = useState("");
     const movieId = props.match.movieId;
-    let branches = [];
     const history = useHistory();
+    let branches = [];
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -51,12 +51,11 @@ const FunctionForm = (props) => {
             if (props.edit) {
                 const functionId = props.match.params.functionId; // Se identifica el id de la pelicula a editar
                 axios.put(`http://127.0.0.1:8000/api/functions/${functionId}/`, data);
-                console.log(data, 'Modo edicion');
             } else {
                 axios.post('http://127.0.0.1:8000/api/functions/', data);
-                console.log(data);
             }
             
+            console.log(data);
             history.push('/admin/movies');
 
         }
@@ -67,6 +66,7 @@ const FunctionForm = (props) => {
         await axios.get(`http://127.0.0.1:8000/api/functions/${functionId}/`)
         .then(res => {
             setLot(res.data.lot);
+            setDate(res.data.date);
         })
         .catch(err => console.log(err));
     }
@@ -96,7 +96,7 @@ const FunctionForm = (props) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="date">Fecha</label>
-                    <input type="date" className="form-field" value={date} name="date" id="date" onChange={(e) => handleChange(e)}></input>
+                    <input type="date" className="form-field" min={today} value={date} name="date" id="date" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="btn-group">
                     <Link to="/admin/movies"><button type="button" className="btn-form">Cancelar</button></Link>

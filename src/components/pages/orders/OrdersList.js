@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from 'axios';
 import Banner from '../../Banner';
 
@@ -6,7 +6,7 @@ const OrdersList = (props) => {
 
     let orders = [];
     let movies = [];
-    let branches = [];
+    // let branches = [];
     let clients = [];
 
     const getOrders = async() => {
@@ -21,11 +21,11 @@ const OrdersList = (props) => {
         .catch(err => console.log(err));
     }
 
-    const getBranches = async() => {
-        await axios.get('http://127.0.0.1:8000/api/branches/')
-        .then(res => { branches = res.data })
-        .catch(err => console.log(err));
-    }
+    // const getBranches = async() => {
+    //     await axios.get('http://127.0.0.1:8000/api/branches/')
+    //     .then(res => { branches = res.data })
+    //     .catch(err => console.log(err));
+    // }
     
     const getClients = async() => {
         await axios.get('http://127.0.0.1:8000/api/clients/')
@@ -36,9 +36,9 @@ const OrdersList = (props) => {
     useEffect(() => {
         getOrders();
         getMovies();
-        getBranches();
+        // getBranches();
         getClients();
-    }, [])
+    }, []);
 
     return (
         <div>

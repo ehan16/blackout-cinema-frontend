@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
 
 function BranchItem(props) {
 
@@ -22,32 +21,13 @@ function BranchItem(props) {
                 </ul>
                 <div style={{ display: 'flex' }}>
 
-                    { props.admin ? <button style={ deleteStyle } onClick={() => enableBranch(props.branch)}>{ props.branch.enable ? 'Inhabilitar' : 'Habilitar'}</button> : null }
+                    { props.admin ? <button style={ deleteStyle } onClick={() => props.deleteBranch(props.branch)}>{ props.branch.enable ? 'Inhabilitar' : 'Habilitar'}</button> : null }
                     { props.admin ? <Link to={`/admin/branches/${props.branch.id}`}><button style={ editStyle }>Editar</button></Link> : null }
 
                 </div>
             </div>
         </div>
     )
-}
-
-// Lo mejor seria ponerle un estado de cerrado no?
-function enableBranch(branch) {
-
-    const data = {
-        'state_field': branch.state_field,
-        'city': branch.city,
-        'zone': branch.zone,
-        'place': branch.place,
-        'number_field': branch.number_field,
-        'employee': branch.employee,
-        'enable': !branch.enable
-    }
-
-    axios.put(`http://127.0.0.1:8000/api/branches/${branch.id}/`, data);
-    console.log(data);
-    swal("Se ha realizado con éxito");
-
 }
 
 const deleteStyle = {

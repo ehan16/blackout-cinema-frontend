@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from 'axios';
 import Banner from '../../Banner';
 
@@ -14,7 +14,7 @@ const ClientsList = (props) => {
 
     useEffect(() => {
         getClients();
-    }, [])
+    }, []);
 
     return (
         <div>

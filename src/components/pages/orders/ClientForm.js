@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 const ClientForm = (props) => {
 
     const showHideClassName = props.show ? 'modal d-block' : 'd-none';
-    const [name, setName] = useState("")
+    // const [name, setName] = useState("")
     const [plate, setPlate] = useState("")
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState(0);
@@ -14,18 +14,16 @@ const ClientForm = (props) => {
     const [id, setId] = useState(0);
     const history = useHistory();
     const products = props.buyList.map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
-    const movieId = props.movieId;
     const functionId = props.functionId;
-    const branchId = props.branchId;
 
     const handleChange = (e) => {
 
         e.preventDefault();
         const {name, value} = e.currentTarget;
         switch (name) {
-            case 'name':
-                setName(value)
-                break;
+            // case 'name':
+            //     setName(value)
+            //     break;
             case 'email':
                 setEmail(value)
                 break;
@@ -48,7 +46,7 @@ const ClientForm = (props) => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        if (name === '' || email === '' || phone < 1 || id < 1 || plate === '') {
+        if (email === '' || phone < 1 || id < 1 || plate === '') {
 
             // Se valida que ningun campo este vacio
             swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
@@ -57,54 +55,80 @@ const ClientForm = (props) => {
 
             let price = 10;
             const orderId = "";
-            const aux = parseInt(props.amount, 10); // Se convierte el monto de los productos en int
             if (vehicleType === '2') { price = 20; }
-            const amount = aux + price; 
+            const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
 
             const order = {
-                movie_id: movieId,
+                movie_id: props.movieId,
                 client_id: id,
-                products: products,
                 amount: amount,
                 function_id: functionId,
-                branch_id: branchId
+                branch_id: props.branchId
             };
 
             axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)
-            .then(res => {
-                // Significa que el cliente ya se encuentra en la base de datos y no se registra en la tabla de clientes
-                axios.post('http://127.0.0.1:8000/api/orders/', order)
-                .then(res => console.log(res.data));
-                console.log(order)
-                
-                alert("Compra existosa. Su orden de compra es " + orderId);
-                history.push("/");
+            .then(res => { 
+                // Significa que el cliente ya se encuentra en la BBDD y no se registra en la tabla de clientes
             })
             .catch(err => {
-
+                
                 const client = {
-                    'id': id,
-                    'name': name,
-                    'email': email,
-                    'phone': phone,
-                    'vehicleType': vehicleType,
-                    'plate': plate
+                    id: id,
+                    // name: name,
+                    email: email,
+                    phone: phone,
+                    vehicleType: vehicleType,
+                    plate: plate
                 };
                 
                 // Se agrega al nuevo cliente
                 axios.post('http://127.0.0.1:8000/api/clients/', client);
                 console.log(client)
                 
-                // Se agrega la orden de compra
-                axios.post('http://127.0.0.1:8000/api/orders/', order)
-                .then(res => console.log(res.data)); // Se consigue cual es el id de la orden de compra
-                alert("Compra existosa. Su orden de compra es " + orderId);
-                console.log(order)
-                
             });
+
+            // Se agrega la orden de compra
+            axios.post('http://127.0.0.1:8000/api/orders/', order)
+            .then(res => {
+                console.log(res.data); // Se consigue cual es el id de la orden de compra
+                this.insertProducts(orderId); 
+                this.updateLots(functionId);
+            }); 
+            console.log(order);
+
+            
+            // alert("Compra existosa. Su orden de compra es " + orderId);
+            swal("Compra exitosa", `Su orden de compra es ${orderId}`, "info", { dangerMode: true });
+            history.push("/"); // Se devuelve al cliente al home
             
         }
         
+    }
+
+    const insertProducts = (orderId) => {
+        // Se inserta cada producto adquirido en el historico
+        products.map(product => {
+            const data = {
+                product_id: product,
+                order_id: orderId
+            };
+            axios.post('http://127.0.0.1:8000/api/record/', data);
+        })
+    }
+
+    const updateLots = (functionId) => {
+        // Se tiene que actualizar la cantidad de puestos
+        axios.get(`http://127.0.0.1:8000/api/functions/${functionId}`).then(res => {
+            const functionDetail = res.data;
+            const data = {
+                branch: functionDetail.branch,
+                lot: (parseInt(functionDetail.lot, 10) - 1), // Por precaucion se hace la conversion
+                date: functionDetail.date,
+                movie_id: functionDetail.movie_id
+            };
+            axios.put(`http://127.0.0.1:8000/api/functions/${functionId}`, data);
+        })
+
     }
 
     return (
@@ -115,10 +139,10 @@ const ClientForm = (props) => {
                     <h3>Información del cliente</h3>
                 </div>
                 <form>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label htmlFor="name">Nombre</label>
                         <input type="text" className="form-field" name="name" id="name" onChange={(e) => handleChange(e)}></input>
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <label htmlFor="id">Cédula</label>
                         <input type="number" className="form-field" name="id" id="id" onChange={(e) => handleChange(e)}></input>

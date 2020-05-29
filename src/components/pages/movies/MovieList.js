@@ -80,7 +80,7 @@ export class MovieList extends Component {
 
     }
 
-    launchMovie = (movie, index) => {
+    launchMovie = (movie) => {
 
         const data = {
             title: movie.title,
@@ -94,13 +94,25 @@ export class MovieList extends Component {
             state_now: 'cartelera'
         };
 
-        axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
-        .then(this.getMovies());  // Se actualiza la informacion mostrada
-        swal("Se ha estrenado la película", { dangerMode: true });
+        swal({
+            title: "Confimación",
+            text: "Una vez que lo estreno, no podrá cambiarlo. ¿Seguro?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if(willDelete) {
+                axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
+                .then(this.getMovies()); // Se actualiza la informacion mostrada
+                swal("Exitoso", "¡Se ha estrenado la película!", "info", { dangerMode: true });
+            } else {
+                swal("No ha ocurrido nada", { dangerMode: true });
+            }
+        })
 
     }
     
-    takeOutMovie = (movie, index) => {
+    takeOutMovie = (movie) => {
 
         const data = {
             title: movie.title,
@@ -114,10 +126,21 @@ export class MovieList extends Component {
             state_now: 'pasada'
         };
 
-        axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
-        .then(this.getMovies()); // Se actualiza la informacion mostrada
-        swal("Se ha sacado la película del aire", { dangerMode: true });
-
+        swal({
+            title: "Confimación",
+            text: "Una vez que lo elimine, no podrá recuperarlo. ¿Seguro?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if(willDelete) {
+                axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
+                .then(this.getMovies()); // Se actualiza la informacion mostrada
+                swal("Exitoso", "¡Se ha sacado la película del aire!", "info", { dangerMode: true });
+            } else {
+                swal("No ha ocurrido nada", { dangerMode: true });
+            }
+        })
     }
     
 }

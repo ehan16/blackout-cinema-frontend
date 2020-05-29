@@ -73,7 +73,7 @@ const ProductForm = (props) => {
             } else {
 
                 const data = {
-                    'name': name,
+                    'name': name.toLowerCase(),
                     'price': price,
                     'category': category,
                     'availability': availability,
