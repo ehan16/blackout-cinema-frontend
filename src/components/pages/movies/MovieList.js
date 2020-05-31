@@ -11,30 +11,30 @@ export class MovieList extends Component {
         super(props);
         this.state = {
             movies: [
-                {
-                    movie_id: 1,
-                    title: 'Peter Rabbit',
-                    year: 2018,
-                    genre: 'infantil',
-                    duration: 90,
-                    language_field: 'inglés',
-                    subtitle: 'true',
-                    synopsys: 'Asdasda',
-                    date: 'no se',
-                    state_now: 'estreno'
-                },
-                {
-                    movie_id: 2,
-                    title: 'Peter Dog',
-                    year: 2018,
-                    genre: 'infantil',
-                    duration: 90,
-                    language_field: 'inglés',
-                    subtitle: 'true',
-                    synopsys: 'Asdasda',
-                    date: 'no se',
-                    state_now: 'cartelera'
-                }
+                // {
+                //     movie_id: 1,
+                //     title: 'Peter Rabbit',
+                //     year: 2018,
+                //     genre: 'infantil',
+                //     duration: 90,
+                //     language_field: 'inglés',
+                //     subtitle: 'true',
+                //     synopsys: 'Asdasda',
+                //     date: 'no se',
+                //     state_now: 'estreno'
+                // },
+                // {
+                //     movie_id: 2,
+                //     title: 'Peter Dog',
+                //     year: 2018,
+                //     genre: 'infantil',
+                //     duration: 90,
+                //     language_field: 'inglés',
+                //     subtitle: 'true',
+                //     synopsys: 'Asdasda',
+                //     date: 'no se',
+                //     state_now: 'cartelera'
+                // }
             ]
         };
     }
@@ -46,9 +46,9 @@ export class MovieList extends Component {
     getMovies = () => {
         // Se buscan las peliculas dependiendo de la modalidad
         // if (this.props.mode === '') {
-        //     axios.get('http://127.0.0.1:8000/api/movies').then(res => {
-        //         this.setState({ ...this.state, movies: res.data });
-        //     })
+            axios.get('http://127.0.0.1:8000/api/movies').then(res => {
+                this.setState({ ...this.state, movies: res.data });
+            })
         // } else { //Cambiar para que busque segun la tabla
         //     axios.get(`http://127.0.0.1:8000/api/movies/${this.props.mode}/`).then(res => {
         //         this.setState({ ...this.state, movies: res.data });

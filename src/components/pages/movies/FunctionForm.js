@@ -67,6 +67,7 @@ const FunctionForm = (props) => {
         .then(res => {
             setLot(res.data.lot);
             setDate(res.data.date);
+            setBranch(res.data.branch)
         })
         .catch(err => console.log(err));
     }
