@@ -8,6 +8,7 @@ import MovieList from './components/pages/movies/MovieList';
 import BranchList from './components/pages/branches/BranchList';
 import ProductsList from './components/pages/products/ProductsList';
 import ClientForm from './components/pages/orders/ClientForm';
+import MovieDetail from './components/pages/movies/MovieDetail';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/admin/movies' render={(props) => <MovieList {...props} mode='' />} />
             <Route path='/movies/on-air' render={(props) => <MovieList {...props} mode='on-air' />} />
             <Route path='/movies/to-release' render={(props) => <MovieList {...props} mode='to-release' />} />
+            <Route path='/movie/:movieId/' component={MovieDetail} />} />
             <Route path='/branches' component={BranchList} />} />
             <Route path='/products' component={ProductsList} />} />
             <Route path='/admin/branches' render={(props) => <BranchList {...props} admin='True' />} />

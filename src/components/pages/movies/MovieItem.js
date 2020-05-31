@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function MovieItem(props) {
     return (
@@ -16,7 +17,9 @@ function MovieItem(props) {
                     { props.mode === 'to-release' ? <li>Fecha de estreno: { props.movie.date }</li> : null }
                 </ul>
                 <div style={{ display: 'flex' }}>
-                    { props.mode === 'on-air'  ? <button style={ deleteStyle } disabled={ props.movie.lots == 0 } >Reservar</button> : null }
+                    { props.mode === 'on-air'  ? <button style={ deleteStyle } disabled={ props.movie.lots == 0 } >
+                            <Link to={`/movie/${props.movie.id}/`} className="text-white" href="#">Detalles</Link> 
+                        </button> : null }
                     {/* { props.mode === ''  ?  <button style={ deleteStyle }>Eliminar</button> : null }  */}
                     { props.mode === ''  ?  <button style={ editStyle }>Editar</button> : null } 
                     { props.movie.date !== undefined ? <button style={ launchStyle }>Estrenar</button> : null }
