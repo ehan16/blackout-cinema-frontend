@@ -10,7 +10,7 @@ function BranchItem(props) {
             <h4>{ props.branch.place }</h4>
                 <ul className="mb-0" style={{ listStyleType: 'none', paddingBottom: '10px' }}>
 
-                    { props.admin ? <li>ID: { props.branch.id }</li> : null}
+                    { props.admin ? <li>ID: { props.branch.branchs_id }</li> : null}
                     <li>Estado: { props.branch.state_field }</li>
                     <li>Ciudad: { props.branch.city }</li>
                     <li>Zona: { props.branch.zone }</li>
@@ -22,7 +22,7 @@ function BranchItem(props) {
                 <div style={{ display: 'flex' }}>
 
                     { props.admin ? <button style={ deleteStyle } onClick={() => props.deleteBranch(props.branch)}>{ props.branch.enable ? 'Inhabilitar' : 'Habilitar'}</button> : null }
-                    { props.admin ? <Link to={`/admin/branches/${props.branch.id}`}><button style={ editStyle }>Editar</button></Link> : null }
+                    { props.admin ? <Link to={`/admin/branches/${props.branch.branchs_id}`}><button style={ editStyle }>Editar</button></Link> : null }
 
                 </div>
             </div>

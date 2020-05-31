@@ -12,7 +12,7 @@ export class BranchList extends Component {
         this.state = {
             branches: [
                 {
-                    id: 2,
+                    branch_id: 2,
                     state_field: 'Miranda',
                     city: 'Caracas',
                     zone: 'Las Mercedes',
@@ -30,9 +30,9 @@ export class BranchList extends Component {
     }
     
     getBranches = () => {
-        // axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
-        //     this.setState({...this.state, branches: res.data})
-        // });
+        axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
+            this.setState({...this.state, branches: res.data})
+        });
     }
 
     render() {
@@ -49,7 +49,7 @@ export class BranchList extends Component {
                     }
                     {
                         this.state.branches.map( (branch) => (
-                            <BranchItem key={branch.id} branch={ branch } admin={ this.props.admin } deleteBranch={this.deleteBranch} />
+                            <BranchItem key={branch.branchs_id} branch={ branch } admin={ this.props.admin } deleteBranch={this.deleteBranch} />
                         ))
                     }
                 </div>
@@ -78,7 +78,7 @@ export class BranchList extends Component {
             dangerMode: true
         }).then((willDelete) => {
             if(willDelete) {
-                axios.put(`http://127.0.0.1:8000/api/branches/${branch.id}/`, data).then(
+                axios.put(`http://127.0.0.1:8000/api/branches/${branch.branch_id}/`, data).then(
                     // window.location.reload()
                     this.getBranches()
                 );

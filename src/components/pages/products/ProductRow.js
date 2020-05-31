@@ -9,16 +9,15 @@ export default function ProductRow(props) {
 
     return (
         <tr>
-            { props.admin ? <th scope="row">{ item.id }</th> : null }
+            { props.admin ? <th scope="row">{ item.category !== 'combo' ? item.product_id : item.combo_id }</th> : null }
             <td className="text-capitalize">{ item.name }</td>
-            { props.admin ? 
-                <th className="text-capitalize">{ item.category === 'combo' ?  items : 'N/A' } </th> 
-            : null }
+            { props.admin ? <th className="text-capitalize">{ item.category === 'combo' ?  items : 'N/A' } </th> : null }
             <td className="text-capitalize">{ item.category }</td>
             <td>{ item.price }</td>
+            { props.admin && item.category !== 'combo'? <th>{ item.availability }</th> : <th>{ item.enable ? 'Activo' : 'Desactivo' }</th> }
             <td>
                 <div className="btn-group btn-group-sm">
-                    { !props.admin && !props.buy ? <button className="btn" style={ btnStyle } onClick={() => props.addToBuyList(item)} disabled={item.availability === 0}><i className="fa fa-plus"></i></button> : null}
+                    { !props.admin && !props.buy ? <button className="btn" style={ btnStyle } onClick={() => props.addToBuyList(item)} disabled={item.availability === 0 || !item.enable}><i className="fa fa-plus"></i></button> : null}
                     { !props.admin && props.buy ? <button className="btn" style={ btnStyle }><i className="fa fa-trash" onClick={() => props.deleteInBuyList(index)}></i></button> : null}
                     { props.admin && !item.category === 'combo' ? <Link to={`/admin/products/${item.id}`}><button className="btn" style={ btnStyle }><i className="fa fa-pencil"></i></button></Link> : null}
                     { props.admin && item.category === 'combo' ? <Link to={`/admin/combos/${item.id}`}><button className="btn" style={ btnStyle }><i className="fa fa-pencil"></i></button></Link> : null}

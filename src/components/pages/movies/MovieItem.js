@@ -11,7 +11,7 @@ function MovieItem(props) {
                 <ul className="mb-0" style={{ listStyleType: 'none', paddingBottom: '10px' }}>
 
                     {/* Los datos de la pelicula */}
-                    { props.mode === '' ? <li>ID: { props.movie.id }</li> : null }
+                    { props.mode === '' ? <li>ID: { props.movie.movie_id }</li> : null }
                     <li>Año: { props.movie.year }</li>
                     <li className="text-capitalize">Género: { props.movie.genre }</li>
                     <li>Duración: { props.movie.duration } min</li>
@@ -28,7 +28,7 @@ function MovieItem(props) {
                             <Link to={`/admin/movies/${props.movie.id}`}><button style={ editStyle }>Editar</button></Link>
                             { props.movie.state_now === 'estreno' ? <button style={ buttonStyle } onClick={() => props.launchMovie(props.movie)}>Estrenar</button> : null }
                             { props.movie.state_now === 'cartelera' ? <button style={ buttonStyle } onClick={() => props.takeOutMovie(props.movie)}>Culminar</button> : null }
-                            { props.movie.state_now === 'cartelera' ? <Link to={`/admin/movie/${props.movie.id}/functions`}><button style={ buttonStyle }>Funciones</button></Link> : null }
+                            { props.movie.state_now === 'cartelera' ? <Link to={`/admin/movie/${props.movie.movie_id}/functions`}><button style={ buttonStyle }>Funciones</button></Link> : null }
                         </div>
                         : null
                     }

@@ -83,7 +83,6 @@ const ClientForm = (props) => {
                 
                 // Se agrega al nuevo cliente
                 axios.post('http://127.0.0.1:8000/api/clients/', client);
-                console.log(client)
                 
             });
 
@@ -91,11 +90,9 @@ const ClientForm = (props) => {
             axios.post('http://127.0.0.1:8000/api/orders/', order)
             .then(res => {
                 console.log(res.data); // Se consigue cual es el id de la orden de compra
-                this.insertProducts(orderId); 
-                this.updateLots(functionId);
+                insertProducts(orderId); 
+                updateLots(functionId);
             }); 
-            console.log(order);
-
             
             // alert("Compra existosa. Su orden de compra es " + orderId);
             swal("Compra exitosa", `Su orden de compra es ${orderId}`, "info", { dangerMode: true });

@@ -61,9 +61,10 @@ export class ProductsList extends Component {
                                     <tr className="bg-danger">
                                         { this.props.admin ? <th scope="col">ID</th> : null}
                                         <th scope="col">Nombre</th>
-                                        { this.props.admin ? <th scope="col">Items</th> : null}
+                                        { this.props.admin ? <th>Items</th> : null}
                                         <th scope="col">Categoría</th>
                                         <th scope="col">Precio</th>
+                                        { this.props.admin ? <th>Qty</th> : null}
                                         <th scope="col">Acción</th>
                                     </tr>
                                 </thead>

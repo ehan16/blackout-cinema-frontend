@@ -35,8 +35,8 @@ const ClientsList = (props) => {
                         <tbody>
                             { clients 
                                 ? clients.map(client => 
-                                    <tr>
-                                        <th scope="row">{ client.id }</th>
+                                    <tr key={ client.client_id }>
+                                        <th scope="row">{ client.client_id }</th>
                                         <td className="text-capitalize">{ client.plate }</td>
                                         <td className="text-capitalize">{ client.email }</td>
                                         <td className="text-capitalize">{ client.phone }</td>

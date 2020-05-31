@@ -61,8 +61,8 @@ const OrdersList = (props) => {
                         <tbody>
                             { orders 
                                 ? orders.map(order => 
-                                    <tr>
-                                        <th scope="row">{ order.id }</th>
+                                    <tr key={ order.order_id }>
+                                        <th scope="row">{ order.order_id }</th>
                                         <td className="text-capitalize">{ order.date }</td>
                                         <td className="text-capitalize">{ order.client_id }</td>
                                         <td className="text-capitalize">{ order.movie_id }</td>

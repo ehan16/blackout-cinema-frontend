@@ -12,7 +12,7 @@ export class MovieList extends Component {
         this.state = {
             movies: [
                 {
-                    id: 1,
+                    movie_id: 1,
                     title: 'Peter Rabbit',
                     year: 2018,
                     genre: 'infantil',
@@ -24,7 +24,7 @@ export class MovieList extends Component {
                     state_now: 'estreno'
                 },
                 {
-                    id: 2,
+                    movie_id: 2,
                     title: 'Peter Dog',
                     year: 2018,
                     genre: 'infantil',
@@ -71,7 +71,7 @@ export class MovieList extends Component {
                     }
                     { 
                         this.state.movies.map( (movie,index) => (
-                            <MovieItem key={movie.id} movie={ movie } mode={ this.props.mode } index={index} launchMovie={this.launchMovie} takeOutMovie={this.takeOutMovie} /> 
+                            <MovieItem key={movie.movie_id} movie={ movie } mode={ this.props.mode } index={index} launchMovie={this.launchMovie} takeOutMovie={this.takeOutMovie} /> 
                         ))
                     }
                 </div>
@@ -102,7 +102,7 @@ export class MovieList extends Component {
             dangerMode: true
         }).then((willDelete) => {
             if(willDelete) {
-                axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
+                axios.put(`http://127.0.0.1:8000/api/movies/${movie.movie_id}`, data)
                 .then(this.getMovies()); // Se actualiza la informacion mostrada
                 swal("Exitoso", "¡Se ha estrenado la película!", "info", { dangerMode: true });
             } else {
@@ -134,7 +134,7 @@ export class MovieList extends Component {
             dangerMode: true
         }).then((willDelete) => {
             if(willDelete) {
-                axios.put(`http://127.0.0.1:8000/api/movies/${movie.id}`, data)
+                axios.put(`http://127.0.0.1:8000/api/movies/${movie.movie_id}`, data)
                 .then(this.getMovies()); // Se actualiza la informacion mostrada
                 swal("Exitoso", "¡Se ha sacado la película del aire!", "info", { dangerMode: true });
             } else {
