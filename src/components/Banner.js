@@ -4,7 +4,7 @@ function Banner(props) {
     return (
         <div className="banner">
             <div style={ nameStyle }>
-                <h6>{ props.name }</h6>
+                <strong><h5>{ props.name }</h5></strong>
             </div>
         </div>
         );
@@ -12,11 +12,10 @@ function Banner(props) {
 
 const nameStyle = {
     color: 'red',
-    // background: '#280547',
-    // background: '#5e1212',
     background: '#111',
     textAlign: 'center',
-    padding: '8px'
+    padding: '8px',
+    fontWeight: 'bolder'
 }
 
 export default Banner;

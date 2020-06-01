@@ -1,21 +1,29 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 function BranchItem(props) {
+
     return (
         <div className="card branch">
             <div>
             <h4>{ props.branch.place }</h4>
                 <ul className="mb-0" style={{ listStyleType: 'none', paddingBottom: '10px' }}>
-                    { props.admin ? <li>ID: { props.branch.id }</li> : null}
-                    <li>Estado: { props.branch.state }</li>
+
+                    { props.admin ? <li>ID: { props.branch.branchs_id }</li> : null}
+                    <li>Estado: { props.branch.state_field }</li>
                     <li>Ciudad: { props.branch.city }</li>
                     <li>Zona: { props.branch.zone }</li>
-                    <li>Teléfono: { props.branch.number }</li>
-                    { props.admin ? <li>Número de empleados: { props.branch.employees }</li> : null}
+                    <li>Teléfono: { props.branch.number_field }</li>
+                    { props.admin ? <li>Número de empleados: { props.branch.employee }</li> : null}
+                    <li>{ props.branch.enable ? 'Activo' : 'Inactivo'}</li>
+
                 </ul>
                 <div style={{ display: 'flex' }}>
-                    { props.admin ? <button style={ deleteStyle }>Eliminar</button> : null }
-                    { props.admin ? <button style={ editStyle }>Editar</button> : null }
+
+                    { props.admin ? <button style={ deleteStyle } onClick={() => props.deleteBranch(props.branch)}>{ props.branch.enable ? 'Inhabilitar' : 'Habilitar'}</button> : null }
+                    { props.admin ? <Link to={`/admin/branches/${props.branch.branchs_id}`}><button style={ editStyle }>Editar</button></Link> : null }
+
                 </div>
             </div>
         </div>
@@ -26,8 +34,6 @@ const deleteStyle = {
     background: 'red',
     margin: '5px',
     color: 'white',
-    padding: '5px',
-    borderRadius: '5px',
     border: 'red'
 }
 
@@ -35,10 +41,7 @@ const editStyle = {
     background: 'darkgoldenrod',
     margin: '5px',
     color: 'white',
-    padding: '5px',
-    borderRadius: '5px',
     border: 'darkgoldenrod',
-    padding: '0px 15px'
 }
 
 export default BranchItem;

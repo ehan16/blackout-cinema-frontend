@@ -8,9 +8,9 @@ function Home() {
             <Banner name="Home"/>
             <div className="container-fluid p-m-5">
 
-                <div className="row" style={{ padding: '50px 100px' }}>
+                <div className="row" style={{ padding: '50px' }}>
                     <div className="col text-center">
-                        <h2 className="mb-4" style={{ fontWeight: 'bold' }}>¡BIENVENIDOS!</h2>
+                        <h3 className="mb-4" style={{ fontWeight: 'bold' }}>¡BIENVENIDOS!</h3>
                         <p><em style={{ color: 'red', fontWeight: 'bolder' }}>Blackout Cinema</em> es un autocine que busca retomar todas las soñadas escenas del 
                             pasado al presente, combinando la simplicidad junto a nuevas tecnologías e invenciones, creando un ambiente
                             de ensueño para el disfrute de todos nuestros clientes.</p>
@@ -41,9 +41,9 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="row" style={{ padding: '50px 100px' }}>
+                <div className="row" style={{ padding: '50px' }}>
                     <div className="col text-center">
-                        <h3 className="mb-4" style={{ fontWeight: 'bold' }}>¡SOBRE NOSOTROS!</h3>
+                        <h4 className="mb-4" style={{ fontWeight: 'bold' }}>¡SOBRE NOSOTROS!</h4>
                         <p><em style={{ color: 'red', fontWeight: 'bolder' }}>Blackout Cinema</em> fue creado por un grupo de estudiantes 
                             de la Universidad Metropolitana
                             como resultado de un proyecto dirigido a profundizar sobre las bases de datos.

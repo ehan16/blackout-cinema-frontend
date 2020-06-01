@@ -16,9 +16,7 @@ class Navbar extends React.Component {
                         <Link to='/' className="nav-item nav-link" >Inicio</Link>
                         <Link to='/movies/on-air' className="nav-item nav-link">Cartelera</Link> 
                         <Link to='/movies/to-release' className="nav-item nav-link">Estrenos</Link> 
-                        
                         <Link to='/branches' className="nav-item nav-link">Sucursales</Link> 
-
 
                         <div className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="dropMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
@@ -27,6 +25,8 @@ class Navbar extends React.Component {
                                 <Link to='/admin/products' className="dropdown-item text-white newHover" href="#">Inventario</Link> 
                                 <Link to='/admin/branches' className="dropdown-item text-white newHover" href="#">Sucursales</Link> 
                                 <Link to='/admin/orders' className="dropdown-item text-white newHover" href="#">Ventas</Link> 
+                                <Link to='/admin/clients' className="dropdown-item text-white newHover" href="#">Clientes</Link> 
+                                <Link to='/admin/statistics' className="dropdown-item text-white newHover" href="#">Estadísticas</Link> 
                             </div>
                         </div>
                     </div>
