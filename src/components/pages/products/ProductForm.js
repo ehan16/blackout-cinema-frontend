@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 const ProductForm = (props) => {
@@ -16,7 +16,6 @@ const ProductForm = (props) => {
     const [product5, setProduct5] = useState("");
     const [enable, setEnable] = useState(true);
     let products = []; // Para mostrarle a la persona los productos que pueden conformar el combo
-    const history = useHistory();
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -106,7 +105,7 @@ const ProductForm = (props) => {
                     
                 }
 
-                history.push('/admin/products');
+                window.location.replace("http://localhost:3000/admin/products")
             }
 
         }
@@ -134,7 +133,7 @@ const ProductForm = (props) => {
                 setName(res.data.name);
                 setPrice(res.data.price);
                 setAvailability(res.data.availability);
-                setCategory(res.data.category);
+                setCategory('combo');
                 setProduct1(res.data.product_1);
                 setProduct2(res.data.product_2);
                 setProduct3(res.data.product_3);
@@ -143,15 +142,16 @@ const ProductForm = (props) => {
                 setEnable(res.data.enable);
             })
             .catch(err => console.log(err));
-
+            
         } else {
-
+            
             await axios.get(`http://127.0.0.1:8000/api/products/${productId}/`)
             .then(res => {
-            setName(res.data.name_);
-            setPrice(res.data.price);
-            setAvailability(res.data.availability);
-            setCategory(res.data.category);
+                setName(res.data.name_);
+                setPrice(res.data.price);
+                setAvailability(res.data.availability);
+                setCategory(res.data.category);
+                setEnable(res.data.enable);
             })
             .catch(err => console.log(err));
             

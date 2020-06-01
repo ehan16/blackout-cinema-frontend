@@ -20,13 +20,12 @@ export class ProductsList extends Component {
 
     componentDidMount() {
 
-        // axios.get('http://127.0.0.1:8000/api/products/').then(res => {
-        //     this.setState({...this.state, products: res.data})
-        // });
-
-        // axios.get('http://127.0.0.1:8000/api/combos/').then(res => {
-        //     this.setState({...this.state, product: [...this.state.products, res.data]})
-        // })
+        axios.get('http://127.0.0.1:8000/api/products/').then(res => {
+            this.setState({...this.state, products: res.data})
+        });
+        axios.get('http://127.0.0.1:8000/api/combos/').then(res => {
+            this.setState({...this.state, product: [...this.state.products, res.data]})
+        })
         
     }
 
@@ -64,12 +63,12 @@ export class ProductsList extends Component {
                                         { this.props.admin ? <th>Items</th> : null}
                                         <th scope="col">Categoría</th>
                                         <th scope="col">Precio</th>
-                                        { this.props.admin ? <th>Qty</th> : null}
+                                        <th>Qty</th>
                                         <th scope="col">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { this.state.buyList.map((item, index) => 
+                                    { this.state.products.map((item, index) => 
                                         <ProductRow admin={this.props.admin} item={item} index={index} buy={false} addToBuyList={this.addToBuyList}/>
                                     ) }
                                 </tbody>
@@ -88,7 +87,7 @@ export class ProductsList extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { this.state.buyList.map((item, index) => 
+                                    { this.state.products.map((item, index) => 
                                         <ProductRow admin={this.props.admin} item={item} index={index} buy={true} deleteInBuyList={this.deleteInBuyList} />
                                     ) }
                                 </tbody>
@@ -103,13 +102,16 @@ export class ProductsList extends Component {
         )
     }
 
-    addToBuyList = (newProduct) => { this.setState({ buyList: [...this.state.buyList, newProduct], amount: (this.state.amount + newProduct.price) }) };
+    addToBuyList = (newProduct) => { 
+        this.setState({ buyList: [...this.state.buyList, newProduct], amount: (this.state.amount + newProduct.price) }) 
+    };
 
-    deleteInBuyList = (index) => { this.setState(state => {
-        const price = this.state.buyList[index].price;
-        const buyList = state.buyList.filter((item, i) => index !== i);
-        const amount = this.state.amount - price;
-        return { buyList, amount };
+    deleteInBuyList = (index) => { 
+        this.setState(state => {
+            const price = this.state.buyList[index].price;
+            const buyList = state.buyList.filter((item, i) => index !== i);
+            const amount = this.state.amount - price;
+            return { buyList, amount };
     }) }
 
     showModal = () => {

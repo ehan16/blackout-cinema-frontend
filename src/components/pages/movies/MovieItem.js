@@ -25,7 +25,7 @@ function MovieItem(props) {
                     { props.mode === 'on-air'  ? <button style={ buttonStyle }>Detalles</button> : null }
                     { props.mode === ''  
                         ? <div>
-                            <Link to={`/admin/movies/${props.movie.id}`}><button style={ editStyle }>Editar</button></Link>
+                            <Link to={`/admin/movies/${props.movie.movie_id}`}><button style={ editStyle }>Editar</button></Link>
                             { props.movie.state_now === 'estreno' ? <button style={ buttonStyle } onClick={() => props.launchMovie(props.movie)}>Estrenar</button> : null }
                             { props.movie.state_now === 'cartelera' ? <button style={ buttonStyle } onClick={() => props.takeOutMovie(props.movie)}>Culminar</button> : null }
                             { props.movie.state_now === 'cartelera' ? <Link to={`/admin/movie/${props.movie.movie_id}/functions`}><button style={ buttonStyle }>Funciones</button></Link> : null }

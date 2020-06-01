@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Banner from '../../Banner';
 
 const ClientsList = (props) => {
 
-    let clients = ['ii'];
+    const [clients, setClients] = useState([]);
 
     const getClients = async() => {
         await axios.get('http://127.0.0.1:8000/api/clients/')
-        .then(res => { clients = res.data })
+        .then(res => { 
+            setClients(res.data);
+        })
         .catch(err => console.log(err));
     }
 
@@ -20,13 +22,14 @@ const ClientsList = (props) => {
         <div>
 
             <Banner name="Clientes"/>
-            <div className="row px-sm-3 pb-3 pt-2">
+            <div className="row mx-2 px-sm-3 pb-3 pt-2">
 
-                <div className="col mx-md-3 my-5 text-center">
-                    <table className="table table-responsive-sm table-hover table-dark list">
+                <div className="col my-5 text-center">
+                    <table className="table table-responsive-md table-hover table-dark">
                         <thead>
                             <tr className="bg-danger">
                                 <th scope="col">ID</th>
+                                <th scope="col">Cédula</th>
                                 <th scope="col">Placa</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Teléfono</th>
@@ -37,9 +40,10 @@ const ClientsList = (props) => {
                                 ? clients.map(client => 
                                     <tr key={ client.client_id }>
                                         <th scope="row">{ client.client_id }</th>
-                                        <td className="text-capitalize">{ client.plate }</td>
-                                        <td className="text-capitalize">{ client.email }</td>
-                                        <td className="text-capitalize">{ client.phone }</td>
+                                        <td>{ client.identification }</td>
+                                        <td>{ client.plate }</td>
+                                        <td>{ client.email }</td>
+                                        <td>{ client.phone }</td>
                                     </tr>
                                     )
                                 : null

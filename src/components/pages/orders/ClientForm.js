@@ -13,7 +13,7 @@ const ClientForm = (props) => {
     const [vehicleType, setVehicleType] = useState("1");
     const [id, setId] = useState(0);
     const history = useHistory();
-    const products = props.buyList.map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
+    const products = props.buyList; // .map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
     const functionId = props.functionId;
 
     const handleChange = (e) => {
@@ -53,9 +53,8 @@ const ClientForm = (props) => {
 
         } else {
 
-            let price = 10;
-            const orderId = "";
-            if (vehicleType === '2') { price = 20; }
+            let price = vehicleType === '1' ? 10 : 20;
+            const orderId = ""; // Se obtiene el id de la orden para realizar operaciones con el 
             const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
 
             const order = {
@@ -73,16 +72,14 @@ const ClientForm = (props) => {
             .catch(err => {
                 
                 const client = {
-                    id: id,
+                    client_id: id,
                     // name: name,
                     email: email,
                     phone: phone,
                     vehicleType: vehicleType,
-                    plate: plate
+                    plate: plate.toUpperCase()
                 };
-                
-                // Se agrega al nuevo cliente
-                axios.post('http://127.0.0.1:8000/api/clients/', client);
+                axios.post('http://127.0.0.1:8000/api/clients/', client); // Se agrega al nuevo cliente
                 
             });
 
@@ -94,7 +91,6 @@ const ClientForm = (props) => {
                 updateLots(functionId);
             }); 
             
-            // alert("Compra existosa. Su orden de compra es " + orderId);
             swal("Compra exitosa", `Su orden de compra es ${orderId}`, "info", { dangerMode: true });
             history.push("/"); // Se devuelve al cliente al home
             
@@ -106,10 +102,25 @@ const ClientForm = (props) => {
         // Se inserta cada producto adquirido en el historico
         products.map(product => {
             const data = {
-                product_id: product,
+                product_id: product.id,
                 order_id: orderId
             };
             axios.post('http://127.0.0.1:8000/api/record/', data);
+        })
+    }
+
+    const updateProducts = (productId) => {
+        // Se tiene que actualizar la cantidad disponible de productos
+        axios.get(`http://127.0.0.1:8000/api/products/${productId}`).then(res => {
+            const productDetail = res.data;
+            const data = {
+                name: productDetail.name,
+                availability: (parseInt(productDetail.availability, 10) - 1), // Por precaucion se hace la conversion
+                price: productDetail.price,
+                category: productDetail.category,
+                enable: productDetail.enable,
+            };
+            axios.put(`http://127.0.0.1:8000/api/functions/${functionId}`, data);
         })
     }
 

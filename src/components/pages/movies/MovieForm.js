@@ -64,27 +64,28 @@ const MovieForm = (props) => {
         } else {
             
             const data = {
-                title: title.toLowerCase(),
-                genre: genre,
-                duration: duration,
-                language_field: language,
-                subtitle: subtitles,
-                date: date,
-                state_now: mode,
-                synopsys: synopsys,
-                year: year
+                'title': title.toLowerCase(),
+                'date': date,
+                'year': year,
+                'genre': genre,
+                'duration': duration,
+                'language_field': language,
+                'subtitle': subtitles,
+                'state_now': mode,
+                'synopsys': synopsys,
             }
     
             if (props.edit) {
                 const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
-                axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data);
-                console.log(data, 'Modo edicion');
+                axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data, {headers: {"Content-Type" : "application/json" }})
+                .then(res => console.log(data, 'Modo edicion', movieId)).catch(err => console.log(err));
             } else {
                 axios.post('http://127.0.0.1:8000/api/movies/', data);
                 console.log(data, 'Modo agregar');
             }
             
-            history.push('/admin/movies');
+            history.push('/admin/movies'); // Se decidio no usar ya que hay que hacer refresh a la pagina igual
+            // window.location.replace("http://localhost:3000/admin/movies")
 
         }
     }
@@ -98,7 +99,7 @@ const MovieForm = (props) => {
             setYear(res.data.year);
             setDuration(res.data.duration);
             setLanguage(res.data.language_field);
-            setSubtitles(res.data.subtitles);
+            setSubtitles(res.data.subtitle);
             setDate(res.data.date);
             setMode(res.data.state_now);
             setSynopsys(res.data.synopsys);
@@ -131,6 +132,7 @@ const MovieForm = (props) => {
                         <option value="romance">Romance</option>
                         <option value="infantil">Infantil</option>
                         <option value="terror">Terror</option>
+                        <option value="thriller">Thriller</option>
                     </select>
                 </div>
                 <div className="form-group">

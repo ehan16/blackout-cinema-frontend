@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import swal from 'sweetalert';
 
 const BranchForm = (props) => {
@@ -12,7 +12,6 @@ const BranchForm = (props) => {
     const [phone, setPhone] = useState(0);
     const [employees, setEmployees] = useState(0);
     const [enable, setEnable] = useState(true);
-    const history = useHistory();
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -65,13 +64,11 @@ const BranchForm = (props) => {
             if (props.edit) {
                 const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
                 axios.put(`http://127.0.0.1:8000/api/branches/${branchId}/`, data); 
-                console.log(data);
             } else {
                 axios.post(`http://127.0.0.1:8000/api/branches/`, data); 
-                console.log(data);
             }
             
-            history.push('/admin/branches'); // Se devuelve a la lista de sucursales
+            window.location.replace("http://localhost:3000/admin/branches") // Se devuelve a la lista de sucursales
 
         }
 
@@ -93,6 +90,7 @@ const BranchForm = (props) => {
             setPlace(res.data.place);
             setPhone(res.data.number_field);
             setEmployees(res.data.employee);
+            setEnable(res.data.enable);
         })
         .catch(err => console.log(err));
     }

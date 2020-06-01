@@ -12,14 +12,14 @@ export class BranchList extends Component {
         this.state = {
             branches: [
                 {
-                    branch_id: 2,
-                    state_field: 'Miranda',
-                    city: 'Caracas',
-                    zone: 'Las Mercedes',
-                    place: 'Plaza Alfredo Sadel',
-                    number_field: '0212-315132',
-                    employee: 5,
-                    enable: true
+                    // branch_id: 2,
+                    // state_field: 'Miranda',
+                    // city: 'Caracas',
+                    // zone: 'Las Mercedes',
+                    // place: 'Plaza Alfredo Sadel',
+                    // number_field: '0212-315132',
+                    // employee: 5,
+                    // enable: true
                 },
             ]
         }
@@ -49,7 +49,7 @@ export class BranchList extends Component {
                     }
                     {
                         this.state.branches.map( (branch) => (
-                            <BranchItem key={branch.branchs_id} branch={ branch } admin={ this.props.admin } deleteBranch={this.deleteBranch} />
+                            <BranchItem key={ branch.branchs_id } branch={ branch } admin={ this.props.admin } deleteBranch={this.deleteBranch} />
                         ))
                     }
                 </div>
@@ -66,9 +66,8 @@ export class BranchList extends Component {
             'place': branch.place,
             'number_field': branch.number_field,
             'employee': branch.employee,
-            'enable': !branch.enable
-        }
-        console.log(data);
+            'enable': !branch.enable,
+        };
 
         swal({
             title: "Confimación",
@@ -78,11 +77,10 @@ export class BranchList extends Component {
             dangerMode: true
         }).then((willDelete) => {
             if(willDelete) {
-                axios.put(`http://127.0.0.1:8000/api/branches/${branch.branch_id}/`, data).then(
-                    // window.location.reload()
-                    this.getBranches()
-                );
-                swal("Exitoso", "¡Se ha eliminado con éxito!", "info", { dangerMode: true });
+                axios.put(`http://127.0.0.1:8000/api/branches/${branch.branchs_id}/`, data).then(res => {
+                    this.getBranches();
+                    swal("Exitoso", "¡Se ha eliminado con éxito!", "info", { dangerMode: true });
+                });
             } else {
                 swal("No ha ocurrido nada", { dangerMode: true });
             }

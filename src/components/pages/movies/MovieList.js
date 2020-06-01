@@ -102,9 +102,10 @@ export class MovieList extends Component {
             dangerMode: true
         }).then((willDelete) => {
             if(willDelete) {
-                axios.put(`http://127.0.0.1:8000/api/movies/${movie.movie_id}`, data)
-                .then(this.getMovies()); // Se actualiza la informacion mostrada
-                swal("Exitoso", "¡Se ha estrenado la película!", "info", { dangerMode: true });
+                axios.put(`http://127.0.0.1:8000/api/movies/${movie.movie_id}/`, data).then(res => {
+                    this.getMovies(); // Se actualiza la informacion mostrada
+                    swal("Exitoso", "¡Se ha estrenado la película!", "info", { dangerMode: true });
+                }); 
             } else {
                 swal("No ha ocurrido nada", { dangerMode: true });
             }
@@ -134,9 +135,10 @@ export class MovieList extends Component {
             dangerMode: true
         }).then((willDelete) => {
             if(willDelete) {
-                axios.put(`http://127.0.0.1:8000/api/movies/${movie.movie_id}`, data)
-                .then(this.getMovies()); // Se actualiza la informacion mostrada
-                swal("Exitoso", "¡Se ha sacado la película del aire!", "info", { dangerMode: true });
+                axios.put(`http://127.0.0.1:8000/api/movies/${movie.movie_id}/`, data).then(res => {
+                    this.getMovies(); // Se actualiza la informacion mostrada
+                    swal("Exitoso", "¡Se ha sacado la película del aire!", "info", { dangerMode: true });
+                }); 
             } else {
                 swal("No ha ocurrido nada", { dangerMode: true });
             }
