@@ -11,30 +11,30 @@ export class MovieList extends Component {
         super(props);
         this.state = {
             movies: [
-                // {
-                //     movie_id: 1,
-                //     title: 'Peter Rabbit',
-                //     year: 2018,
-                //     genre: 'infantil',
-                //     duration: 90,
-                //     language_field: 'inglés',
-                //     subtitle: 'true',
-                //     synopsys: 'Asdasda',
-                //     date: 'no se',
-                //     state_now: 'estreno'
-                // },
-                // {
-                //     movie_id: 2,
-                //     title: 'Peter Dog',
-                //     year: 2018,
-                //     genre: 'infantil',
-                //     duration: 90,
-                //     language_field: 'inglés',
-                //     subtitle: 'true',
-                //     synopsys: 'Asdasda',
-                //     date: 'no se',
-                //     state_now: 'cartelera'
-                // }
+                {
+                    movie_id: 1,
+                    title: 'Peter Rabbit',
+                    year: 2018,
+                    genre: 'infantil',
+                    duration: 90,
+                    language_field: 'inglés',
+                    subtitle: 'true',
+                    synopsys: 'Asdasda',
+                    date: 'no se',
+                    state_now: 'estreno'
+                },
+                {
+                    movie_id: 2,
+                    title: 'Peter Dog',
+                    year: 2018,
+                    genre: 'infantil',
+                    duration: 90,
+                    language_field: 'inglés',
+                    subtitle: 'true',
+                    synopsys: 'Asdasda',
+                    date: 'no se',
+                    state_now: 'cartelera'
+                }
             ]
         };
     }
