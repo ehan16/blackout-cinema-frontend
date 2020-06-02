@@ -4,9 +4,9 @@ import axios from 'axios';
 export default function MovieDetail(props) {
 
     const movieId = props.match.params.movieId;
-    const movie = "";
-    const branches = [];
-    const functions = [];
+    let movie = "";
+    let branches = [];
+    let functions = [];
 
     
     useEffect(() => {
@@ -16,9 +16,9 @@ export default function MovieDetail(props) {
         })
         .catch(e => console.log(e))
 
-        axios.get(`http://127.0.0.1:8000/api/branches/`)
+       axios.get(`http://127.0.0.1:8000/api/branches/`)
         .then(res => {
-            branches = res.data;
+           branches = res.data;
         })
         .catch(e => console.log(e))
 
@@ -29,39 +29,89 @@ export default function MovieDetail(props) {
         .catch(e => console.log(e))
     }, []);
 
+    const myli = {
+        listStyle: 'none',
+        display: 'inline',
+        padding: '.8em',
+        color: '#c7c7c7',
+    }
+
+    const aStyle = {
+        textDecoration: 'none',
+        color: '#d63636'
+    }
+
+    const lin = {
+        backgroundColor: 'transparent',
+        border: '2px solid',
+        lineHeight: 'calc(2rem - 4px)',
+        borderRadius: '.2rem',
+        textDecoration: 'none',
+        color: '#d63636',
+        textTransform: 'uppercase'
+    }
+
     return (
         <div>
-            <div className="row "> 
-                <div className="col mx-sm-3 my-4 text-center">
-                    <h1 className="bold">Título</h1>
-                    <p>Descripcion</p>
+            <div className="row" > 
+                <div className="col-6 mx-sm-5 my-4">
+
+                    <h1 className="pt-5" style={{ color: 'red', fontWeight: 'bolder'}}>Peaky Blinders</h1>
+                    
+                    <div className="d-inline-block py-3">
+                        <li style={myli}>2017</li>
+                        <li style={myli}>Drama, Crimen</li>
+                        <li style={myli}>60 min</li>
+                    </div>
+                    
+
+                    <p style={{fontSize: '1em'}}>La serie está ambientada en el mundo de los gangsters de los años 20, en Birmingham. Un joven a lomos de un hermoso corcel negro recorre las calles de Birmingham (Inglaterra). Estamos en 1919, la Gran Guerra ha terminado, pero aquel individuo posee el don de atemorizar a su paso a cualquier transeúnte. ¿Quién es? ¿Por qué les asusta tanto? Al parecer busca un hechizo, una pócima, que garantice la victoria de su caballo de carreras. Una mujer oriental proveerá al temido muchacho de una mágica especia que hará que el noble animal equino logre su fin.</p>
+                    
                     <div className="d-inline-block">
-                        <ul className="">
-                            <li>Año</li>
-                            <li>Genero</li>
-                            <li>Duracion</li>
-                            <li>Lenguaje</li>
-                            <li>Subtitulos</li>
-                        </ul>
+                        <li style={myli}>Inglés</li>
+                        <li style={myli}>Subtitulada</li>
                     </div>
                 </div>
+
+                <div className="col-4 d-flex align-items-end flex-row-reverse">
+                    
+                    <div>
+                        <a href="#" style={aStyle} class="btn fa fa-twitter px-3" aria-hidden="true"></a>
+                        <a href="#" style={aStyle} class="btn fa fa-facebook-square px-3" aria-hidden="true"></a>
+                    </div>
+
+                    <div className="align-self-center">
+                        <button style={lin} className="btn lg p-3" >Agregar película</button>
+                    </div>
+                </div>
+                
             </div>
+
             <div className="row mx-sm-3 my-3">
                     <table className="table table-responsive-sm table-hover table-dark list text-center">
                         <thead>
-                            <tr>
-                                <th>id_funcion</th>
-                                <th>sucursal</th>
-                                <th>hora</th>
-                                <th>puestos disponible</th>
-                                <th>comprar</th>
+                            <tr className="bg-danger">
+                                <th scope="col">ID</th>
+                                <th scope="col">Sucursal</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Puestos Disponible</th>
+                                <th scope="col">Comprar</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Plaza Alfredo Sadel</td>
+                                <td>9 pm</td>
+                                <td>20</td>
+                                <td>COMPRAR</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
         </div>
     )
+
+    
+    
 }

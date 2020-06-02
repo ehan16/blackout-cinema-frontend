@@ -22,7 +22,13 @@ function MovieItem(props) {
                 <div >
 
                     {/* Botones de accion */}
-                    { props.mode === 'on-air'  ? <button style={ buttonStyle }>Detalles</button> : null }
+                    { props.mode === 'on-air'  ? 
+                        <Link to={`/movie/${props.movie.movie_id}`} >
+                            <button style={ buttonStyle }>Detalles</button>
+                        </Link>
+                    : null }
+                        
+                        
                     { props.mode === ''  
                         ? <div>
                             <Link to={`/admin/movies/${props.movie.id}`}><button style={ editStyle }>Editar</button></Link>

@@ -4,9 +4,13 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <footer>
-                <div className="d-flex text-center align-items-center justify-content-center" style={{ background: '#111' }}>
-                    <p className="m-3 w-100 text-white">© { new Date().getFullYear() } Copyright: Blackout Cinema</p>
+            <footer className="ft">
+                <div className="d-block text-center justify-content-center" style={{ background: '#111' }}>
+                    <p className="pt-3 w-100">Blackout Cinema © { new Date().getFullYear() }</p>
+                    <i class="fa fa-twitter px-3" aria-hidden="true"></i>
+                    <i class="fa fa-instagram px-3" aria-hidden="true"></i>
+                    <i class="fa fa-facebook-square px-3" aria-hidden="true"></i>
+
                 </div>
             </footer>
         );
