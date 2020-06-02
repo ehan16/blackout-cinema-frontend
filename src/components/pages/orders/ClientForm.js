@@ -101,16 +101,22 @@ const ClientForm = (props) => {
     const insertProducts = (orderId) => {
         // Se inserta cada producto adquirido en el historico
         products.map(product => {
+
             const data = {
                 product_id: product.product_id,
                 order_id: orderId,
                 combo_id: product.combo_id
             };
+
             axios.post('http://127.0.0.1:8000/api/record/', data);
+            if(product.product_id !== undefined) {
+                updateProduct(product.product_id);
+            }
+
         })
     }
 
-    const updateProducts = (productId) => {
+    const updateProduct = (productId) => {
         // Se tiene que actualizar la cantidad disponible de productos
         axios.get(`http://127.0.0.1:8000/api/products/${productId}`).then(res => {
             const productDetail = res.data;
