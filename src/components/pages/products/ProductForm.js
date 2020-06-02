@@ -6,16 +6,16 @@ import swal from 'sweetalert';
 const ProductForm = (props) => {
 
     const [name, setName] = useState("");
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(1);
     const [category, setCategory] = useState("");
-    const [availability, setAvailability] = useState(0);
+    const [availability, setAvailability] = useState(1);
     const [product1, setProduct1] = useState("");
     const [product2, setProduct2] = useState("");
     const [product3, setProduct3] = useState("");
     const [product4, setProduct4] = useState("");
     const [product5, setProduct5] = useState("");
-    const [enable, setEnable] = useState(true);
-    let products = []; // Para mostrarle a la persona los productos que pueden conformar el combo
+    const [enable, setEnable] = useState(false);
+    const [products, setProducts] = useState([]);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -64,7 +64,7 @@ const ProductForm = (props) => {
 
         } else {
 
-            if (category === "combo" && product1 === "" && product2 === "" && product3 === "" && product4 === "" && product5 === "") {
+            if (category === "combo" && product1 === "" && product2 === "") {
 
                 // Si es un combo, por lo menos uno de los productos tiene que estar seleccionado
                 swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
@@ -72,7 +72,7 @@ const ProductForm = (props) => {
             } else {
 
                 const data = {
-                    'name': name.toLowerCase(),
+                    'name': name,
                     'price': price,
                     'category': category,
                     'availability': availability,
@@ -114,13 +114,14 @@ const ProductForm = (props) => {
 
     useEffect(() => {
         // Se tiene que buscar todos los productos de la BBDD para presentarlos
-        products = axios.get('http://127.0.0.1:8000/api/products/').then(res => {
-            res.data.map(product => <option value={product.name} className="text-capitalize">{product.name_}</option>);
+        axios.get('http://127.0.0.1:8000/api/products/').then(res => {
+            const aux = res.data.map(product => <option value={product.name} className="text-capitalize">{product.name}</option>);
+            setProducts(res.data);
+            if (props.edit) {
+                getProduct();
+            }
         })
 
-        if (props.edit) {
-            getProduct();
-        }
     }, []);
 
     const getProduct = async() => {
@@ -128,11 +129,11 @@ const ProductForm = (props) => {
         const productId = props.match.params.productId; // Se identifica el id del producto a editar
         if (props.combo) {
 
-            await axios.get(`http://127.0.0.1:8000/api/products/${productId}/`)
+            await axios.get(`http://127.0.0.1:8000/api/combos/${productId}/`)
             .then(res => {
                 setName(res.data.name);
                 setPrice(res.data.price);
-                setAvailability(res.data.availability);
+                setAvailability(1);
                 setCategory('combo');
                 setProduct1(res.data.product_1);
                 setProduct2(res.data.product_2);
@@ -140,6 +141,7 @@ const ProductForm = (props) => {
                 setProduct4(res.data.product_4);
                 setProduct5(res.data.product_5);
                 setEnable(res.data.enable);
+                console.log(res.data.enable)
             })
             .catch(err => console.log(err));
             
@@ -147,7 +149,7 @@ const ProductForm = (props) => {
             
             await axios.get(`http://127.0.0.1:8000/api/products/${productId}/`)
             .then(res => {
-                setName(res.data.name_);
+                setName(res.data.name);
                 setPrice(res.data.price);
                 setAvailability(res.data.availability);
                 setCategory(res.data.category);
@@ -189,27 +191,37 @@ const ProductForm = (props) => {
                 </div>
                 {
                     category === 'combo' ? 
-                    <div>
+                    <div className="form-group">
                         <label>Productos del combo</label>
                         <select value={product1} className="form-field" name="product1" id="product1" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
-                            { products }
+                            { products.map(product => 
+                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                            }
                         </select> 
                         <select value={product2} className="form-field" name="product2" id="product2" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
-                            { products }
+                            { products.map(product => 
+                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                            }
                         </select> 
                         <select value={product3} className="form-field" name="product3" id="product3" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
-                            { products }
+                            { products.map(product => 
+                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                            }
                         </select> 
                         <select value={product4} className="form-field" name="product4" id="product4" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
-                            { products }
+                            { products.map(product => 
+                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                            }
                         </select> 
                         <select value={product5} className="form-field" name="product5" id="product5" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
-                            { products }
+                            { products.map(product => 
+                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                            }
                         </select> 
                     </div>
                     : null
@@ -219,10 +231,12 @@ const ProductForm = (props) => {
                     <input type="checkbox" value={enable} name="enable" id="enable" onChange={(e) => handleChange(e)}></input>
                     <span className="ml-2">Habilitar</span>
                 </div>
+
                 <div className="btn-group mt-3">
                     <Link to="/admin/products"><button type="button" className="btn-form">Cancelar</button></Link>
                     <button type="submit" className="btn-form btn-submit" onClick={ handleSubmit }>Aceptar</button>
                 </div>
+
             </form>
         </div>
     )

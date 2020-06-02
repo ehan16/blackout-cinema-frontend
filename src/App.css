@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
 .form-field {
   background-color: transparent;
   color: white;
-  padding: 7px;
+  padding: 10px;
   width: 100%;
   border-top: 0;
   border-right: 0;
@@ -89,12 +89,13 @@ button, .btn-submit {
   padding: 5px;
 }
 
+.list { margin-bottom: 40px; }
 .swal-modal { background-color: #272727; }
 .swal-text, .swal-title { color: white; }
 
 @media (max-width: 1035px) { .banner { height: 60vh; } }
 @media (max-width: 750px) { .banner { height: 45vh; } .card { margin: 20px 3vw } }
-@media (max-width: 580px) { .list { width: fit-content; } .continue { width: 70%; } }
+@media (max-width: 580px) { .continue { width: 70%; } }
 @media (max-width: 520px) { .banner { height: 35vh; } }
 @media (max-width: 470px) { .list { width: auto; margin-left: auto; margin-right: auto; } }
 @media (max-width: 380px) { .banner { height: 30vh; } .list { width: initial; } .continue { width: 100%; } }

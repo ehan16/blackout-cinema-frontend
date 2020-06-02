@@ -44,7 +44,7 @@ const OrdersList = (props) => {
         <div>
 
             <Banner name="Órdenes de compra"/>
-            <div className="row px-sm-3 pb-3 pt-2">
+            <div className="row mx-2 px-sm-3 pb-3 pt-2">
 
                 <div className="col mx-md-3 my-5 text-center">
                     <table className="table table-responsive-sm table-hover table-dark list">
