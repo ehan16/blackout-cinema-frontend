@@ -11,9 +11,9 @@ const FunctionForm = (props) => {
     const [lot, setLot] = useState(50);
     const [date, setDate] = useState(today);
     const [branch, setBranch] = useState("");
+    const [branches, setBranches] = useState([]);
     const movieId = props.match.movieId;
     const history = useHistory();
-    let branches = [];
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -73,8 +73,8 @@ const FunctionForm = (props) => {
     }
 
     useEffect(() => {
-        branches = axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
-            res.data.map(branch => <option value={branch.id} className="text-capitalize">{branch.zone} - {branch.place}</option>);
+        axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
+            setBranches(res.data);
         });
     }, [])
 
@@ -92,7 +92,9 @@ const FunctionForm = (props) => {
                     <label htmlFor="branch">Sucursal</label>
                     <select value={branch} name="branch" id="branch" className="form-field" onChange={(e) => handleChange(e)}>
                         <option value="">Ninguno</option>
-                        { branches }
+                        { branches.map(branch => 
+                            <option value={branch.id} className="text-capitalize">{branch.zone} - {branch.place}</option>
+                        )}
                     </select>
                 </div>
                 <div className="form-group">

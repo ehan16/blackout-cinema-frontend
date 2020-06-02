@@ -102,8 +102,9 @@ const ClientForm = (props) => {
         // Se inserta cada producto adquirido en el historico
         products.map(product => {
             const data = {
-                product_id: product.id,
-                order_id: orderId
+                product_id: product.product_id,
+                order_id: orderId,
+                combo_id: product.combo_id
             };
             axios.post('http://127.0.0.1:8000/api/record/', data);
         })

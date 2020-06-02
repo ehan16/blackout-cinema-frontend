@@ -89,7 +89,7 @@ button, .btn-submit {
   padding: 5px;
 }
 
-.list { margin-bottom: 40px; }
+.list { margin-bottom: 30px; font-size: 0.9rem; }
 .swal-modal { background-color: #272727; }
 .swal-text, .swal-title { color: white; }
 

@@ -11,7 +11,7 @@ export default function ProductRow(props) {
         <tr>
             { props.admin ? <th scope="row">{ !props.combo ? item.product_id : item.combo_id }</th> : null }
             <td className="text-capitalize">{ item.name }</td>
-            { props.admin && props.combo ? <th className="text-capitalize">{ items }</th> : null }
+            { props.combo ? <th className="text-capitalize">{ items }</th> : null }
             <td className="text-capitalize">{ item.category !== undefined ? item.category : 'Combo' }</td>
             <td>{ item.price }</td>
             { !props.buy 

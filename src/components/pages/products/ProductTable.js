@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProductRow from './ProductRow';
 
 const ProductTable = (props) => {
 
     return (
-        <table className="table table-responsive-md table-hover table-dark list">
+        <table className="table table-responsive-sm table-hover table-dark list">
             <thead>
                 <tr className="bg-danger">
                     { props.admin ? <th scope="col">ID</th> : null}

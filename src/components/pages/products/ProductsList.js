@@ -53,11 +53,11 @@ export class ProductsList extends Component {
 
                     <div className="row mx-3 px-sm-3 pb-3 pt-2">
 
-                        <div className="col-md mx-md-3 my-3 text-center">
+                        <div className="col-md mx-md-3 text-center">
 
+                            <h4 style={{ color: 'red', marginBottom: '20px' }}>Productos</h4>
                             {/* Tabla de combos */}
                             <ProductTable products={this.state.combos} combo={true} admin={this.props.admin} buy={false} addProduct={this.addProduct} deleteProduct={this.deleteProduct} />
-
                             {/* Tabla de productos */}
                             <ProductTable products={this.state.products} combo={false} admin={this.props.admin} buy={false} addProduct={this.addProduct} deleteProduct={this.deleteProduct} />
 
@@ -66,6 +66,7 @@ export class ProductsList extends Component {
                         {/* Lista de compras del cliente */}
                         { !this.props.admin ?
                             <div className="col-md mx-md-3 text-center">
+                                <h4 style={{ color: 'red', marginBottom: '20px' }}>Lista de compra</h4>
                                 <ProductTable products={this.state.buyList} combo={false} admin={this.props.admin} buy={true} addProduct={this.addProduct} deleteProduct={this.deleteProduct} />
                                 <button className="continue" style={ continueStyle } onClick={this.showModal}>Continuar</button>
                             </div>
