@@ -80,13 +80,23 @@ textarea { resize: vertical; }
     width: 80%;
 }
 
-button, .btn-submit {
+button .btn-submit {
   background-color: red;
   border: 1px solid red;
   color: white;
   border-radius: 5px;
   width: 85px;
   padding: 5px;
+}
+
+.ft {
+  color: rgb(153, 153, 153);
+  background: linear-gradient(bottom, #c7c7c7 17%, rgb(17, 17, 17, 1) 100%);;
+}
+
+.fa{
+  font-size: xx-large;
+  margin-bottom: 10px;
 }
 
 .list { margin-bottom: 30px; font-size: 0.9rem; }
