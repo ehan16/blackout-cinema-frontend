@@ -12,7 +12,7 @@ const FunctionForm = (props) => {
     const [date, setDate] = useState(today);
     const [branch, setBranch] = useState("");
     const [branches, setBranches] = useState([]);
-    const movieId = props.match.movieId;
+    const movieId = props.match.params.movieId;
     const history = useHistory();
 
     const handleChange = (e) => {
@@ -76,6 +76,7 @@ const FunctionForm = (props) => {
         axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
             setBranches(res.data);
         });
+        console.log(props.match.params.movieId)
     }, [])
 
     return (
@@ -93,7 +94,7 @@ const FunctionForm = (props) => {
                     <select value={branch} name="branch" id="branch" className="form-field" onChange={(e) => handleChange(e)}>
                         <option value="">Ninguno</option>
                         { branches.map(branch => 
-                            <option value={branch.id} className="text-capitalize">{branch.zone} - {branch.place}</option>
+                            <option key={branch.branchs_id} value={branch.branchs_id} className="text-capitalize">{branch.zone} - {branch.place}</option>
                         )}
                     </select>
                 </div>

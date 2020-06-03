@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default function MovieDetail(props) {
 
     const movieId = props.match.params.movieId;
-    let movie = "";
-    let branches = [];
-    let functions = [];
+    const [movie, setMovie] = useState('');
+    // const [branches, setBranches] = useState([]);
+    const [functions, setFunctions] = useState([]);
 
     
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/movies/${movieId}/`)
-        .then(res => {
-            movie = res.data;
-        })
-        .catch(e => console.log(e))
+            .then(res => {
+                setMovie(res.data);
+            })
+            .catch(e => console.log(e))
 
-       axios.get(`http://127.0.0.1:8000/api/branches/`)
-        .then(res => {
-           branches = res.data;
-        })
-        .catch(e => console.log(e))
+    //    axios.get(`http://127.0.0.1:8000/api/branches/`)
+    //     .then(res => {
+    //        setBranches(res.data)
+    //     })
+    //     .catch(e => console.log(e))
 
         axios.get(`http://127.0.0.1:8000/api/functions/`)
-        .then(res => {
-            functions = res.data;
-        })
-        .catch(e => console.log(e))
+            .then(res => {
+                setFunctions(res.data);
+                console.log(res.data)
+            })
+            .catch(e => console.log(e))
     }, []);
 
     const myli = {
@@ -52,8 +54,8 @@ export default function MovieDetail(props) {
     }
 
     return (
-        <div>
-            <div className="row" > 
+        <div className="container-fluid p-3">
+            <div className="row"> 
                 <div className="col-6 mx-sm-5 my-4">
 
                     <h1 className="pt-5" style={{ color: 'red', fontWeight: 'bolder'}}>Peaky Blinders</h1>
@@ -76,19 +78,19 @@ export default function MovieDetail(props) {
                 <div className="col-4 d-flex align-items-end flex-row-reverse">
                     
                     <div>
-                        <a href="#" style={aStyle} class="btn fa fa-twitter px-3" aria-hidden="true"></a>
-                        <a href="#" style={aStyle} class="btn fa fa-facebook-square px-3" aria-hidden="true"></a>
+                        <a href="#" style={aStyle} className="btn fa fa-twitter px-3" aria-hidden="true"></a>
+                        <a href="#" style={aStyle} className="btn fa fa-facebook-square px-3" aria-hidden="true"></a>
                     </div>
 
                     <div className="align-self-center">
-                        <button style={lin} className="btn lg p-3" >Agregar película</button>
+                        <Link to={`/admin/movie/${movieId}/add-function`}><button style={lin} className="btn lg p-3" >Agregar película</button></Link>
                     </div>
                 </div>
                 
             </div>
 
             <div className="row mx-sm-3 my-3">
-                    <table className="table table-responsive-sm table-hover table-dark list text-center">
+                    <table className="table table-responsive-md table-hover table-dark list text-center">
                         <thead>
                             <tr className="bg-danger">
                                 <th scope="col">ID</th>
@@ -99,13 +101,17 @@ export default function MovieDetail(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Plaza Alfredo Sadel</td>
-                                <td>9 pm</td>
-                                <td>20</td>
-                                <td>COMPRAR</td>
-                            </tr>
+                            {
+                                functions.map(functionDetail => 
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Plaza Alfredo Sadel</td>
+                                        <td>9 pm</td>
+                                        <td>20</td>
+                                        <td>COMPRAR</td>
+                                    </tr>
+                                )
+                            }
                         </tbody>
                     </table>
                 </div>

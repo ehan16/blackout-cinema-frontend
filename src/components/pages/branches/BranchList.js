@@ -49,7 +49,7 @@ export class BranchList extends Component {
                     }
                     {
                         this.state.branches.map( (branch) => (
-                            <BranchItem key={ branch.branchs_id } branch={ branch } admin={ this.props.admin } deleteBranch={this.deleteBranch} />
+                            <BranchItem branch={ branch } admin={ this.props.admin } deleteBranch={this.deleteBranch} />
                         ))
                     }
                 </div>

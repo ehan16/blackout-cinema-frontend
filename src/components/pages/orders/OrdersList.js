@@ -11,33 +11,15 @@ const OrdersList = (props) => {
 
     const getOrders = async() => {
         await axios.get('http://127.0.0.1:8000/api/orders/')
-        .then(res =>  setOrders(res.data))
+        .then(res =>  {
+            setOrders(res.data);
+            console.log(res.data)
+        })
         .catch(err => console.log(err));
     }
-
-    const getMovies = async() => {
-        await axios.get('http://127.0.0.1:8000/api/movies/')
-        .then(res => { movies = res.data })
-        .catch(err => console.log(err));
-    }
-
-    // const getBranches = async() => {
-    //     await axios.get('http://127.0.0.1:8000/api/branches/')
-    //     .then(res => { branches = res.data })
-    //     .catch(err => console.log(err));
-    // }
     
-    const getClients = async() => {
-        await axios.get('http://127.0.0.1:8000/api/clients/')
-        .then(res => { clients = res.data })
-        .catch(err => console.log(err));
-    }
-
     useEffect(() => {
         getOrders();
-        getMovies();
-        // getBranches();
-        getClients();
     }, []);
 
     return (
@@ -64,8 +46,8 @@ const OrdersList = (props) => {
                                     <tr key={ order.order_id }>
                                         <th scope="row">{ order.order_id }</th>
                                         <td className="text-capitalize">{ order.date }</td>
-                                        <td className="text-capitalize">{ order.client_id }</td>
-                                        <td className="text-capitalize">{ order.movie_id }</td>
+                                        <td>{ order.client_id.email }</td>
+                                        <td className="text-capitalize">{ order.movie_id.title }</td>
                                         {/* <td className="text-capitalize">{ order.branch_id }</td> */}
                                         <td className="text-capitalize">{ order.amount }</td>
                                     </tr>

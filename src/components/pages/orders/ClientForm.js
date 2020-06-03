@@ -86,7 +86,7 @@ const ClientForm = (props) => {
             // Se agrega la orden de compra
             axios.post('http://127.0.0.1:8000/api/orders/', order)
             .then(res => {
-                console.log(res.data); // Se consigue cual es el id de la orden de compra
+                orderId = res.data.order_id; // Se consigue cual es el id de la orden de compra
                 insertProducts(orderId); 
                 updateLots(functionId);
             }); 

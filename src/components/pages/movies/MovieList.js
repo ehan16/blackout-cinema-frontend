@@ -17,19 +17,25 @@ export class MovieList extends Component {
     componentDidMount() {
         this.getMovies();
     }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.mode !== this.props.mode) {
+            this.getMovies();
+        }
+    }
     
     getMovies = () => {
         // Se buscan las peliculas dependiendo de la modalidad
-        // if (this.props.mode === '') {
+        if (this.props.mode === '') {
             axios.get('http://127.0.0.1:8000/api/movies').then(res => {
                 this.setState({ ...this.state, movies: res.data });
             })
-        // } else { 
-               // Cambiar para que busque segun la tabla
-        //     axios.get(`http://127.0.0.1:8000/api/movies/${this.props.mode}/`).then(res => {
-        //         this.setState({ ...this.state, movies: res.data });
-        //     })
-        // }
+        } else { 
+            // Cambiar para que busque segun la tabla
+            axios.get(`http://127.0.0.1:8000/api/movies-${this.props.mode}/`).then(res => {
+                this.setState({ ...this.state, movies: res.data });
+            })
+        }
     }
 
     render() {

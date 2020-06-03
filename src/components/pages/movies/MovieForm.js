@@ -77,11 +77,9 @@ const MovieForm = (props) => {
     
             if (props.edit) {
                 const movieId = props.match.params.movieId; // Se identifica el id de la pelicula a editar
-                axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data, {headers: {"Content-Type" : "application/json" }})
-                .then(res => console.log(data, 'Modo edicion', movieId)).catch(err => console.log(err));
+                axios.put(`http://127.0.0.1:8000/api/movies/${movieId}/`, data, {headers: {"Content-Type" : "application/json" }});
             } else {
                 axios.post('http://127.0.0.1:8000/api/movies/', data);
-                console.log(data, 'Modo agregar');
             }
             
             history.push('/admin/movies'); // Se decidio no usar ya que hay que hacer refresh a la pagina igual
