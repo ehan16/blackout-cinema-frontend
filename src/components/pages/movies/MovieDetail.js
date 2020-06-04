@@ -7,7 +7,7 @@ export default function MovieDetail(props) {
     const movieId = props.match.params.movieId;
     const [movie, setMovie] = useState('');
     // const [branches, setBranches] = useState([]);
-    const [functions, setFunctions] = useState([]);
+    const [movieFunctions, setMovieFunctions] = useState([]);
 
     
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function MovieDetail(props) {
 
         axios.get(`http://127.0.0.1:8000/api/functions/`)
             .then(res => {
-                setFunctions(res.data);
+                setMovieFunctions(res.data);
                 console.log(res.data)
             })
             .catch(e => console.log(e))
@@ -40,7 +40,7 @@ export default function MovieDetail(props) {
 
     const aStyle = {
         textDecoration: 'none',
-        color: '#d63636'
+        color: '#d63636',
     }
 
     const lin = {
@@ -50,65 +50,74 @@ export default function MovieDetail(props) {
         borderRadius: '.2rem',
         textDecoration: 'none',
         color: '#d63636',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        width: 'fit-content',
+        fontWeight: 'bolder'
+    }
+
+    const buyStyle = {
+        color: 'red',
+        fontSize: 'large'
     }
 
     return (
         <div className="container-fluid p-3">
-            <div className="row"> 
-                <div className="col-6 mx-sm-5 my-4">
+            <div className="row px-5"> 
+                <div className="col-md-6 mx-sm-5 my-4 p-3">
 
-                    <h1 className="pt-5" style={{ color: 'red', fontWeight: 'bolder'}}>Peaky Blinders</h1>
+                    <h1 className="pt-5 text-capitalize" style={{ color: 'red', fontWeight: 'bolder'}}>{ movie.title }</h1>
                     
                     <div className="d-inline-block py-3">
-                        <li style={myli}>2017</li>
-                        <li style={myli}>Drama, Crimen</li>
-                        <li style={myli}>60 min</li>
+                        <li style={myli}>{ movie.year }</li>
+                        <li className="text-capitalize" style={myli}>{ movie.genre }</li>
+                        <li style={myli}>{ movie.duration } min</li>
                     </div>
-                    
 
-                    <p style={{fontSize: '1em'}}>La serie está ambientada en el mundo de los gangsters de los años 20, en Birmingham. Un joven a lomos de un hermoso corcel negro recorre las calles de Birmingham (Inglaterra). Estamos en 1919, la Gran Guerra ha terminado, pero aquel individuo posee el don de atemorizar a su paso a cualquier transeúnte. ¿Quién es? ¿Por qué les asusta tanto? Al parecer busca un hechizo, una pócima, que garantice la victoria de su caballo de carreras. Una mujer oriental proveerá al temido muchacho de una mágica especia que hará que el noble animal equino logre su fin.</p>
+                    <p style={{ fontSize: '1em' }}>{ movie.synopsys }</p>
                     
                     <div className="d-inline-block">
-                        <li style={myli}>Inglés</li>
-                        <li style={myli}>Subtitulada</li>
+                        <li className="text-capitalize" style={myli}>{ movie.language_field }</li>
+                        <li style={myli}>{ movie.subtitle ? 'Subtitulada' : null }</li>
                     </div>
+
                 </div>
 
-                <div className="col-4 d-flex align-items-end flex-row-reverse">
+                <div className="col-md-4 ml-2 d-flex align-items-end flex-row-reverse">
                     
-                    <div>
-                        <a href="#" style={aStyle} className="btn fa fa-twitter px-3" aria-hidden="true"></a>
-                        <a href="#" style={aStyle} className="btn fa fa-facebook-square px-3" aria-hidden="true"></a>
+                    <div className="text-center">
+                        <a href="" style={aStyle} className="btn fa fa-twitter px-3 fa-icon" aria-hidden="true"></a>
+                        <a href="" style={aStyle} className="btn fa fa-facebook-square px-3 fa-icon" aria-hidden="true"></a>
                     </div>
 
                     <div className="align-self-center">
-                        <Link to={`/admin/movie/${movieId}/add-function`}><button style={lin} className="btn lg p-3" >Agregar película</button></Link>
+                        <Link to={`/admin/movie/${movieId}/add-function`}><button style={lin} className="btn p-3" >Agregar función</button></Link>
                     </div>
                 </div>
                 
             </div>
 
-            <div className="row mx-sm-3 my-3">
-                    <table className="table table-responsive-md table-hover table-dark list text-center">
+            <div className="row mx-sm-3 my-3 p-4">
+                    <table className="table table-responsive-sm table-hover table-dark list text-center">
                         <thead>
                             <tr className="bg-danger">
                                 <th scope="col">ID</th>
                                 <th scope="col">Sucursal</th>
-                                <th scope="col">Hora</th>
-                                <th scope="col">Puestos Disponible</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Puestos</th>
                                 <th scope="col">Comprar</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                functions.map(functionDetail => 
+                                movieFunctions.map(functionDetail => 
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>Plaza Alfredo Sadel</td>
-                                        <td>9 pm</td>
-                                        <td>20</td>
-                                        <td>COMPRAR</td>
+                                        <td>{ functionDetail.branch.city } - { functionDetail.branch.place }</td>
+                                        <td>{ functionDetail.date }</td>
+                                        <td>{ functionDetail.lot }</td>
+                                        <td>
+                                            <Link to={`/movie/${movieId}/${functionDetail.function_id}`}><button className="btn"><i style={ buyStyle } className="fa fa-credit-card "></i></button></Link>
+                                        </td>
                                     </tr>
                                 )
                             }

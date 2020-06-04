@@ -5,12 +5,15 @@ export default function ProductRow(props) {
 
     const item = props.item;
     const index = props.index;
-    const items = <p style={{ fontSize: '0.8rem' }}>{item.product_1}, {item.product_2}, {item.product_3}, {item.product_4}, {item.product_5}</p>;
+    let items = '';
+    if (props.combo) {
+        items = <p style={{ fontSize: '0.8rem' }}>{item.product_1.name}, {item.product_2.name}, {item.product_3.name}, {item.product_4.name}, {item.product_5.name}</p>;
+    }
 
     return (
         <tr>
             { props.admin ? <th scope="row">{ !props.combo ? item.product_id : item.combo_id }</th> : null }
-            <td className="text-capitalize">{ item.name }</td>
+            <td scope="row" className="text-capitalize">{ item.name }</td>
             { props.combo ? <th className="text-capitalize">{ items }</th> : null }
             <td className="text-capitalize">{ item.category !== undefined ? item.category : 'Combo' }</td>
             <td>{ item.price }</td>

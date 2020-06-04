@@ -133,13 +133,13 @@ const ProductForm = (props) => {
             .then(res => {
                 setName(res.data.name);
                 setPrice(res.data.price);
-                setAvailability(1);
+                setAvailability(100);
                 setCategory('combo');
-                setProduct1(res.data.product_1);
-                setProduct2(res.data.product_2);
-                setProduct3(res.data.product_3);
-                setProduct4(res.data.product_4);
-                setProduct5(res.data.product_5);
+                setProduct1(res.data.product_1.product_id);
+                setProduct2(res.data.product_2.product_id);
+                setProduct3(res.data.product_3.product_id);
+                setProduct4(res.data.product_4.product_id);
+                setProduct5(res.data.product_5.product_id);
                 setEnable(res.data.enable);
                 console.log(res.data.enable)
             })
@@ -196,31 +196,31 @@ const ProductForm = (props) => {
                         <select value={product1} className="form-field" name="product1" id="product1" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
                             { products.map(product => 
-                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                                <option key={product.product_id} value={product.product_id}>{product.name}</option>) 
                             }
                         </select> 
                         <select value={product2} className="form-field" name="product2" id="product2" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
                             { products.map(product => 
-                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                                <option key={product.product_id} value={product.product_id}>{product.name}</option>) 
                             }
                         </select> 
                         <select value={product3} className="form-field" name="product3" id="product3" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
                             { products.map(product => 
-                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                                <option key={product.product_id} value={product.product_id}>{product.name}</option>) 
                             }
                         </select> 
                         <select value={product4} className="form-field" name="product4" id="product4" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
                             { products.map(product => 
-                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                                <option key={product.product_id} value={product.product_id}>{product.name}</option>) 
                             }
                         </select> 
                         <select value={product5} className="form-field" name="product5" id="product5" onChange={(e) => handleChange(e)}>
                             <option value={""}>Ninguno</option>
                             { products.map(product => 
-                                <option key={product.product_id} value={product.name}>{product.name}</option>) 
+                                <option key={product.product_id} value={product.product_id}>{product.name}</option>) 
                             }
                         </select> 
                     </div>

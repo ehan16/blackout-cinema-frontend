@@ -31,7 +31,7 @@ function App() {
             <Route path='/movies/on-air' render={(props) => <MovieList {...props} mode='on-air' />} />
             <Route path='/movies/to-release' render={(props) => <MovieList {...props} mode='to-release' />} />
             <Route path='/movie/:movieId/' exact={true} component={MovieDetail} />} />
-            <Route path='/movie/:movieId/:branchId/:functionId/products' component={ProductsList} />} />
+            <Route path='/movie/:movieId/:functionId/products' component={ProductsList} />} />
             <Route path='/branches' component={BranchList} />} />
             {/* Rutas del admin */}
             <Route path='/admin/movies' exact={true} render={(props) => <MovieList {...props} mode='' />} />

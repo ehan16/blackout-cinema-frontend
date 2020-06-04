@@ -61,9 +61,11 @@ const ClientForm = (props) => {
                 movie_id: props.movieId,
                 client_id: id,
                 amount: amount,
-                function_id: functionId,
-                branch_id: props.branchId
+                function_id: functionId
             };
+
+            console.log(order)
+            console.log(parseInt(props.amount, 10))
 
             axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)
             .then(res => { 
@@ -72,12 +74,12 @@ const ClientForm = (props) => {
             .catch(err => {
                 
                 const client = {
-                    client_id: id,
                     // name: name,
                     email: email,
                     phone: phone,
-                    vehicleType: vehicleType,
-                    plate: plate.toUpperCase()
+                    // vehicleType: vehicleType,
+                    plate: plate.toUpperCase(),
+                    identification: id
                 };
                 axios.post('http://127.0.0.1:8000/api/clients/', client); // Se agrega al nuevo cliente
                 

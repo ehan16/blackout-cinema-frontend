@@ -31,16 +31,15 @@ export class ProductsList extends Component {
 
     render() {
 
-        const movieId = this.props.match.movieId;
+        const movieId = this.props.match.params.movieId;
         const functionId = this.props.match.params.functionId;
-        const branchId = this.props.match.params.branchId;
 
         return (
             <div>
 
                 <Banner name={ this.props.admin ? 'Inventario - Combos' : 'Caramelería'} />
                 { !this.props.admin 
-                    ? <ClientForm show={this.state.show} handleClose={this.hideModal} buyList={this.state.buyList} movieId={movieId} branchId={branchId} functionId={functionId} /> 
+                    ? <ClientForm show={this.state.show} amount={this.state.amount} handleClose={this.hideModal} buyList={this.state.buyList} movieId={movieId} functionId={functionId} /> 
                 : null }
 
                 <div className="container-fluid p-3 text-center">
@@ -80,12 +79,13 @@ export class ProductsList extends Component {
     }
 
     addProduct = (newProduct) => { 
-        this.setState({ buyList: [...this.state.buyList, newProduct], amount: (this.state.amount + newProduct.price) }) 
+        const newAmount = this.state.amount + parseInt(newProduct.price, 10);
+        this.setState({ buyList: [...this.state.buyList, newProduct], amount: newAmount }) 
     };
-
+    
     deleteProduct = (index) => { 
         this.setState(state => {
-            const price = this.state.buyList[index].price;
+            const price = parseInt(this.state.buyList[index].price, 10);
             const buyList = state.buyList.filter((item, i) => index !== i);
             const amount = this.state.amount - price;
             return { buyList, amount };
