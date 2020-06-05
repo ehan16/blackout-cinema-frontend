@@ -12,6 +12,8 @@ const FunctionForm = (props) => {
     const [date, setDate] = useState(today);
     const [branch, setBranch] = useState("");
     const [branches, setBranches] = useState([]);
+    const [parkingLots, setParkingLots] = useState([]);
+    const [parkingLot, setParkingLot] = useState("");
     const movieId = props.match.params.movieId;
     const history = useHistory();
 
@@ -19,14 +21,17 @@ const FunctionForm = (props) => {
         e.preventDefault();
         const {name, value} = e.currentTarget;
         switch (name) {
-            case 'branch':
-                setBranch(value)
-                break;
+            // case 'branch':
+            //     setBranch(value)
+            //     break;
             case 'lot':
                 setLot(value)
                 break;
             case 'date':
                 setDate(value)
+                break;
+            case 'parkingLot':
+                setParkingLot(value)
                 break;
         }
     }
@@ -44,8 +49,9 @@ const FunctionForm = (props) => {
             const data = {
                 lot: lot,
                 movie_id: movieId,
-                branch: branch,
-                date: date
+                // branch: branch,
+                date: date,
+                parking_lot: parkingLot
             }
     
             if (props.edit) {
@@ -76,6 +82,9 @@ const FunctionForm = (props) => {
         axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
             setBranches(res.data);
         });
+        axios.get('http://127.0.0.1:8000/api/parkinglots/').then(res => {
+            setParkingLots(res.data);
+        });
         console.log(props.match.params.movieId)
     }, [])
 
@@ -89,12 +98,21 @@ const FunctionForm = (props) => {
                     <label htmlFor="lot">Puestos</label>
                     <input type="number" className="form-field" value={lot} name="lot" id="lot" disabled={true} onChange={(e) => handleChange(e)}></input>
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label htmlFor="branch">Sucursal</label>
                     <select value={branch} name="branch" id="branch" className="form-field" onChange={(e) => handleChange(e)}>
                         <option value="">Ninguno</option>
                         { branches.map(branch => 
                             <option key={branch.branchs_id} value={branch.branchs_id} className="text-capitalize">{branch.zone} - {branch.place}</option>
+                        )}
+                    </select>
+                </div> */}
+                <div className="form-group">
+                    <label htmlFor="parkingLot">Estacionamiento</label>
+                    <select value={parkingLot} name="parkingLot" id="parkingLot" className="form-field" onChange={(e) => handleChange(e)}>
+                        <option value="">Ninguno</option>
+                        { parkingLots.map(parkingLot => 
+                            <option key={parkingLot.parking_id} value={parkingLot.parking_id} className="text-capitalize">{parkingLot.branch.city}, {parkingLot.branch.place} - {parkingLot.parking_id}</option>
                         )}
                     </select>
                 </div>

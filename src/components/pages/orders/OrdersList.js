@@ -5,9 +5,6 @@ import Banner from '../../Banner';
 const OrdersList = (props) => {
 
     const [orders, setOrders] = useState([]);
-    let movies = [];
-    // let branches = [];
-    let clients = [];
 
     const getOrders = async() => {
         await axios.get('http://127.0.0.1:8000/api/orders/')

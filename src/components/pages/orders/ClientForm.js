@@ -13,8 +13,8 @@ const ClientForm = (props) => {
     const [vehicleType, setVehicleType] = useState("1");
     const [id, setId] = useState(0);
     const history = useHistory();
-    const products = props.buyList; // .map(item => { return item.id }); // Se llena la lista con los ids de los productos nada mas
     const functionId = props.functionId;
+    const orderId = '';
 
     const handleChange = (e) => {
 
@@ -53,23 +53,11 @@ const ClientForm = (props) => {
 
         } else {
 
-            let price = vehicleType === '1' ? 10 : 20;
-            const orderId = ""; // Se obtiene el id de la orden para realizar operaciones con el 
-            const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
-
-            const order = {
-                movie_id: props.movieId,
-                client_id: id,
-                amount: amount,
-                function_id: functionId
-            };
-
-            console.log(order)
-            console.log(parseInt(props.amount, 10))
-
             axios.get(`http://127.0.0.1:8000/api/clients/${id}/`)
             .then(res => { 
                 // Significa que el cliente ya se encuentra en la BBDD y no se registra en la tabla de clientes
+                const clientId = res.data.client_id;
+                insertOrder(clientId);
             })
             .catch(err => {
                 
@@ -77,11 +65,14 @@ const ClientForm = (props) => {
                     // name: name,
                     email: email,
                     phone: phone,
-                    // vehicleType: vehicleType,
                     plate: plate.toUpperCase(),
                     identification: id
                 };
-                axios.post('http://127.0.0.1:8000/api/clients/', client); // Se agrega al nuevo cliente
+
+                // Se agrega al nuevo cliente
+                axios.post('http://127.0.0.1:8000/api/clients/', client).then(
+                    res => insertOrder(res.data.client_id)
+                ); 
                 
             });
 
@@ -100,9 +91,31 @@ const ClientForm = (props) => {
         
     }
 
+    const insertOrder = (clientId) => {
+
+        let price = vehicleType === '1' ? 10 : 20;
+        const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
+
+        const order = {
+            movie_id: props.movieId,
+            client_id: clientId,
+            amount: amount,
+            function_id: functionId
+        };
+
+        // Se agrega la orden de compra
+        axios.post('http://127.0.0.1:8000/api/orders/', order)
+        .then(res => {
+            orderId = res.data.order_id; // Se consigue cual es el id de la orden de compra
+            insertProducts(orderId); 
+            updateLots(functionId);
+        }); 
+
+    }
+
     const insertProducts = (orderId) => {
         // Se inserta cada producto adquirido en el historico
-        products.map(product => {
+        props.buyList.map(product => {
 
             const data = {
                 product_id: product.product_id,
@@ -182,11 +195,9 @@ const ClientForm = (props) => {
                             <option value="1">Sedan</option>
                             <option value="1">Compacto</option>
                             <option value="1">Coupe</option>
-                            <option value="1">Hatchback</option>
                             <option value="2">SUV</option>
                             <option value="2">Pickup</option>
                             <option value="2">Familiar</option>
-                            <option value="2">Crossover</option>
                         </select>
                     </div>
                     <div className="btn-group">

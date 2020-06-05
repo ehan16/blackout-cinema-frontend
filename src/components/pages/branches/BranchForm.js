@@ -10,7 +10,6 @@ const BranchForm = (props) => {
     const [zone, setZone] = useState("");
     const [place, setPlace] = useState("");
     const [phone, setPhone] = useState(0);
-    const [employees, setEmployees] = useState(0);
     const [enable, setEnable] = useState(true);
 
     const handleChange = (e) => {
@@ -32,9 +31,6 @@ const BranchForm = (props) => {
             case 'phone':
                 setPhone(value)
                 break;
-            case 'employees':
-                setEmployees(value)
-                break;
             case 'enable':
                 setEnable(value)
                 break;
@@ -44,7 +40,7 @@ const BranchForm = (props) => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        if (state === "" || city === "" || zone === "" || place === "" || phone < 1 || employees < 1) {
+        if (state === "" || city === "" || zone === "" || place === "" || phone < 1) {
 
             // Se valida que ningun campo este vacio o con valor erroneo
             swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
@@ -57,7 +53,6 @@ const BranchForm = (props) => {
                 'zone': zone,
                 'place': place,
                 'number_field': phone,
-                'employee': employees,
                 'enable': enable
             }
     
@@ -89,7 +84,6 @@ const BranchForm = (props) => {
             setZone(res.data.zone);
             setPlace(res.data.place);
             setPhone(res.data.number_field);
-            setEmployees(res.data.employee);
             setEnable(res.data.enable);
         })
         .catch(err => console.log(err));
@@ -120,10 +114,6 @@ const BranchForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="phone">Teléfono</label>
                     <input type="number" className="form-field" value={phone} name="phone" id="phone" onChange={(e) => handleChange(e)}></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="employees">Número de empleados</label>
-                    <input type="number" className="form-field" value={employees} name="employees" id="employees" onChange={(e) => handleChange(e)}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="enable">Estado de la sucursal</label>

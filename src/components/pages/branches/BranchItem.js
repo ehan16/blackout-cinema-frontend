@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 
 function BranchItem(props) {
 
@@ -15,7 +14,6 @@ function BranchItem(props) {
                     <li>Ciudad: { props.branch.city }</li>
                     <li>Zona: { props.branch.zone }</li>
                     <li>Teléfono: { props.branch.number_field }</li>
-                    { props.admin ? <li>Número de empleados: { props.branch.employee }</li> : null}
                     <li>{ props.branch.enable ? 'Activo' : 'Inactivo'}</li>
 
                 </ul>

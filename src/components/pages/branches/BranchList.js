@@ -10,18 +10,7 @@ export class BranchList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            branches: [
-                {
-                    // branch_id: 2,
-                    // state_field: 'Miranda',
-                    // city: 'Caracas',
-                    // zone: 'Las Mercedes',
-                    // place: 'Plaza Alfredo Sadel',
-                    // number_field: '0212-315132',
-                    // employee: 5,
-                    // enable: true
-                },
-            ]
+            branches: []
         }
     }
 
@@ -65,7 +54,6 @@ export class BranchList extends Component {
             'zone': branch.zone,
             'place': branch.place,
             'number_field': branch.number_field,
-            'employee': branch.employee,
             'enable': !branch.enable,
         };
 

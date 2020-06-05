@@ -82,8 +82,8 @@ const MovieForm = (props) => {
                 axios.post('http://127.0.0.1:8000/api/movies/', data);
             }
             
-            history.push('/admin/movies'); // Se decidio no usar ya que hay que hacer refresh a la pagina igual
-            // window.location.replace("http://localhost:3000/admin/movies")
+            // Se decidio no usar ya que hay que hacer refresh a la pagina igual
+            window.location.replace("http://localhost:3000/admin/movies")
 
         }
     }
