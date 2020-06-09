@@ -45,8 +45,8 @@ export class ProductsList extends Component {
                 <div className="container-fluid p-3 text-center">
                     
                     { this.props.admin ?
-                        <div className="text-center">
-                            <Link to="/admin/add-product/"><button className="btn-add" >Agregar producto</button></Link>
+                        <div className="text-center my-3">
+                            <Link to="/admin/add-product/"><button className="btn-add" >Agregar producto / combo</button></Link>
                         </div>
                     : null }
 

@@ -75,40 +75,31 @@ const ClientForm = (props) => {
                 ); 
                 
             });
-
-            // Se agrega la orden de compra
-            axios.post('http://127.0.0.1:8000/api/orders/', order)
-            .then(res => {
-                orderId = res.data.order_id; // Se consigue cual es el id de la orden de compra
-                insertProducts(orderId); 
-                updateLots(functionId);
-            }); 
-            
-            swal("Compra exitosa", `Su orden de compra es ${orderId}`, "info", { dangerMode: true });
-            history.push("/"); // Se devuelve al cliente al home
             
         }
         
     }
-
+    
     const insertOrder = (clientId) => {
-
+        
         let price = vehicleType === '1' ? 10 : 20;
         const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
-
+        
         const order = {
             movie_id: props.movieId,
             client_id: clientId,
             amount: amount,
             function_id: functionId
         };
-
+        
         // Se agrega la orden de compra
         axios.post('http://127.0.0.1:8000/api/orders/', order)
         .then(res => {
             orderId = res.data.order_id; // Se consigue cual es el id de la orden de compra
             insertProducts(orderId); 
             updateLots(functionId);
+            swal("Compra exitosa", `Su orden de compra es ${orderId}`, "info", { dangerMode: true });
+            history.push("/"); // Se devuelve al cliente al home
         }); 
 
     }
