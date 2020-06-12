@@ -6,7 +6,7 @@ const ParkingLotList = (props) => {
     const [parkingLots, setParkingLots] = useState([]);
 
     const getParkingLots = async() => {
-        await axios.get('http://127.0.0.1:8000/api/parkingLots/')
+        await axios.get('http://127.0.0.1:8000/api/parkinglots/')
         .then(res =>  {
             setParkingLots(res.data);
             console.log(res.data)
@@ -24,7 +24,7 @@ const ParkingLotList = (props) => {
             <div className="row mx-2 px-sm-3 pb-3 pt-2">
 
                 <div className="text-center">
-                        <Link to="/admin/add-movie/"><button className="btn-add" >Agregar película</button></Link>
+                        <button className="btn-add" >Agregar estacionamiento</button>
                 </div>
 
                 <div className="col mx-md-3 my-5 text-center">
@@ -39,9 +39,10 @@ const ParkingLotList = (props) => {
                         <tbody>
                             { parkingLots 
                                 ? parkingLots.map(parkingLot => 
-                                    <tr key={ parkingLot.order_id }>
+                                    <tr key={ parkingLot.parking_id }>
                                         <th scope="row">{ parkingLot.parking_id }</th>
                                         <td className="text-capitalize">{ parkingLot.branch.zone } - { parkingLot.branch.place }</td>
+                                        {/* <td className="text-capitalize">{ parkingLot.capacity }</td> */}
                                         <td className="text-capitalize">50</td>
                                     </tr>
                                     )

@@ -21,6 +21,7 @@ function BranchItem(props) {
 
                     { props.admin ? <button style={ deleteStyle } onClick={() => props.deleteBranch(props.branch)}>{ props.branch.enable ? 'Inhabilitar' : 'Habilitar'}</button> : null }
                     { props.admin ? <Link to={`/admin/branches/${props.branch.branchs_id}`}><button style={ editStyle }>Editar</button></Link> : null }
+                    { props.admin ? <Link to={`/admin/branch/${props.branch.branchs_id}`}><button style={ editStyle }>Detalles</button></Link> : null }
 
                 </div>
             </div>

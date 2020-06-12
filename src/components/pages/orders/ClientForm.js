@@ -14,7 +14,6 @@ const ClientForm = (props) => {
     const [id, setId] = useState(0);
     const history = useHistory();
     const functionId = props.functionId;
-    const orderId = '';
 
     const handleChange = (e) => {
 
@@ -89,16 +88,16 @@ const ClientForm = (props) => {
             movie_id: props.movieId,
             client_id: clientId,
             amount: amount,
-            function_id: functionId
+            function: functionId
         };
         
         // Se agrega la orden de compra
         axios.post('http://127.0.0.1:8000/api/orders/', order)
         .then(res => {
-            orderId = res.data.order_id; // Se consigue cual es el id de la orden de compra
-            insertProducts(orderId); 
-            updateLots(functionId);
-            swal("Compra exitosa", `Su orden de compra es ${orderId}`, "info", { dangerMode: true });
+            console.log(res.data)
+            // insertProducts(res.data.order_id); 
+            // updateLots(functionId);
+            swal("Compra exitosa", `Su orden de compra es ${res.data.order_id}`, "info", { dangerMode: true });
             history.push("/"); // Se devuelve al cliente al home
         }); 
 
@@ -142,7 +141,7 @@ const ClientForm = (props) => {
         axios.get(`http://127.0.0.1:8000/api/functions/${functionId}`).then(res => {
             const functionDetail = res.data;
             const data = {
-                branch: functionDetail.branch,
+                parking_lot: functionDetail.parking_lot,
                 lot: (parseInt(functionDetail.lot, 10) - 1), // Por precaucion se hace la conversion
                 date: functionDetail.date,
                 movie_id: functionDetail.movie_id

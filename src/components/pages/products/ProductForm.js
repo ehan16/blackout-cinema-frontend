@@ -7,7 +7,7 @@ const ProductForm = (props) => {
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState(1);
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("popcorn");
     const [availability, setAvailability] = useState(1);
     const [product1, setProduct1] = useState("");
     const [product2, setProduct2] = useState("");
@@ -115,7 +115,6 @@ const ProductForm = (props) => {
     useEffect(() => {
         // Se tiene que buscar todos los productos de la BBDD para presentarlos
         axios.get('http://127.0.0.1:8000/api/products/').then(res => {
-            const aux = res.data.map(product => <option value={product.name} className="text-capitalize">{product.name}</option>);
             setProducts(res.data);
             if (props.edit) {
                 getProduct();

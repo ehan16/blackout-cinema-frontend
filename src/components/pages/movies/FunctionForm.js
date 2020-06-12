@@ -11,7 +11,7 @@ const FunctionForm = (props) => {
     const [lot, setLot] = useState(50);
     const [date, setDate] = useState(today);
     const [branch, setBranch] = useState("");
-    const [branches, setBranches] = useState([]);
+    // const [branches, setBranches] = useState([]);
     const [parkingLots, setParkingLots] = useState([]);
     const [parkingLot, setParkingLot] = useState("");
     const movieId = props.match.params.movieId;
@@ -63,10 +63,10 @@ const FunctionForm = (props) => {
             
             console.log(data);
             history.push('/admin/movies');
-
+            
         }
     }
-
+    
     const getFunction = async() => {
         const functionId = props.match.params.functionId; // Se identifica el id de la pelicula a editar
         await axios.get(`http://127.0.0.1:8000/api/functions/${functionId}/`)
@@ -77,7 +77,7 @@ const FunctionForm = (props) => {
         })
         .catch(err => console.log(err));
     }
-
+    
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
             setBranches(res.data);
@@ -85,9 +85,12 @@ const FunctionForm = (props) => {
         axios.get('http://127.0.0.1:8000/api/parkinglots/').then(res => {
             setParkingLots(res.data);
         });
-        console.log(props.match.params.movieId)
+        
+        if (props.edit) {
+            getFunction();
+        }
     }, [])
-
+    
     return (
         <div>
             <div className="title-style">

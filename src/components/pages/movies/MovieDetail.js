@@ -17,12 +17,6 @@ export default function MovieDetail(props) {
             })
             .catch(e => console.log(e))
 
-    //    axios.get(`http://127.0.0.1:8000/api/branches/`)
-    //     .then(res => {
-    //        setBranches(res.data)
-    //     })
-    //     .catch(e => console.log(e))
-
         axios.get(`http://127.0.0.1:8000/api/functions/`)
             .then(res => {
                 setMovieFunctions(res.data);
@@ -69,14 +63,14 @@ export default function MovieDetail(props) {
                     
                     <div className="d-inline-block py-3">
                         <li style={myli}>{ movie.year }</li>
-                        <li className="text-capitalize" style={myli}>{ movie.genre }</li>
+                        <li className="text-capitalize" style={myli}>{ movie.genre.genre }</li>
                         <li style={myli}>{ movie.duration } min</li>
                     </div>
 
                     <p style={{ fontSize: '1em' }}>{ movie.synopsys }</p>
                     
                     <div className="d-inline-block">
-                        <li className="text-capitalize" style={myli}>{ movie.language_field }</li>
+                        <li className="text-capitalize" style={myli}>{ movie.language_field.lang }</li>
                         <li style={myli}>{ movie.subtitle ? 'Subtitulada' : null }</li>
                     </div>
 
@@ -102,6 +96,7 @@ export default function MovieDetail(props) {
                             <tr className="bg-danger">
                                 <th scope="col">ID</th>
                                 <th scope="col">Sucursal</th>
+                                <th scope="col">Estacionamiento</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Puestos</th>
                                 <th scope="col">Comprar</th>
@@ -112,11 +107,13 @@ export default function MovieDetail(props) {
                                 movieFunctions.map(functionDetail => 
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>{ functionDetail.branch.city } - { functionDetail.branch.place }</td>
+                                        {/* <td>{ functionDetail.branch.city } - { functionDetail.branch.place }</td> */}
+                                        <td>{ functionDetail.date }</td>
+                                        <td>{ functionDetail.parking_lot.parking_id }</td>
                                         <td>{ functionDetail.date }</td>
                                         <td>{ functionDetail.lot }</td>
                                         <td>
-                                            <Link to={`/movie/${movieId}/${functionDetail.function_id}`}><button className="btn"><i style={ buyStyle } className="fa fa-credit-card "></i></button></Link>
+                                            <Link to={`/movie/${movieId}/${functionDetail.function_id}/products`}><button className="btn"><i style={ buyStyle } className="fa fa-credit-card "></i></button></Link>
                                         </td>
                                     </tr>
                                 )

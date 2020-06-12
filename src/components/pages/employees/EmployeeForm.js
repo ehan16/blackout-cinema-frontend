@@ -8,7 +8,6 @@ const EmployeeForm = (props) => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState(0);
     const [ci, setCi] = useState(0);
-    const [active, setActive] = useState(true);
     const branchId = props.match.params.branchId;
 
     const handleChange = (e) => {
@@ -23,9 +22,6 @@ const EmployeeForm = (props) => {
                 break;
             case 'ci':
                 setCi(value)
-                break;
-            case 'active':
-                setActive(value)
                 break;
         }
     }
@@ -45,7 +41,7 @@ const EmployeeForm = (props) => {
                 branch: branchId,
                 number_field: phone,
                 ci: ci,
-                active: active
+                active: true
             }
     
             if (props.edit) {
@@ -56,7 +52,7 @@ const EmployeeForm = (props) => {
             }
             
             console.log(data);
-            // window.location.replace(`http://localhost:3000/admin/branch/${branchId}`)
+            // window.location.replace(`http://localhost:3000/admin/branch/${branchId}/employee`)
 
         }
     }
@@ -68,13 +64,15 @@ const EmployeeForm = (props) => {
             setName(res.data.name);
             setCi(res.data.ci);
             setBranch(res.data.branch);
-            setActive(res.data.active);
             setPhone(res.data.number_field);
         })
         .catch(err => console.log(err));
     }
 
     useEffect(() => {
+        if (props.edit) {
+            getEmployee();
+        }
     }, [])
 
     return (
@@ -94,11 +92,6 @@ const EmployeeForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="phone">Teléfono</label>
                     <input type="phone" className="form-field" value={phone} name="phone" id="phone" disabled={true} onChange={(e) => handleChange(e)}></input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="enable">Estado del empleado</label>
-                    <input type="checkbox" value={active} name="active" id="active" onChange={(e) => handleChange(e)}></input>
-                    <span className="ml-2">Activo</span>
                 </div>
                 <div className="btn-group">
                     <Link to={`/admin/branch/${branchId}`}><button type="button" className="btn-form">Cancelar</button></Link>

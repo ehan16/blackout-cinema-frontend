@@ -14,6 +14,9 @@ import BranchForm from './components/pages/branches/BranchForm';
 import FunctionForm from './components/pages/movies/FunctionForm';
 import OrdersList from './components/pages/orders/OrdersList';
 import ClientsList from './components/pages/orders/ClientsList';
+import BranchDetail from './components/pages/branches/BranchDetail';
+import EmployeeTable from './components/pages/employees/EmployeeTable';
+import EmployeeForm from './components/pages/employees/EmployeeForm';
 
 function App() {
   return (
@@ -40,8 +43,12 @@ function App() {
             <Route path='/admin/movie/:movieId/add-function' render={(props) => <FunctionForm {...props} />} />
             <Route path='/admin/movie/:movieId/functions' render={(props) => <MovieDetail {...props} admin={true} />} />
             <Route path='/admin/branches' exact={true} render={(props) => <BranchList {...props} admin={true} />} />
-            <Route path='/admin/add-branch' component={BranchForm} />
             <Route path='/admin/branches/:branchId' render={(props) => <BranchForm {...props} edit={true} />} />
+            <Route path='/admin/add-branch' component={BranchForm} />
+            <Route path='/admin/branch/:branchId' exact={true} component={BranchDetail} />
+            <Route path='/admin/branch/:branchId/employee' exact={true} component={EmployeeTable} />
+            <Route path='/admin/branch/:branchId/employee/:employeeId' render={(props) => <EmployeeForm {...props} edit={true} />} />
+            <Route path='/admin/branch/:branchId/add-employee' component={EmployeeForm} />
             <Route path='/admin/products' exact={true} render={(props) => <ProductsList {...props} admin={true} />} />
             <Route path='/admin/add-product' component={ProductForm} />
             <Route path='/admin/products/:productId' render={(props) => <ProductForm {...props} edit={true} />} />
