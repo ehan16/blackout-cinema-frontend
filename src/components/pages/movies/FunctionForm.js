@@ -79,9 +79,9 @@ const FunctionForm = (props) => {
     }
     
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
-            setBranches(res.data);
-        });
+        // axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
+        //     setBranches(res.data);
+        // });
         axios.get('http://127.0.0.1:8000/api/parkinglots/').then(res => {
             setParkingLots(res.data);
         });

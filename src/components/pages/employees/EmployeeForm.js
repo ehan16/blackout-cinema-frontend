@@ -63,7 +63,7 @@ const EmployeeForm = (props) => {
         .then(res => {
             setName(res.data.name);
             setCi(res.data.ci);
-            setBranch(res.data.branch);
+            // setBranch(res.data.branch);
             setPhone(res.data.number_field);
         })
         .catch(err => console.log(err));
