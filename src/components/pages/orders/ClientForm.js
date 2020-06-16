@@ -108,14 +108,15 @@ const ClientForm = (props) => {
         props.buyList.map(product => {
 
             const data = {
-                product_id: product.product_id,
+                product_id: product.product.product_id,
                 order_id: orderId,
-                combo_id: product.combo_id
+                combo_id: product.product.combo_id,
+                qty: product.qty
             };
 
             axios.post('http://127.0.0.1:8000/api/record/', data);
-            if(product.product_id !== undefined) {
-                updateProduct(product.product_id);
+            if(product.product.product_id !== undefined) {
+                updateProduct(product.product.product_id);
             }
 
         })

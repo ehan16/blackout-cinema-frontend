@@ -12,7 +12,7 @@ const ProductTable = (props) => {
                     { !props.buy && props.combo ? <th>Items</th> : null}
                     <th scope="col">Categoría</th>
                     <th scope="col">Precio</th>
-                    { !props.buy ? <th>Cantidad</th> : null}
+                    <th>Cantidad</th>
                     <th scope="col">Acción</th>
                 </tr>
             </thead>

@@ -5,9 +5,12 @@ import swal from 'sweetalert';
 
 const MovieForm = (props) => {
 
+    // Fecha actual para definir minimo de fecha de estreno
     const curr = new Date();
     curr.setDate(curr.getDate());
     const today = curr.toISOString().substr(0,10); // Se obtiene la fecha en formato string
+
+    // Variables para el formulario
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("comedia");
     const [duration, setDuration] = useState(0);
@@ -17,7 +20,10 @@ const MovieForm = (props) => {
     const [mode, setMode] = useState('estreno');
     const [synopsys, setSynopsys] = useState("");
     const [year, setYear] = useState(0);
-    const history = useHistory();
+
+    // Lenguajes y generos
+    const [genres, setGenres] = useState([]);
+    const [languages, setLanguages] = useState([]);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -94,9 +100,11 @@ const MovieForm = (props) => {
         .then(res => {
             setTitle(res.data.title);
             setGenre(res.data.genre);
+            // setGenre(res.data.genre.genre_id);
             setYear(res.data.year);
             setDuration(res.data.duration);
             setLanguage(res.data.language_field);
+            // setLanguage(res.data.language_field.lang_id);
             setSubtitles(res.data.subtitle);
             setDate(res.data.date);
             setMode(res.data.state_now);
@@ -106,6 +114,20 @@ const MovieForm = (props) => {
     }
 
     useEffect(() => {
+
+        // Se buscan los lenguajes y los generos
+        // await axios.get(`http://127.0.0.1:8000/api/language/`)
+        // .then(res => {
+        //     setLanguages(res.data)
+        // })
+        // .catch(err => console.log(err));
+        
+        // await axios.get(`http://127.0.0.1:8000/api/genre/`)
+        // .then(res => {
+        //     setGenres(res.data)
+        // })
+        // .catch(err => console.log(err));
+
         if (props.edit) {
             getMovie();
         }
@@ -131,6 +153,9 @@ const MovieForm = (props) => {
                         <option value="infantil">Infantil</option>
                         <option value="terror">Terror</option>
                         <option value="thriller">Thriller</option>
+                        {/* { genres.map(genre => 
+                            <option value={ genre.genre_id } >{ genre.genre }</option>
+                        ) } */}
                     </select>
                 </div>
                 <div className="form-group">
@@ -152,6 +177,9 @@ const MovieForm = (props) => {
                         <option value="ingles">Inglés</option>
                         <option value="frances">Francés</option>
                         <option value="aleman">Alemán</option>
+                        {/* { languages.map(language => 
+                            <option value={language.lang_id}>{ language.lang }</option>
+                        ) } */}
                     </select>
                 </div>
                 <div className="form-group">

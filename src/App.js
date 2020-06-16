@@ -33,26 +33,33 @@ function App() {
             {/* Rutas del cliente */}
             <Route path='/movies/on-air' render={(props) => <MovieList {...props} mode='on-air' />} />
             <Route path='/movies/to-release' render={(props) => <MovieList {...props} mode='to-release' />} />
-            <Route path='/movie/:movieId/' exact={true} component={MovieDetail} />} />
-            <Route path='/movie/:movieId/:functionId/products' component={ProductsList} />} />
-            <Route path='/branches' component={BranchList} />} />
+            <Route path='/movie/:movieId/' exact={true} component={MovieDetail} />
+            <Route path='/movie/:movieId/:functionId/products' component={ProductsList} />
+            <Route path='/branches' component={BranchList} />
+
             {/* Rutas del admin */}
+
+            {/* En relacion a las peliculas */}
             <Route path='/admin/movies' exact={true} render={(props) => <MovieList {...props} mode='' />} />
             <Route path='/admin/add-movie' component={MovieForm} />
             <Route path='/admin/movies/:movieId' render={(props) => <MovieForm {...props} edit={true} />} />
             <Route path='/admin/movie/:movieId/add-function' render={(props) => <FunctionForm {...props} />} />
             <Route path='/admin/movie/:movieId/functions' render={(props) => <MovieDetail {...props} admin={true} />} />
+            {/* En relacion a las sucursales */}
             <Route path='/admin/branches' exact={true} render={(props) => <BranchList {...props} admin={true} />} />
             <Route path='/admin/branches/:branchId' render={(props) => <BranchForm {...props} edit={true} />} />
             <Route path='/admin/add-branch' component={BranchForm} />
             <Route path='/admin/branch/:branchId' exact={true} component={BranchDetail} />
+            {/* En relacion a los empleados */}
             <Route path='/admin/branch/:branchId/employee' exact={true} component={EmployeeTable} />
             <Route path='/admin/branch/:branchId/employee/:employeeId' render={(props) => <EmployeeForm {...props} edit={true} />} />
             <Route path='/admin/branch/:branchId/add-employee' component={EmployeeForm} />
+            {/* En relacion a los productos */}
             <Route path='/admin/products' exact={true} render={(props) => <ProductsList {...props} admin={true} />} />
             <Route path='/admin/add-product' component={ProductForm} />
             <Route path='/admin/products/:productId' render={(props) => <ProductForm {...props} edit={true} />} />
             <Route path='/admin/combos/:productId' render={(props) => <ProductForm {...props} edit={true} combo={true} />} />
+            {/* En relacion a datos utiles para la empresa */}
             <Route path='/admin/orders' component={OrdersList} />
             <Route path='/admin/clients' component={ClientsList} />
             <Route path='/admin/statistics' component={ClientsList} />

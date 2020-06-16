@@ -84,7 +84,7 @@ const EmployeeTable = (props) => {
                                         <td className="text-capitalize">{ employee.active ? 'Activo' : 'Resignado' }</td>
                                         <td className="text-capitalize">
                                             <Link to={`/admin/branch/:branchId/employee/${employee.employee_id}`}><button className="btn" style={ btnStyle }><i className="fa fa-pencil"></i></button></Link> 
-                                            <button className="btn" style={ btnStyle }><i className="fa fa-trash"></i></button>
+                                            <button className="btn" style={ btnStyle } onClick={() => fireEmployee(employee)}><i className="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     )

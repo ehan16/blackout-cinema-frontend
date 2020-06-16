@@ -83,9 +83,12 @@ export default function MovieDetail(props) {
                         <a href="" style={aStyle} className="btn fa fa-facebook-square px-3 fa-icon" aria-hidden="true"></a>
                     </div>
 
-                    <div className="align-self-center">
-                        <Link to={`/admin/movie/${movieId}/add-function`}><button style={lin} className="btn p-3" >Agregar función</button></Link>
-                    </div>
+                    { props.admin 
+                        ? <div className="align-self-center">
+                            <Link to={`/admin/movie/${movieId}/add-function`}><button style={lin} className="btn p-3" >Agregar función</button></Link>
+                        </div>
+                        : null
+                    }
                 </div>
                 
             </div>
@@ -107,8 +110,8 @@ export default function MovieDetail(props) {
                                 movieFunctions.map(functionDetail => 
                                     <tr>
                                         <th scope="row">1</th>
+                                        <td>{ functionDetail.function_id }</td>
                                         {/* <td>{ functionDetail.branch.city } - { functionDetail.branch.place }</td> */}
-                                        <td>{ functionDetail.date }</td>
                                         <td>{ functionDetail.parking_lot.parking_id }</td>
                                         <td>{ functionDetail.date }</td>
                                         <td>{ functionDetail.lot }</td>
