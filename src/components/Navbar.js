@@ -22,6 +22,7 @@ class Navbar extends React.Component {
                             <a className="nav-link dropdown-toggle" href="#" id="dropMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                             <div className="dropdown-menu mb-2" style={{ background: '#181818' }} aria-labelledby="dropMenu">
                                 <Link to='/admin/movies' className="dropdown-item text-white newHover" href="#">Películas</Link> 
+                                <Link to='/admin/lang-genre' className="dropdown-item text-white newHover" href="#">Lenguajes - Generos</Link> 
                                 <Link to='/admin/products' className="dropdown-item text-white newHover" href="#">Inventario</Link> 
                                 <Link to='/admin/branches' className="dropdown-item text-white newHover" href="#">Sucursales</Link> 
                                 <Link to='/admin/orders' className="dropdown-item text-white newHover" href="#">Ventas</Link> 
