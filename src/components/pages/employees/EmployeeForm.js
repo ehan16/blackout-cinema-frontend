@@ -46,8 +46,7 @@ const EmployeeForm = (props) => {
         axios.post("http://127.0.0.1:8000/api/employees/", data);
       }
 
-      console.log(data);
-      // window.location.replace(`http://localhost:3000/admin/branch/${branchId}/employee`)
+      window.location.replace(`http://localhost:3000/admin/branch/${branchId}`)
     }
   };
 

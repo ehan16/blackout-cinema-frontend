@@ -17,6 +17,7 @@ import ClientsList from './components/pages/orders/ClientsList';
 import BranchDetail from './components/pages/branches/BranchDetail';
 import EmployeeTable from './components/pages/employees/EmployeeTable';
 import EmployeeForm from './components/pages/employees/EmployeeForm';
+import RecordTable from './components/pages/orders/RecordTable';
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
             <Route path='/admin/combos/:productId' render={(props) => <ProductForm {...props} edit={true} combo={true} />} />
             {/* En relacion a datos utiles para la empresa */}
             <Route path='/admin/orders' component={OrdersList} />
+            <Route path='/admin/record' component={RecordTable} />
             <Route path='/admin/clients' component={ClientsList} />
             <Route path='/admin/statistics' component={ClientsList} />
           </Switch>

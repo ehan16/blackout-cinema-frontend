@@ -10,7 +10,6 @@ const BranchForm = (props) => {
   const [zone, setZone] = useState("");
   const [place, setPlace] = useState("");
   const [phone, setPhone] = useState(0);
-  const [enable, setEnable] = useState(true);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -30,9 +29,6 @@ const BranchForm = (props) => {
         break;
       case "phone":
         setPhone(value);
-        break;
-      case "enable":
-        setEnable(value);
         break;
     }
   };
@@ -55,7 +51,7 @@ const BranchForm = (props) => {
         zone: zone,
         place: place,
         number_field: phone,
-        enable: enable,
+        enable: true,
       };
 
       if (props.edit) {
@@ -85,7 +81,6 @@ const BranchForm = (props) => {
         setZone(res.data.zone);
         setPlace(res.data.place);
         setPhone(res.data.number_field);
-        setEnable(res.data.enable);
       })
       .catch((err) => console.log(err));
   };
@@ -150,17 +145,6 @@ const BranchForm = (props) => {
             id="phone"
             onChange={(e) => handleChange(e)}
           ></input>
-        </div>
-        <div className="form-group">
-          <label htmlFor="enable">Estado de la sucursal</label>
-          <input
-            type="checkbox"
-            value={enable}
-            name="enable"
-            id="enable"
-            onChange={(e) => handleChange(e)}
-          ></input>
-          <span className="ml-2">Habilitar</span>
         </div>
         <div className="btn-group">
           <Link to="/admin/branches">

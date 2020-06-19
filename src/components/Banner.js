@@ -4,7 +4,7 @@ function Banner(props) {
     return (
         <div className="banner">
             <div style={ nameStyle }>
-                <strong><h5>{ props.name }</h5></strong>
+                <strong><h6 className="font-weight-bold my-1">{ props.name }</h6></strong>
             </div>
         </div>
         );
