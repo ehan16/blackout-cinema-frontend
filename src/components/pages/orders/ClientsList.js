@@ -30,7 +30,7 @@ const ClientsList = (props) => {
                             <tr className="bg-danger">
                                 <th scope="col">ID</th>
                                 <th scope="col">Cédula</th>
-                                <th scope="col">Placa</th>
+                                <th scope="col">Placa del Vehículo</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Teléfono</th>
                             </tr>

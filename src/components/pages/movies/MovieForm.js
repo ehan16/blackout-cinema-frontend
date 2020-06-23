@@ -61,9 +61,9 @@ const MovieForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      title === "" ||
+      title.trim() === "" ||
       duration < 1 ||
-      synopsys === "" ||
+      synopsys.trim() === "" ||
       year < 2000
     ) {
       // Se valida que ningun campo este vacio
@@ -141,6 +141,7 @@ const MovieForm = (props) => {
       <div className="title-style">
         {props.edit ? <h1>Editar película</h1> : <h1>Agregar película</h1>}
       </div>
+      {/* Formulario con todos los campos requeridos */}
       <form method="post">
         <div className="form-group">
           <label htmlFor="title">Nombre de la película</label>
@@ -229,6 +230,7 @@ const MovieForm = (props) => {
           ></input>
           <span className="ml-2">Español</span>
         </div>
+        {/* Se coloca un minimo a la fecha de estreno */}
         <div className="form-group">
           <label htmlFor="date">Fecha de estreno</label>
           <input
@@ -241,6 +243,7 @@ const MovieForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></input>
         </div>
+        {/* Estado de la pelicula que se limita a las 3 disponibles */}
         <div className="form-group">
           <label htmlFor="mode">Estado</label>
           <select
@@ -255,7 +258,8 @@ const MovieForm = (props) => {
             <option value="pasada">Pasada</option>
           </select>
         </div>
-        <div className="btn-group">
+        {/* Botones de accion */}
+        <div className="btn-group my-3">
           <Link to="/admin/movies">
             <button type="button" className="btn-form">
               Cancelar

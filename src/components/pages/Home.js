@@ -88,7 +88,6 @@ function Home() {
 
         <div style={cinemaStyle}>
           <img src={back} style={{ width: "80%", borderRadius: "20px" }} />
-          <h3 style={centerStyle}>No te lo pierdas</h3>
         </div>
       </div>
     </div>
@@ -99,15 +98,6 @@ const cinemaStyle = {
   position: "relative",
   textAlign: "center",
   marginBottom: "40px",
-};
-
-const centerStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  fontWeight: "bold",
-  textShadow: "2px 2px red",
 };
 
 export default Home;

@@ -36,11 +36,12 @@ const BranchForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      state === "" ||
-      city === "" ||
-      zone === "" ||
-      place === "" ||
-      phone < 1
+      state.trim() === "" ||
+      city.trim() === "" ||
+      zone.trim() === "" ||
+      place.trim() === "" ||
+      phone < 1 ||
+      phone.toString().length < 11
     ) {
       // Se valida que ningun campo este vacio o con valor erroneo
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
@@ -54,6 +55,7 @@ const BranchForm = (props) => {
         enable: true,
       };
 
+      // Se edita o inserta
       if (props.edit) {
         const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
         axios.put(`http://127.0.0.1:8000/api/branches/${branchId}/`, data);
@@ -61,6 +63,7 @@ const BranchForm = (props) => {
         axios.post(`http://127.0.0.1:8000/api/branches/`, data);
       }
 
+      // Se devuelve a la persona a la lista de todas las branches
       window.location.replace("http://localhost:3000/admin/branches"); // Se devuelve a la lista de sucursales
     }
   };
@@ -146,7 +149,7 @@ const BranchForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></input>
         </div>
-        <div className="btn-group">
+        <div className="btn-group my-3">
           <Link to="/admin/branches">
             <button type="button" className="btn-form">
               Cancelar

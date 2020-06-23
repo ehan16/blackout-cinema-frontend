@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 
 const EmployeeForm = (props) => {
+  // Variables de la clase
   const [name, setName] = useState("");
   const [phone, setPhone] = useState(0);
   const [ci, setCi] = useState(0);
@@ -27,7 +28,13 @@ const EmployeeForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name === "" || phone === "" || ci < 1) {
+    if (
+      name.trim() === "" ||
+      phone < 1 ||
+      phone.toString().length < 11 ||
+      ci < 1 ||
+      ci.toString().length < 6
+    ) {
       // Se valida que ningun campo este vacio
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
@@ -46,7 +53,7 @@ const EmployeeForm = (props) => {
         axios.post("http://127.0.0.1:8000/api/employees/", data);
       }
 
-      window.location.replace(`http://localhost:3000/admin/branch/${branchId}`)
+      window.location.replace(`http://localhost:3000/admin/branch/${branchId}`);
     }
   };
 
@@ -107,7 +114,7 @@ const EmployeeForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></input>
         </div>
-        <div className="btn-group">
+        <div className="btn-group my-3">
           <Link to={`/admin/branch/${branchId}`}>
             <button type="button" className="btn-form">
               Cancelar

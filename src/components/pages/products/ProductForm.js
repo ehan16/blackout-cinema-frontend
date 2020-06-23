@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 
 const ProductForm = (props) => {
+  // Variables de la clase
   const [name, setName] = useState("");
   const [price, setPrice] = useState(1);
   const [category, setCategory] = useState("popcorn");
@@ -51,7 +52,7 @@ const ProductForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name === "" || price < 1 || availability < 1) {
+    if (name.trim() === "" || price < 1 || availability < 1) {
       // Se valida que ningun campo este vacio
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {

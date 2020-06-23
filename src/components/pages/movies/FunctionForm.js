@@ -6,14 +6,11 @@ import swal from "sweetalert";
 const FunctionForm = (props) => {
   // Se obtiene la fecha de hoy como limite inferior
   const curr = new Date();
-  curr.setDate(curr.getDate() - 1);
+  curr.setDate(curr.getDate());
   const today = curr.toISOString().substr(0, 10); // Se obtiene la fecha actual en string para validaciones
 
   // Variables de la clase
-  // const [lot, setLot] = useState(50);
   const [date, setDate] = useState(today);
-  const [branch, setBranch] = useState("");
-  // const [branches, setBranches] = useState([]);
   const [parkingLots, setParkingLots] = useState([]);
   const [parkingLot, setParkingLot] = useState("");
   const movieId = props.match.params.movieId;
@@ -23,9 +20,6 @@ const FunctionForm = (props) => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
     switch (name) {
-      // case 'branch':
-      //     setBranch(value)
-      //     break;
       case "date":
         setDate(value);
         break;
@@ -41,12 +35,14 @@ const FunctionForm = (props) => {
       // Se valida que ningun campo este vacio
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
+      // Se consigue cual es el estacionamiento
+      const parking = parkingLots[parkingLot];
+
       const data = {
-        lot: parkingLot.capacity,
+        lot: parking.capacity,
         movie_id: movieId,
-        // branch: branch,
         date: date,
-        parking_lot: parkingLot.parking_id,
+        parking_lot: parking.parking_id,
       };
 
       if (props.edit) {
@@ -57,7 +53,8 @@ const FunctionForm = (props) => {
       }
 
       console.log(data);
-      history.push("/admin/movies");
+      console.log(parking);
+      // history.push("/admin/movies");
     }
   };
 
@@ -68,16 +65,13 @@ const FunctionForm = (props) => {
       .then((res) => {
         // setLot(res.data.lot);
         setDate(res.data.date);
-        setBranch(res.data.branch);
+        // setBranch(res.data.branch);
         setParkingLot(res.data.parking_lot);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    // axios.get('http://127.0.0.1:8000/api/branches/').then(res => {
-    //     setBranches(res.data);
-    // });
     axios.get("http://127.0.0.1:8000/api/parkinglots/").then((res) => {
       setParkingLots(res.data);
     });
@@ -93,19 +87,6 @@ const FunctionForm = (props) => {
         {props.edit ? <h1>Editar función</h1> : <h1>Agregar función</h1>}
       </div>
       <form method="post">
-        {/* <div className="form-group">
-                    <label htmlFor="lot">Puestos</label>
-                    <input type="number" className="form-field" value={lot} name="lot" id="lot" disabled={true} onChange={(e) => handleChange(e)}></input>
-                </div> */}
-        {/* <div className="form-group">
-                    <label htmlFor="branch">Sucursal</label>
-                    <select value={branch} name="branch" id="branch" className="form-field" onChange={(e) => handleChange(e)}>
-                        <option value="">Ninguno</option>
-                        { branches.map(branch => 
-                            <option key={branch.branchs_id} value={branch.branchs_id} className="text-capitalize">{branch.zone} - {branch.place}</option>
-                        )}
-                    </select>
-                </div> */}
         <div className="form-group">
           <label htmlFor="parkingLot">Estacionamiento</label>
           <select
@@ -116,14 +97,14 @@ const FunctionForm = (props) => {
             onChange={(e) => handleChange(e)}
           >
             <option value="">Ninguno</option>
-            {parkingLots.map((parkingLot) => (
+            {parkingLots.map((parking, index) => (
               <option
-                key={parkingLot.parking_id}
-                value={parkingLot}
+                key={parking.parking_id}
+                value={index}
                 className="text-capitalize"
               >
-                {parkingLot.branch.city}, {parkingLot.branch.place} -{" "}
-                {parkingLot.parking_id} ({parkingLot.capacity})
+                {parking.parking_id} - {parking.branch.city},{" "}
+                {parking.branch.place} ({parking.capacity})
               </option>
             ))}
           </select>
