@@ -86,18 +86,18 @@ const ClientForm = (props) => {
     };
 
     // Se agrega la orden de compra
-    // axios.post("http://127.0.0.1:8000/api/orders/", order).then((res) => {
-    //   console.log(res.data);
-    //   insertProducts(res.data.order_id);
-    //   updateLots(functionId);
-    //   swal(
-    //     "Compra exitosa",
-    //     `Su orden de compra es ${res.data.order_id}`,
-    //     "info",
-    //     { dangerMode: true }
-    //   );
-    //   history.push("/"); // Se devuelve al cliente al home
-    // });
+    axios.post("http://127.0.0.1:8000/api/orders/", order).then((res) => {
+      console.log(res.data);
+      insertProducts(res.data.order_id);
+      updateLots(functionId);
+      swal(
+        "Compra exitosa",
+        `Su orden de compra es ${res.data.order_id}`,
+        "info",
+        { dangerMode: true }
+      );
+      history.push("/"); // Se devuelve al cliente al home
+    });
   };
 
   const insertProducts = (orderId) => {
