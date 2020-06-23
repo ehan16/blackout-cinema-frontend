@@ -3,6 +3,7 @@ import Banner from "../Banner";
 import back from "../../assets/autocinema.jpg";
 
 function Home() {
+
   return (
     <div>
       <Banner name="Home" />

@@ -51,10 +51,9 @@ const FunctionForm = (props) => {
       } else {
         axios.post("http://127.0.0.1:8000/api/functions/", data);
       }
-
-      console.log(data);
-      console.log(parking);
-      // history.push("/admin/movies");
+      
+      // Se devuelve a las peliculas
+      window.location.replace(`/admin/movie/${movieId}/functions`)
     }
   };
 

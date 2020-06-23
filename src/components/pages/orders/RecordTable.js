@@ -3,7 +3,7 @@ import axios from "axios";
 import Banner from "../../Banner";
 
 const RecordTable = (props) => {
-  const [record, setRecords] = useState([]);
+  const [record, setRecords] = useState();
 
   const getRecords = async () => {
     await axios
@@ -28,6 +28,7 @@ const RecordTable = (props) => {
             <thead>
               <tr className="bg-danger">
                 <th scope="col">ID Orden</th>
+                <th scope="col">Cliente</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Producto / Combo</th>
                 {/* <th scope="col">Sucursal</th> */}
@@ -41,6 +42,7 @@ const RecordTable = (props) => {
                 ? record.map((item) => (
                     <tr key={item.record_id}>
                       <th scope="row">{item.order_id.order_id}</th>
+                      <th scope="row">{item.order_id.client_id.identification}</th>
                       <td className="text-capitalize">{item.order_id.date}</td>
                       {/* Si es un producto lo que se compro */}
                       {item.product_id ? (
