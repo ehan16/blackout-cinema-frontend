@@ -48,9 +48,9 @@ const BranchForm = (props) => {
     } else {
       const data = {
         state_field: state,
-        city: city,
-        zone: zone,
-        place: place,
+        city,
+        zone,
+        place,
         number_field: phone,
         enable: true,
       };

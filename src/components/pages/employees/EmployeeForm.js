@@ -13,6 +13,7 @@ const EmployeeForm = (props) => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
+    // eslint-disable-next-line default-case
     switch (name) {
       case "name":
         setName(value);
@@ -39,10 +40,10 @@ const EmployeeForm = (props) => {
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
       const data = {
-        name: name,
+        name,
         branch: branchId,
         number_field: phone,
-        ci: ci,
+        ci,
         active: true,
       };
 

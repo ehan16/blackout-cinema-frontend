@@ -19,6 +19,7 @@ const ProductForm = (props) => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
+    // eslint-disable-next-line default-case
     switch (name) {
       case "name":
         setName(value);
@@ -63,10 +64,10 @@ const ProductForm = (props) => {
         });
       } else {
         const data = {
-          name: name,
-          price: price,
-          category: category,
-          availability: availability,
+          name,
+          price,
+          category,
+          availability,
           product_1: product1,
           product_2: product2,
           product_3: product3,

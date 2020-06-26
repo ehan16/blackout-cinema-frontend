@@ -14,11 +14,11 @@ const FunctionForm = (props) => {
   const [parkingLots, setParkingLots] = useState([]);
   const [parkingLot, setParkingLot] = useState("");
   const movieId = props.match.params.movieId;
-  const history = useHistory();
 
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
+    // eslint-disable-next-line default-case
     switch (name) {
       case "date":
         setDate(value);
@@ -41,7 +41,7 @@ const FunctionForm = (props) => {
       const data = {
         lot: parking.capacity,
         movie_id: movieId,
-        date: date,
+        date,
         parking_lot: parking.parking_id,
       };
 

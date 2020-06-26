@@ -17,6 +17,7 @@ const ClientForm = (props) => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
+    // eslint-disable-next-line default-case
     switch (name) {
       case "email":
         setEmail(value);
@@ -53,8 +54,8 @@ const ClientForm = (props) => {
         if (res.data.client_id === undefined) {
           // Se agrega al cliente en la base de datos
           const client = {
-            email: email,
-            phone: phone,
+            email,
+            phone,
             plate: plate.toUpperCase(),
             identification: id,
           };
@@ -76,8 +77,6 @@ const ClientForm = (props) => {
   const insertOrder = (clientId) => {
     let price = vehicleType === "1" ? 10 : 20;
     const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
-    console.log(props.amount)
-    console.log(amount)
     const order = {
       movie_id: props.movieId,
       client_id: clientId,

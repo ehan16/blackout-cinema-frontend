@@ -27,6 +27,7 @@ const MovieForm = (props) => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
+    // eslint-disable-next-line default-case
     switch (name) {
       case "title":
         setTitle(value);
@@ -71,14 +72,14 @@ const MovieForm = (props) => {
     } else {
       const data = {
         title: title.toLowerCase(),
-        date: date,
-        year: year,
-        genre: genre,
-        duration: duration,
+        date,
+        year,
+        genre,
+        duration,
         language_field: language,
         subtitle: subtitles,
         state_now: mode,
-        synopsys: synopsys,
+        synopsys,
       };
 
       console.log(data);

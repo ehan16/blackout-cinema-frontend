@@ -154,7 +154,7 @@ export class ProductsList extends Component {
           ...this.state.buyList.slice(index + 1),
         ];
       }
-      const amount = this.state.amount - price;
+      const amount = parseInt(this.state.amount, 10) - price;
       return { buyList, amount };
     });
   };
