@@ -15,7 +15,6 @@ export default function ProductRow(props) {
   if (props.combo) {
     items = (
       <div style={{ fontSize: "0.8rem" }}>
-        {" "}
         <p className="my-1">{item.product_1.name}</p>
         <p className="my-1">{item.product_2.name}</p>
         <p className="my-1">{item.product_3.name}</p>
@@ -89,7 +88,7 @@ export default function ProductRow(props) {
                 </button>
               </Link>
             )}
-            <button className="btn" style={btnStyle}>
+            <button className="btn" style={btnStyle} onClick={() => props.disableProduct(item, !props.combo)}>
               <i className="fa fa-trash"></i>
             </button>
           </div>

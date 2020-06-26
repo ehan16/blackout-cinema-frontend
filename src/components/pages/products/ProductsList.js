@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import Banner from "../../Banner";
 import ClientForm from "../orders/ClientForm";
 import ProductTable from "./ProductTable";
@@ -18,13 +19,17 @@ export class ProductsList extends Component {
   }
 
   componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts = () => {
     axios.get("http://127.0.0.1:8000/api/products/").then((res) => {
       this.setState({ ...this.state, products: res.data });
     });
     axios.get("http://127.0.0.1:8000/api/combos/").then((res) => {
       this.setState({ ...this.state, combos: res.data });
     });
-  }
+  };
 
   render() {
     const movieId = this.props.match.params.movieId;
@@ -68,6 +73,7 @@ export class ProductsList extends Component {
                 buy={false}
                 addProduct={this.addProduct}
                 deleteProduct={this.deleteProduct}
+                disableProduct={this.disableProduct}
               />
               {/* Tabla de productos */}
               <ProductTable
@@ -77,6 +83,7 @@ export class ProductsList extends Component {
                 buy={false}
                 addProduct={this.addProduct}
                 deleteProduct={this.deleteProduct}
+                disableProduct={this.disableProduct}
               />
             </div>
 
@@ -93,6 +100,7 @@ export class ProductsList extends Component {
                   buy={true}
                   addProduct={this.addProduct}
                   deleteProduct={this.deleteProduct}
+                  disableProduct={this.disableProduct}
                 />
                 <button
                   className="continue"
@@ -134,13 +142,12 @@ export class ProductsList extends Component {
         ],
         amount: newAmount,
       });
-
     }
   };
 
   deleteProduct = (index) => {
     this.setState((state) => {
-      const price = parseInt(this.state.buyList[index].price, 10);
+      const price = parseInt(this.state.buyList[index].product.price, 10);
       const auxQty = parseInt(this.state.buyList[index].qty, 10);
       const product = this.state.buyList[index].product;
       let buyList = [];
@@ -156,6 +163,55 @@ export class ProductsList extends Component {
       }
       const amount = parseInt(this.state.amount, 10) - price;
       return { buyList, amount };
+    });
+  };
+
+  disableProduct = (product, isProduct) => {
+    // Metodo para que el admin deshabilite productos
+    let data;
+
+    if (isProduct) {
+      data = {
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        availability: product.availability,
+        enable: false,
+      };
+    } else {
+      data = {
+        name: product.name,
+        price: product.price,
+        availability: product.availability,
+        product_1: product.product_1,
+        product_2: product.product_2,
+        product_3: product.product_3,
+        product_4: product.product_4,
+        product_5: product.product_5,
+        enable: false,
+      };
+    }
+
+    swal({
+      title: "Confimación",
+      text: "Una vez que lo elimine, no podrá cambiarlo. ¿Seguro?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        const id = isProduct ? product.product_id : product.combo_id;
+        axios
+          .put(`http://127.0.0.1:8000/api/products/${id}/`, data)
+          .then((res) => {
+            this.getProducts(); // Se actualiza la informacion mostrada
+            swal("Exitoso", "¡Se ha eliminado el producto!", "info", {
+              dangerMode: true,
+            });
+          });
+      } else {
+        swal("No ha ocurrido nada", { dangerMode: true });
+      }
     });
   };
 

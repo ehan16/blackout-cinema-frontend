@@ -13,7 +13,6 @@ export default function MovieDetail(props) {
       .get(`http://127.0.0.1:8000/api/movies/${movieId}/`)
       .then((res) => {
         setMovie(res.data);
-        console.log(res.data);
       })
       .catch((e) => console.log(e));
 
@@ -21,7 +20,6 @@ export default function MovieDetail(props) {
       .get(`http://127.0.0.1:8000/api/functions/?movie=${movieId}`)
       .then((res) => {
         setMovieFunctions(res.data);
-        console.log(res.data);
       })
       .catch((e) => console.log(e));
   }, []);

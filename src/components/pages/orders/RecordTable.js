@@ -27,10 +27,10 @@ const RecordTable = (props) => {
           <table className="table table-responsive-sm table-hover table-dark list">
             <thead>
               <tr className="bg-danger">
-                <th scope="col">ID Orden</th>
+                <th scope="col">Orden</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Producto / Combo</th>
+                <th scope="col">Producto</th>
                 {/* <th scope="col">Sucursal</th> */}
                 {/* <th scope="col">Función</th> */}
                 <th scope="col">Cantidad</th>

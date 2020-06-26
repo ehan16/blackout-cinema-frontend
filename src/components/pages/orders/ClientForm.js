@@ -60,7 +60,6 @@ const ClientForm = (props) => {
             identification: id,
           };
 
-          console.log(client)
           // Se agrega al nuevo cliente
           axios
             .post("http://127.0.0.1:8000/api/clients/", client)
@@ -77,6 +76,8 @@ const ClientForm = (props) => {
   const insertOrder = (clientId) => {
     let price = vehicleType === "1" ? 10 : 20;
     const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
+    console.log(amount)
+    console.log(props.amount)
     const order = {
       movie_id: props.movieId,
       client_id: clientId,
@@ -133,11 +134,8 @@ const ClientForm = (props) => {
         };
       });
 
-    console.log(data);
-
     await axios
-      .put(`http://127.0.0.1:8000/api/products/${productId}/`, data)
-      .then((res) => console.log(res));
+      .put(`http://127.0.0.1:8000/api/products/${productId}/`, data);
   };
 
   const updateLots = async (functionId) => {
@@ -147,10 +145,10 @@ const ClientForm = (props) => {
       .get(`http://127.0.0.1:8000/api/functions/${functionId}/`)
       .then((res) => {
         data = {
-          parking_lot: res.data.parking_lot,
-          lot: parseInt(res.data.lot, 10) - 1, // Por precaucion se hace la conversion
+          parking_lot: res.data.parking_lot.parking_id,
+          lot: (parseInt(res.data.lot, 10) - 1), // Por precaucion se hace la conversion
           date: res.data.date,
-          movie_id: res.data.movie_id,
+          movie_id: res.data.movie_id.movie_id,
         };
       });
 

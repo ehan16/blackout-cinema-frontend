@@ -2,11 +2,6 @@ import React from "react";
 import ProductRow from "./ProductRow";
 
 const ProductTable = (props) => {
-
-  const disableProduct = () => {
-    // Metodo para que el admin deshabilite productos
-  }
-
   return (
     <table className="table table-responsive-sm table-hover table-dark list">
       <thead>
@@ -31,12 +26,12 @@ const ProductTable = (props) => {
             buy={props.buy}
             addProduct={props.addProduct}
             deleteProduct={props.deleteProduct}
+            disableProduct={props.disableProduct}
           />
         ))}
       </tbody>
     </table>
   );
-
 };
 
 export default ProductTable;

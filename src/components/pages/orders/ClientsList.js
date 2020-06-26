@@ -21,7 +21,7 @@ const ClientsList = () => {
   return (
     <div>
       <Banner name="Clientes" />
-      <div className="row mx-5 px-sm-5 pb-3 pt-2">
+      <div className="row mx-3 px-sm-5 pb-3 pt-2">
         <div className="col my-5 text-center">
           <table className="table table-responsive-md table-hover table-dark">
             <thead>
