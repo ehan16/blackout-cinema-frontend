@@ -106,7 +106,7 @@ const ProductForm = (props) => {
         getProduct();
       }
     });
-  }, []);
+  });
 
   const getProduct = async () => {
     const productId = props.match.params.productId; // Se identifica el id del producto a editar
@@ -165,7 +165,7 @@ const ProductForm = (props) => {
             name="price"
             id="price"
             onChange={(e) => handleChange(e)}
-          ></input>
+          />
         </div>
         <div className="form-group">
           <label htmlFor="availability">Disponibilidad</label>

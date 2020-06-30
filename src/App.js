@@ -18,6 +18,7 @@ import BranchDetail from './components/pages/branches/BranchDetail';
 import EmployeeTable from './components/pages/employees/EmployeeTable';
 import EmployeeForm from './components/pages/employees/EmployeeForm';
 import RecordTable from './components/pages/orders/RecordTable';
+import LangGenre from './components/pages/lang-genr/LangGenre';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             {/* En relacion a las peliculas */}
             <Route path='/admin/movies' exact={true} render={(props) => <MovieList {...props} mode='' />} />
             <Route path='/admin/add-movie' component={MovieForm} />
+            <Route path='/admin/lang-genre' component={LangGenre} />
             <Route path='/admin/movies/:movieId' render={(props) => <MovieForm {...props} edit={true} />} />
             <Route path='/admin/movie/:movieId/add-function' render={(props) => <FunctionForm {...props} />} />
             <Route path='/admin/movie/:movieId/functions' render={(props) => <MovieDetail {...props} admin={true} />} />
