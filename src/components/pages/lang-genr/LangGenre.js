@@ -3,13 +3,14 @@ import axios from "axios";
 import swal from "sweetalert";
 import Banner from "../../Banner";
 
-const LangGenre = (props) => {
+const LangGenre = () => {
   // Variables de la clase
   const [languages, setLanguages] = useState();
   const [genres, setGenres] = useState();
   const [language, setLanguage] = useState("");
   const [genre, setGenre] = useState("");
   let edit = false;
+  let editID;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -77,6 +78,21 @@ const LangGenre = (props) => {
     getLanguages();
   });
 
+  const editField = (object, isGenre) => {
+    // En primer lugar se cambia el valor de edit a verdadero
+    edit = true;
+
+    // Se 
+    if (isGenre) {
+      editID = object.genre_id;
+      setGenre(object.genre);
+    } else {
+      editID = object.lang_id;
+      setLanguage(object.lang)
+    }
+
+  }
+
   return (
     <div>
       <Banner name="Lenguajes y Generos" />
@@ -143,6 +159,7 @@ const LangGenre = (props) => {
                 <tr className="bg-danger">
                   <th scope="col">ID</th>
                   <th scope="col">Género</th>
+                  <th scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>
@@ -150,6 +167,15 @@ const LangGenre = (props) => {
                   <tr key={genr.genre_id}>
                     <th scope="row">{genr.genre_id}</th>
                     <th scope="row">{genr.genre}</th>
+                    <th>
+                      <button
+                        className="btn"
+                        style={btnStyle}
+                        onClick={() => editField()}
+                      >
+                        <i className="fa fa-pencil"></i>
+                      </button>
+                    </th>
                   </tr>;
                 })}
               </tbody>
@@ -163,7 +189,9 @@ const LangGenre = (props) => {
             <table className="table table-striped table-hover table-dark">
               <thead>
                 <tr className="bg-danger">
-                  <th scope="col">Lenguajes</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Lenguaje</th>
+                  <th scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>
@@ -171,6 +199,15 @@ const LangGenre = (props) => {
                   <tr key={lang.lang_id}>
                     <th scope="row">{lang.lang_id}</th>
                     <th scope="row">{lang.lang}</th>
+                    <th>
+                      <button
+                        className="btn"
+                        style={btnStyle}
+                        onClick={() => editField()}
+                      >
+                        <i className="fa fa-pencil"></i>
+                      </button>
+                    </th>
                   </tr>;
                 })}
               </tbody>
@@ -180,6 +217,12 @@ const LangGenre = (props) => {
       </div>
     </div>
   );
+};
+
+const btnStyle = {
+  background: "#292929",
+  color: "red",
+  width: "40px",
 };
 
 export default LangGenre;

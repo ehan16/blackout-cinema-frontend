@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import swal from "sweetalert";
 
 const EmployeeForm = (props) => {
@@ -58,9 +58,9 @@ const EmployeeForm = (props) => {
     }
   };
 
-  const getEmployee = async () => {
+  const getEmployee = () => {
     const employeeId = props.match.params.employeeId; // Se identifica el id de la pelicula a editar
-    await axios
+    axios
       .get(`http://127.0.0.1:8000/api/employees/${employeeId}/`)
       .then((res) => {
         setName(res.data.name);

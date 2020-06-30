@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Banner from "../../Banner";
 
-const OrdersList = (props) => {
+const OrdersList = () => {
   const [orders, setOrders] = useState([]);
 
-  const getOrders = async () => {
-    await axios
+  const getOrders = () => {
+    axios
       .get("http://127.0.0.1:8000/api/orders/")
       .then((res) => {
         setOrders(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
