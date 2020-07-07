@@ -63,7 +63,7 @@ const ClientForm = (props) => {
           // Se agrega al nuevo cliente
           axios
             .post("http://127.0.0.1:8000/api/clients/", client)
-            .then((res) => insertOrder(res.data.client_id))
+            .then((res) => insertOrder(res.data.client_id));
         } else {
           // Significa que el cliente ya se encuentra en la BBDD y no se registra en la tabla de clientes
           insertOrder(res.data.client_id);
@@ -76,8 +76,6 @@ const ClientForm = (props) => {
   const insertOrder = (clientId) => {
     let price = vehicleType === "1" ? 10 : 20;
     const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
-    console.log(amount)
-    console.log(props.amount)
     const order = {
       movie_id: props.movieId,
       client_id: clientId,
@@ -87,7 +85,6 @@ const ClientForm = (props) => {
 
     // Se agrega la orden de compra
     axios.post("http://127.0.0.1:8000/api/orders/", order).then((res) => {
-      console.log(res.data);
       insertProducts(res.data.order_id);
       updateLots(functionId);
       swal(
@@ -122,41 +119,36 @@ const ClientForm = (props) => {
     // Se tiene que actualizar la cantidad disponible de productos
     let data;
 
-    await axios
-      .get(`http://127.0.0.1:8000/api/products/${productId}/`)
-      .then((res) => {
-        data = {
-          name: res.data.name,
-          availability: parseInt(res.data.availability, 10) - parseInt(qty, 10), // Por precaucion se hace la conversion
-          price: res.data.price,
-          category: res.data.category,
-          enable: res.data.enable,
-        };
-      });
+    const res = await axios.get(
+      `http://127.0.0.1:8000/api/products/${productId}/`
+    );
 
-    await axios
-      .put(`http://127.0.0.1:8000/api/products/${productId}/`, data);
+    data = {
+      name: res.data.name,
+      availability: parseInt(res.data.availability, 10) - parseInt(qty, 10), // Por precaucion se hace la conversion
+      price: res.data.price,
+      category: res.data.category,
+      enable: res.data.enable,
+    };
+
+    await axios.put(`http://127.0.0.1:8000/api/products/${productId}/`, data);
   };
 
   const updateLots = async (functionId) => {
     // Se tiene que actualizar la cantidad de puestos
     let data;
-    await axios
-      .get(`http://127.0.0.1:8000/api/functions/${functionId}/`)
-      .then((res) => {
-        data = {
-          parking_lot: res.data.parking_lot.parking_id,
-          lot: (parseInt(res.data.lot, 10) - 1), // Por precaucion se hace la conversion
-          date: res.data.date,
-          movie_id: res.data.movie_id.movie_id,
-        };
-      });
+    const res = await axios.get(
+      `http://127.0.0.1:8000/api/functions/${functionId}/`
+    );
 
-    console.log(data);
+    data = {
+      parking_lot: res.data.parking_lot.parking_id,
+      lot: parseInt(res.data.lot, 10) - 1, // Por precaucion se hace la conversion
+      date: res.data.date,
+      movie_id: res.data.movie_id.movie_id,
+    };
 
-    await axios
-      .put(`http://127.0.0.1:8000/api/functions/${functionId}/`, data)
-      .then((res) => console.log(res));
+    await axios.put(`http://127.0.0.1:8000/api/functions/${functionId}/`, data);
   };
 
   return (

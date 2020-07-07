@@ -108,10 +108,10 @@ const ProductForm = (props) => {
     });
   });
 
-  const getProduct = async () => {
+  const getProduct = () => {
     const productId = props.match.params.productId; // Se identifica el id del producto a editar
     if (props.combo) {
-      await axios
+      axios
         .get(`http://127.0.0.1:8000/api/combos/${productId}/`)
         .then((res) => {
           setName(res.data.name);
@@ -127,7 +127,7 @@ const ProductForm = (props) => {
         })
         .catch((err) => console.log(err));
     } else {
-      await axios
+      axios
         .get(`http://127.0.0.1:8000/api/products/${productId}/`)
         .then((res) => {
           setName(res.data.name);

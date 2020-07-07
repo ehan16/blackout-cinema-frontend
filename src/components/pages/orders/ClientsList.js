@@ -5,8 +5,8 @@ import Banner from "../../Banner";
 const ClientsList = () => {
   const [clients, setClients] = useState([]);
 
-  const getClients = async () => {
-    await axios
+  const getClients = () => {
+    axios
       .get("http://127.0.0.1:8000/api/clients/")
       .then((res) => {
         setClients(res.data);
@@ -16,7 +16,7 @@ const ClientsList = () => {
 
   useEffect(() => {
     getClients();
-  }, []);
+  });
 
   return (
     <div>

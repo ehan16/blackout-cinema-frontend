@@ -5,8 +5,8 @@ import Banner from "../../Banner";
 const RecordTable = (props) => {
   const [record, setRecords] = useState();
 
-  const getRecords = async () => {
-    await axios
+  const getRecords = () => {
+    axios
       .get("http://127.0.0.1:8000/api/record/")
       .then((res) => {
         setRecords(res.data);

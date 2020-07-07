@@ -61,51 +61,38 @@ class Navbar extends React.Component {
                 <Link
                   to="/admin/movies"
                   className="dropdown-item text-white newHover"
-                  href="#"
                 >
                   Películas
                 </Link>
                 <Link
                   to="/admin/products"
                   className="dropdown-item text-white newHover"
-                  href="#"
                 >
                   Inventario
                 </Link>
                 <Link
                   to="/admin/branches"
                   className="dropdown-item text-white newHover"
-                  href="#"
                 >
                   Sucursales
                 </Link>
                 <Link
                   to="/admin/orders"
                   className="dropdown-item text-white newHover"
-                  href="#"
                 >
                   Órdenes
                 </Link>
                 <Link
                   to="/admin/record"
                   className="dropdown-item text-white newHover"
-                  href="#"
                 >
                   Histórico
                 </Link>
                 <Link
                   to="/admin/clients"
                   className="dropdown-item text-white newHover"
-                  href="#"
                 >
                   Clientes
-                </Link>
-                <Link
-                  to="/admin/statistics"
-                  className="dropdown-item text-white newHover"
-                  href="#"
-                >
-                  Estadísticas
                 </Link>
               </div>
             </div>

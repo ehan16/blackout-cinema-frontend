@@ -9,8 +9,6 @@ const LangGenre = () => {
   const [genres, setGenres] = useState();
   const [language, setLanguage] = useState("");
   const [genre, setGenre] = useState("");
-  let edit = false;
-  let editID;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -25,7 +23,7 @@ const LangGenre = () => {
     }
   };
 
-  const handleSubmitGenre = (e) => {
+  const handleSubmitGenre = async(e) => {
     e.preventDefalut();
     if (genre.trim() === "") {
       swal("ERROR", "Existen campos invalidos", "error", { dangerMode: true });
@@ -35,11 +33,25 @@ const LangGenre = () => {
         genre,
       };
 
-      axios.post("http://127.0.0.1:8000/api/genre/", data);
+      // Se confirma que desea insertar
+      swal({
+        title: "Confimación",
+        text: `Una vez que inserte ${genre}, no podrá cambiarlo. ¿Seguro?`,
+        buttons: true,
+        dangerMode: true,
+      }).then((willInsert) => {
+        if (willInsert) {
+          await axios.post("http://127.0.0.1:8000/api/genre/", data);
+          getGenres();
+        } else {
+          swal("No ha ocurrido nada", { dangerMode: true });
+        }
+      });
+
     }
   };
 
-  const hanldeSubmitLang = (e) => {
+  const hanldeSubmitLang = async(e) => {
     e.preventDefault();
     if (language.trim() === "") {
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
@@ -49,7 +61,21 @@ const LangGenre = () => {
         language,
       };
 
-      axios.post("http://127.0.0.1:8000/api/language/", data);
+      // Se confirma que desea insertarlo
+      swal({
+        title: "Confimación",
+        text: `Una vez que inserte ${language}, no podrá cambiarlo. ¿Seguro?`,
+        buttons: true,
+        dangerMode: true,
+      }).then((willInsert) => {
+        if (willInsert) {
+          await axios.post("http://127.0.0.1:8000/api/language/", data);
+          getLanguages();
+        } else {
+          swal("No ha ocurrido nada", { dangerMode: true });
+        }
+      });
+
     }
   };
 
@@ -77,21 +103,6 @@ const LangGenre = () => {
     getGenres();
     getLanguages();
   });
-
-  const editField = (object, isGenre) => {
-    // En primer lugar se cambia el valor de edit a verdadero
-    edit = true;
-
-    // Se 
-    if (isGenre) {
-      editID = object.genre_id;
-      setGenre(object.genre);
-    } else {
-      editID = object.lang_id;
-      setLanguage(object.lang)
-    }
-
-  }
 
   return (
     <div>

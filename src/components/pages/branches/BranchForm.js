@@ -74,9 +74,9 @@ const BranchForm = (props) => {
     }
   }, []);
 
-  const getBranch = async () => {
+  const getBranch = () => {
     const branchId = props.match.params.branchId; // Se identifica el id de la pelicula a editar
-    await axios
+    axios
       .get(`http://127.0.0.1:8000/api/branches/${branchId}/`)
       .then((res) => {
         setState(res.data.state_field);

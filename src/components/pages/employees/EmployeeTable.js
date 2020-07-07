@@ -6,8 +6,8 @@ import swal from "sweetalert";
 const EmployeeTable = (props) => {
   const [employees, setEmployees] = useState();
 
-  const getEmployees = async () => {
-    await axios
+  const getEmployees = () => {
+    axios
       .get(`http://127.0.0.1:8000/api/employees/?branch=${props.branchId}`)
       .then((res) => {
         setEmployees(res.data);

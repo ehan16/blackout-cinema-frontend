@@ -35,8 +35,8 @@ const ParkingLotList = (props) => {
     }
   };
 
-  const getParkingLots = async () => {
-    await axios
+  const getParkingLots = () => {
+    axios
       .get(`http://127.0.0.1:8000/api/parkinglots/?parking=${props.branchId}`)
       .then((res) => {
         setParkingLots(res.data);
