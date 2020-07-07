@@ -41,8 +41,10 @@ const LangGenre = () => {
         dangerMode: true,
       }).then((willInsert) => {
         if (willInsert) {
-          await axios.post("http://127.0.0.1:8000/api/genre/", data);
-          getGenres();
+          axios.post("http://127.0.0.1:8000/api/genre/", data).then(res => {
+              getGenres();
+            }
+          );
         } else {
           swal("No ha ocurrido nada", { dangerMode: true });
         }
@@ -69,8 +71,7 @@ const LangGenre = () => {
         dangerMode: true,
       }).then((willInsert) => {
         if (willInsert) {
-          await axios.post("http://127.0.0.1:8000/api/language/", data);
-          getLanguages();
+          axios.post("http://127.0.0.1:8000/api/language/", data).then(res => getLanguages());
         } else {
           swal("No ha ocurrido nada", { dangerMode: true });
         }
@@ -170,25 +171,15 @@ const LangGenre = () => {
                 <tr className="bg-danger">
                   <th scope="col">ID</th>
                   <th scope="col">Género</th>
-                  <th scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>
-                {genres.map((genr) => {
+                {/* {genres.map((genr) => {
                   <tr key={genr.genre_id}>
                     <th scope="row">{genr.genre_id}</th>
                     <th scope="row">{genr.genre}</th>
-                    <th>
-                      <button
-                        className="btn"
-                        style={btnStyle}
-                        onClick={() => editField()}
-                      >
-                        <i className="fa fa-pencil"></i>
-                      </button>
-                    </th>
                   </tr>;
-                })}
+                })} */}
               </tbody>
             </table>
           ) : null}
@@ -202,25 +193,15 @@ const LangGenre = () => {
                 <tr className="bg-danger">
                   <th scope="col">ID</th>
                   <th scope="col">Lenguaje</th>
-                  <th scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>
-                {languages.map((lang) => {
+                {/* { languages.map((lang) => {
                   <tr key={lang.lang_id}>
                     <th scope="row">{lang.lang_id}</th>
                     <th scope="row">{lang.lang}</th>
-                    <th>
-                      <button
-                        className="btn"
-                        style={btnStyle}
-                        onClick={() => editField()}
-                      >
-                        <i className="fa fa-pencil"></i>
-                      </button>
-                    </th>
-                  </tr>;
-                })}
+                  </tr>
+                }) } */}
               </tbody>
             </table>
           ) : null}
