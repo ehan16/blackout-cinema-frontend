@@ -5,8 +5,8 @@ import Banner from "../../Banner";
 
 const LangGenre = () => {
   // Variables de la clase
-  const [languages, setLanguages] = useState();
-  const [genres, setGenres] = useState();
+  const [languages, setLanguages] = useState([]);
+  const [genres, setGenres] = useState([]);
   const [language, setLanguage] = useState("");
   const [genre, setGenre] = useState("");
 
@@ -28,10 +28,6 @@ const LangGenre = () => {
     if (genre.trim() === "") {
       swal("ERROR", "Existen campos invalidos", "error", { dangerMode: true });
     } else {
-      // Data a insertar en la BBDD
-      const data = {
-        genre,
-      };
 
       // Se confirma que desea insertar
       swal({
@@ -41,7 +37,7 @@ const LangGenre = () => {
         dangerMode: true,
       }).then((willInsert) => {
         if (willInsert) {
-          axios.post("http://127.0.0.1:8000/api/genre/", data).then(res => {
+          axios.post("http://127.0.0.1:8000/api/genre/", { genre }).then(res => {
               getGenres();
             }
           );
@@ -58,10 +54,6 @@ const LangGenre = () => {
     if (language.trim() === "") {
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
-      // Data a insertar en la BBDD
-      const data = {
-        language,
-      };
 
       // Se confirma que desea insertarlo
       swal({
@@ -71,7 +63,7 @@ const LangGenre = () => {
         dangerMode: true,
       }).then((willInsert) => {
         if (willInsert) {
-          axios.post("http://127.0.0.1:8000/api/language/", data).then(res => getLanguages());
+          axios.post("http://127.0.0.1:8000/api/language/", { language }).then(res => getLanguages());
         } else {
           swal("No ha ocurrido nada", { dangerMode: true });
         }
@@ -111,15 +103,14 @@ const LangGenre = () => {
       {/* Vista que para ver los generos y lenguaje, asi como agregarlos */}
       <div className="row mx-2 px-sm-3 pb-3 pt-2 ">
         {/* Con respecto a los generos */}
-        <div className="col-md-4 my-3 py-4 text-center card-style rounded">
+        <div className="col-lg-4 my-3 py-4 text-center rounded">
           {/* Formulario para agregar generos */}
           <h4 className="mt-2" style={{ color: "red", fontWeight: "bold" }}>
-            Agregar Generos:
+            Agregar Genero:
           </h4>
-          <form method="post" className="pb-0">
+          <form method="post" className="p-0 pb-4">
             <input
-              className="form-field mb-2"
-              style={{ width: "auto" }}
+              className="form-field mb-2 w-50"
               value={genre}
               name="genre"
               id="genre"
@@ -139,15 +130,14 @@ const LangGenre = () => {
 
           {/* Formulario para agregar lenguajes */}
           <h4 className="mt-2" style={{ color: "red", fontWeight: "bold" }}>
-            Agregar Lenguajes:
+            Agregar Lenguaje:
           </h4>
-          <form method="post" className="pb-0">
+          <form method="post" className="p-0 pb-4">
             <input
               value={language}
               name="language"
               id="language"
-              className="form-field"
-              style={{ width: "auto" }}
+              className="form-field w-50"
               onChange={(e) => handleChange(e)}
             ></input>
             <span>
@@ -161,11 +151,12 @@ const LangGenre = () => {
               </button>
             </span>
           </form>
+
         </div>
 
         {/* Con respecto a los generos */}
-        <div className="col-md-4 my-3 py-4 text-center">
-          {genre ? (
+        <div className="col-lg-4 my-3 py-4 px-5 text-center">
+          {genres ? (
             <table className="table table-striped table-hover table-dark">
               <thead>
                 <tr className="bg-danger">
@@ -174,19 +165,21 @@ const LangGenre = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* {genres.map((genr) => {
-                  <tr key={genr.genre_id}>
-                    <th scope="row">{genr.genre_id}</th>
-                    <th scope="row">{genr.genre}</th>
-                  </tr>;
-                })} */}
+                {
+                  genres.map(gen => (
+                    <tr key={gen.genre_id}>
+                      <th scope="row">{gen.genre_id}</th>
+                      <th scope="row">{gen.genre}</th>
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           ) : null}
         </div>
 
         {/* Con respecto a los lenguages */}
-        <div className="col-md-4 my-3 py-4 text-center">
+        <div className="col-lg-4 my-3 py-4 px-5 text-center">
           {languages ? (
             <table className="table table-striped table-hover table-dark">
               <thead>
@@ -196,12 +189,14 @@ const LangGenre = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* { languages.map((lang) => {
-                  <tr key={lang.lang_id}>
-                    <th scope="row">{lang.lang_id}</th>
-                    <th scope="row">{lang.lang}</th>
-                  </tr>
-                }) } */}
+                {
+                  languages.map(lang => (
+                    <tr key={lang.lang}>
+                      <th scope="row">{lang.lang_id}</th>
+                      <th scope="row">{lang.lang}</th>
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           ) : null}

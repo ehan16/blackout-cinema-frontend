@@ -66,7 +66,6 @@ function App() {
             <Route path='/admin/orders' component={OrdersList} />
             <Route path='/admin/record' component={RecordTable} />
             <Route path='/admin/clients' component={ClientsList} />
-            <Route path='/admin/statistics' component={ClientsList} />
           </Switch>
 
         </div>

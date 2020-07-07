@@ -45,7 +45,7 @@ export class MovieList extends Component {
         <Banner name="Películas" />
         <div className="container-fluid p-3">
           {this.props.mode === "" ? (
-            <div className="text-center">
+            <div className="text-center my-3">
               <Link to="/admin/add-movie/">
                 <button className="btn-add">Agregar película</button>
               </Link>
