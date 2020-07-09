@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 import Banner from "../../Banner";
 
 const OrdersList = () => {
+  // Se consiguen las fechas
+  const curr = new Date();
+  const aux = curr;
+  aux.setMonth(aux.getMonth() - 1);
+  const today = curr.toISOString().substr(0, 10);
+  const past = aux.toISOString().substr(0, 10);
 
   // Variables de la clase
-  const curr = new Date();
-  // curr.setDate(curr.getDate());
-  const today = curr.toISOString().substr(0, 10);
   const [orders, setOrders] = useState([]);
-  const [startDate, setStartDate] = useState(today);
+  const [startDate, setStartDate] = useState(past);
   const [endDate, setEndDate] = useState(today);
 
   const getOrders = async (search) => {
-    if(search) {
-      const res = await axios.get(`http://127.0.0.1:8000/api/orders/?start=${startDate}&end=${endDate}`);
+    if (search) {
+      const res = await axios.get(
+        `http://127.0.0.1:8000/api/orders/?start=${startDate}&end=${endDate}`
+      );
       setOrders(res.data);
     } else {
       const res = await axios.get("http://127.0.0.1:8000/api/orders/");
@@ -42,7 +48,12 @@ const OrdersList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getOrders(true);
+    // Se valida que la fecha inicial no sea mayor que la final
+    if (startDate > endDate) {
+      swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
+    } else {
+      getOrders(true);
+    }
   };
 
   return (
@@ -55,7 +66,9 @@ const OrdersList = () => {
           {/* Formulario para elegir rango de fechas */}
           <form method="post" className="pb-5">
             <div className="form-group d-flex justify-content-center">
-              <label htmlFor="startDate" className="my-0 mx-2">Desde</label>
+              <label htmlFor="startDate" className="my-0 mx-2">
+                Desde
+              </label>
               <input
                 type="date"
                 className="form-field w-50 m-2 p-0"
@@ -67,7 +80,9 @@ const OrdersList = () => {
               ></input>
             </div>
             <div className="form-group d-flex justify-content-center">
-              <label htmlFor="endDate" className="my-0 mx-2">Hasta</label>
+              <label htmlFor="endDate" className="my-0 mx-2">
+                Hasta
+              </label>
               <input
                 type="date"
                 className="form-field w-50 m-2 p-0"

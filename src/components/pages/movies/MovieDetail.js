@@ -113,7 +113,7 @@ export default function MovieDetail(props) {
       <div className="row mx-3 my-3 p-4">
         {/* Solo se muestra la tabla si hay funciones */}
         {movieFunctions ? (
-          <table className="table table-responsive-sm table-hover table-dark list text-center">
+          <table className="table table-responsive-md table-hover table-dark list text-center">
             <thead>
               <tr className="bg-danger">
                 <th scope="col">Función</th>

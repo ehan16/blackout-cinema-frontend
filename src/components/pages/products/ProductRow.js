@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function ProductRow(props) {
-
   // Variables de la clase
   let item;
   props.item.product !== undefined
@@ -10,52 +10,51 @@ export default function ProductRow(props) {
     : (item = props.item);
   const index = props.index;
 
-  const [comboProduct, setComboProduct] = useState();
+  const [comboP, setComboP] = useState([]);
 
-  // En caso de que sean combos, se tiene que mostrar sus componentes
-  let items;
-  if (props.combo) {
-    items = (
-      <div style={{ fontSize: "0.8rem" }}>
-        <p className="my-1">{item.product_1.name}</p>
-        <p className="my-1">{item.product_2.name}</p>
-        <p className="my-1">{item.product_3.name}</p>
-        <p className="my-1">{item.product_4.name}</p>
-        <p className="my-1">{item.product_5.name}</p>
-      </div>
-    );
-  }
-
-  useEffect( async() => {
-  //  const res = await axios.get("http://127.0.0.1:8000/api/product-combo/?combo=2");
-  //  setComboProduct(res.data);
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/combo-product/?combo=2")
+      .then((res) => setComboP(res.data));
   }, []);
 
   return (
-
     <tr>
-
       {/* Informacion del producto/combo */}
-      {props.admin ? (<th scope="row">{!props.combo ? item.product_id : item.combo_id}</th>) : null}
-      <td scope="row" className="text-capitalize">{item.name}</td>
-      {props.combo ? <th className="text-capitalize">{items}</th> : null}
-      <td className="text-capitalize">{item.category !== undefined ? item.category : "Combo"}</td>
-      <td>{item.price}</td>
+      {props.admin ? (
+        <th scope="row">{!props.combo ? item.product_id : item.combo_id}</th>
+      ) : null}
+      <td scope="row" className="text-capitalize">
+        {item.name}
+      </td>
+      {props.combo ? (
+        <th className="text-capitalize">
+          {comboP.map((item) => (
+            <p
+              key={item.product_id.product_id}
+              style={{ fontSize: "0.8rem", marginBottom: "5px" }}
+            >
+              {item.product_id.name}
+            </p>
+          ))}
+        </th>
+      ) : null}
+      <td className="text-capitalize">
+        {item.category !== undefined ? item.category : "Combo"}
+      </td>
+      <td>{item.price}$</td>
 
       {/* Dependiendo si es producto o combo, se muestra su status o su cantidad */}
-      {!props.buy 
-        ? <th>
-            {!props.combo ? (item.availability) : item.enable 
-              ? (<i className="fa fa-check"></i>) 
-              : (<i className="fa fa-times"></i>)
-            }
-          </th>
-        : <th>{props.item.qty}</th>
-      }
+      {!props.buy ? (
+        <th>
+          {!props.combo ? (item.availability) : item.enable ? (<i className="fa fa-check"></i>) : (<i className="fa fa-times"></i>)}
+        </th>
+      ) : (
+        <th>{props.item.qty}</th>
+      )}
 
       {/* Botones de accion */}
       <td>
-        
         {/* Cuando es cliente */}
         {!props.admin ? (
           <div className="btn-group btn-group-sm">
@@ -95,7 +94,11 @@ export default function ProductRow(props) {
                 </button>
               </Link>
             )}
-            <button className="btn" style={btnStyle} onClick={() => props.disableProduct(item, !props.combo)}>
+            <button
+              className="btn"
+              style={btnStyle}
+              onClick={() => props.disableProduct(item, !props.combo)}
+            >
               <i className="fa fa-trash"></i>
             </button>
           </div>

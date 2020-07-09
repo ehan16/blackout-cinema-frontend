@@ -183,11 +183,6 @@ export class ProductsList extends Component {
         name: product.name,
         price: product.price,
         availability: product.availability,
-        product_1: product.product_1,
-        product_2: product.product_2,
-        product_3: product.product_3,
-        product_4: product.product_4,
-        product_5: product.product_5,
         enable: false,
       };
     }
@@ -201,8 +196,9 @@ export class ProductsList extends Component {
     }).then((willDelete) => {
       if (willDelete) {
         const id = isProduct ? product.product_id : product.combo_id;
+        const mode = isProduct ? 'products' : 'combos';
         axios
-          .put(`http://127.0.0.1:8000/api/products/${id}/`, data)
+          .put(`http://127.0.0.1:8000/api/${mode}/${id}/`, data)
           .then((res) => {
             this.getProducts(); // Se actualiza la informacion mostrada
             swal("Exitoso", "¡Se ha eliminado el producto!", "info", {
