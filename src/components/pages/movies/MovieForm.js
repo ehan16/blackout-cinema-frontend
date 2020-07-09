@@ -6,7 +6,6 @@ import swal from "sweetalert";
 const MovieForm = (props) => {
   // Fecha actual para definir minimo de fecha de estreno
   const curr = new Date();
-  curr.setDate(curr.getDate());
   const today = curr.toISOString().substr(0, 10); // Se obtiene la fecha en formato string
 
   // Variables para el formulario
@@ -144,7 +143,9 @@ const MovieForm = (props) => {
       </div>
       {/* Formulario con todos los campos requeridos */}
       <form method="post">
-        <div className="form-group">
+
+        {/* Nombre de la pelicula */}
+        <div className="form-group my-4">
           <label htmlFor="title">Nombre de la película</label>
           <input
             type="text"
@@ -155,7 +156,9 @@ const MovieForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></input>
         </div>
-        <div className="form-group">
+
+        {/* Genero */}
+        <div className="form-group my-4">
           <label htmlFor="genre">Género</label>
           <select
             value={genre}
@@ -171,7 +174,9 @@ const MovieForm = (props) => {
             ))}
           </select>
         </div>
-        <div className="form-group">
+
+        {/* Duracion */}
+        <div className="form-group my-4">
           <label htmlFor="duration">Duración</label>
           <input
             type="number"
@@ -182,7 +187,9 @@ const MovieForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></input>
         </div>
-        <div className="form-group">
+
+        {/* Anyo */}
+        <div className="form-group my-4">
           <label htmlFor="year">Año</label>
           <input
             type="number"
@@ -193,7 +200,9 @@ const MovieForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></input>
         </div>
-        <div className="form-group">
+
+        {/* Descripcion */}
+        <div className="form-group my-4">
           <label htmlFor="synopsys">Descripción</label>
           <textarea
             className="form-field"
@@ -203,7 +212,9 @@ const MovieForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></textarea>
         </div>
-        <div className="form-group">
+
+        {/* Lenguaje */}
+        <div className="form-group my-4">
           <label htmlFor="language">Lenguaje</label>
           <select
             value={language}
@@ -219,7 +230,9 @@ const MovieForm = (props) => {
             ))}
           </select>
         </div>
-        <div className="form-group">
+
+        {/* Subtitulos */}
+        <div className="form-group my-4">
           <label htmlFor="subtitles">Subtítulos</label>
           <input
             type="checkbox"
@@ -231,8 +244,9 @@ const MovieForm = (props) => {
           ></input>
           <span className="ml-2">Español</span>
         </div>
+
         {/* Se coloca un minimo a la fecha de estreno */}
-        <div className="form-group">
+        <div className="form-group my-4">
           <label htmlFor="date">Fecha de estreno</label>
           <input
             type="date"
@@ -244,8 +258,9 @@ const MovieForm = (props) => {
             onChange={(e) => handleChange(e)}
           ></input>
         </div>
+
         {/* Estado de la pelicula que se limita a las 3 disponibles */}
-        <div className="form-group">
+        <div className="form-group my-4">
           <label htmlFor="mode">Estado</label>
           <select
             value={mode}
@@ -259,6 +274,7 @@ const MovieForm = (props) => {
             <option value="pasada">Pasada</option>
           </select>
         </div>
+        
         {/* Botones de accion */}
         <div className="btn-group my-3">
           <Link to="/admin/movies">

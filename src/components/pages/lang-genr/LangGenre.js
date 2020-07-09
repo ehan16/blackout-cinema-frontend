@@ -23,12 +23,11 @@ const LangGenre = () => {
     }
   };
 
-  const handleSubmitGenre = async(e) => {
-    e.preventDefalut();
+  const handleSubmitGenre = (e) => {
+    e.preventDefault();
     if (genre.trim() === "") {
       swal("ERROR", "Existen campos invalidos", "error", { dangerMode: true });
     } else {
-
       // Se confirma que desea insertar
       swal({
         title: "Confimación",
@@ -37,24 +36,26 @@ const LangGenre = () => {
         dangerMode: true,
       }).then((willInsert) => {
         if (willInsert) {
-          axios.post("http://127.0.0.1:8000/api/genre/", { genre }).then(res => {
+
+          axios
+            .post("http://127.0.0.1:8000/api/genre/", { genre: genre.toLowerCase() })
+            .then((res) => {
               getGenres();
-            }
-          );
+              setGenre("");
+            })
+            .catch((err) => console.log(err));
         } else {
           swal("No ha ocurrido nada", { dangerMode: true });
         }
       });
-
     }
   };
 
-  const hanldeSubmitLang = async(e) => {
+  const hanldeSubmitLang = (e) => {
     e.preventDefault();
     if (language.trim() === "") {
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
-
       // Se confirma que desea insertarlo
       swal({
         title: "Confimación",
@@ -63,12 +64,23 @@ const LangGenre = () => {
         dangerMode: true,
       }).then((willInsert) => {
         if (willInsert) {
-          axios.post("http://127.0.0.1:8000/api/language/", { language }).then(res => getLanguages());
+
+          // La data a insertar
+          const data = {
+            lang: language.toLowerCase()
+          }
+
+          axios
+            .post("http://127.0.0.1:8000/api/language/", data)
+            .then((res) => {
+              getLanguages();
+              setLanguage("");
+            })
+            .catch((err) => console.log(err));
         } else {
           swal("No ha ocurrido nada", { dangerMode: true });
         }
       });
-
     }
   };
 
@@ -76,7 +88,6 @@ const LangGenre = () => {
     try {
       const res = await axios.get(`http://127.0.0.1:8000/api/genre/`);
       setGenres(res.data);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -86,7 +97,6 @@ const LangGenre = () => {
     try {
       const res = await axios.get(`http://127.0.0.1:8000/api/language/`);
       setLanguages(res.data);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -95,7 +105,7 @@ const LangGenre = () => {
   useEffect(() => {
     getGenres();
     getLanguages();
-  });
+  }, []);
 
   return (
     <div>
@@ -123,7 +133,7 @@ const LangGenre = () => {
                 type="submit"
                 onClick={handleSubmitGenre}
               >
-                <i class="fa fa-plus-circle"></i>
+                <i className="fa fa-plus-circle"></i>
               </button>
             </span>
           </form>
@@ -147,11 +157,10 @@ const LangGenre = () => {
                 className="ml-2"
                 style={{ width: "auto", borderRadius: "30px" }}
               >
-                <i class="fa fa-plus-circle"></i>
+                <i className="fa fa-plus-circle"></i>
               </button>
             </span>
           </form>
-
         </div>
 
         {/* Con respecto a los generos */}
@@ -165,14 +174,12 @@ const LangGenre = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-                  genres.map(gen => (
-                    <tr key={gen.genre_id}>
-                      <th scope="row">{gen.genre_id}</th>
-                      <th scope="row">{gen.genre}</th>
-                    </tr>
-                  ))
-                }
+                {genres.map((gen) => (
+                  <tr key={gen.genre_id}>
+                    <th scope="row">{gen.genre_id}</th>
+                    <th className="text-capitalize">{gen.genre}</th>
+                  </tr>
+                ))}
               </tbody>
             </table>
           ) : null}
@@ -189,14 +196,12 @@ const LangGenre = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-                  languages.map(lang => (
-                    <tr key={lang.lang}>
-                      <th scope="row">{lang.lang_id}</th>
-                      <th scope="row">{lang.lang}</th>
-                    </tr>
-                  ))
-                }
+                {languages.map((lang) => (
+                  <tr key={lang.lang}>
+                    <th scope="row">{lang.lang_id}</th>
+                    <th className="text-capitalize">{lang.lang}</th>
+                  </tr>
+                ))}
               </tbody>
             </table>
           ) : null}

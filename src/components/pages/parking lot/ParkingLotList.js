@@ -35,14 +35,11 @@ const ParkingLotList = (props) => {
     }
   };
 
-  const getParkingLots = () => {
-    axios
-      .get(`http://127.0.0.1:8000/api/parkinglots/?parking=${props.branchId}`)
-      .then((res) => {
-        setParkingLots(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
+  const getParkingLots = async () => {
+    const res = await axios.get(
+      `http://127.0.0.1:8000/api/parkinglots/?parking=${props.branchId}`
+    );
+    setParkingLots(res.data);
   };
 
   useEffect(() => {
@@ -57,7 +54,7 @@ const ParkingLotList = (props) => {
           <div className="form-group">
             <label htmlFor="capacity">Capacidad</label>
             <input
-              type="capacity"
+              type="number"
               className="form-field"
               value={capacity}
               name="capacity"

@@ -12,7 +12,7 @@ const BranchDetail = (props) => {
     axios.get(`http://127.0.0.1:8000/api/branches/${branchId}/`).then((res) => {
       setBranch(res.data);
     });
-  });
+  }, []);
 
   return (
     <div>
@@ -23,7 +23,7 @@ const BranchDetail = (props) => {
           {/* Se muestra la informacion de la sucursal */}
           <div className="title-style m-auto">
             <h2 className="font-weight-bold mb-4 mx-1">
-              {branch.zone.name} - {branch.place}
+              {branch.zone} - {branch.place}
             </h2>
             <h5 style={{ color: "white" }}>
               {branch.state_field}, {branch.city}

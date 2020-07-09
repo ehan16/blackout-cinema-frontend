@@ -16,7 +16,7 @@ const ClientsList = () => {
 
   useEffect(() => {
     getClients();
-  });
+  }, []);
 
   return (
     <div>

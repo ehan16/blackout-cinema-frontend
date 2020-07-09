@@ -6,7 +6,6 @@ import swal from "sweetalert";
 const FunctionForm = (props) => {
   // Se obtiene la fecha de hoy como limite inferior
   const curr = new Date();
-  curr.setDate(curr.getDate());
   const today = curr.toISOString().substr(0, 10); // Se obtiene la fecha actual en string para validaciones
 
   // Variables de la clase

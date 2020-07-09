@@ -70,9 +70,9 @@ export class MovieList extends Component {
     const data = {
       title: movie.title,
       year: movie.year,
-      genre: movie.genre,
+      genre: movie.genre.genre_id,
       duration: movie.duration,
-      language_field: movie.language_field,
+      language_field: movie.language_field.lang_id,
       subtitle: movie.subtitle,
       synopsys: movie.synopsys,
       date: movie.date,
@@ -105,9 +105,9 @@ export class MovieList extends Component {
     const data = {
       title: movie.title,
       year: movie.year,
-      genre: movie.genre,
+      genre: movie.genre.genre_id,
       duration: movie.duration,
-      language_field: movie.language_field,
+      language_field: movie.language_field.lang_id,
       subtitle: movie.subtitle,
       synopsys: movie.synopsys,
       date: movie.date,

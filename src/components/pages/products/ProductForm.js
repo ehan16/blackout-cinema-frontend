@@ -106,7 +106,7 @@ const ProductForm = (props) => {
         getProduct();
       }
     });
-  });
+  }, []);
 
   const getProduct = () => {
     const productId = props.match.params.productId; // Se identifica el id del producto a editar

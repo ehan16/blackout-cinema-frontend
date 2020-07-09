@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function ProductRow(props) {
@@ -9,6 +9,8 @@ export default function ProductRow(props) {
     ? (item = props.item.product)
     : (item = props.item);
   const index = props.index;
+
+  const [comboProduct, setComboProduct] = useState();
 
   // En caso de que sean combos, se tiene que mostrar sus componentes
   let items;
@@ -23,6 +25,11 @@ export default function ProductRow(props) {
       </div>
     );
   }
+
+  useEffect( async() => {
+  //  const res = await axios.get("http://127.0.0.1:8000/api/product-combo/?combo=2");
+  //  setComboProduct(res.data);
+  }, []);
 
   return (
 
