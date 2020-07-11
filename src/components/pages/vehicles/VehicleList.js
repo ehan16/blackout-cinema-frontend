@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import Banner from "../../Banner";
 
-const VehicleList = (props) => {
+const VehicleList = () => {
   // Variables de la clase
   const [model, setModel] = useState("");
   const [price, setPrice] = useState(35);
+  const [vehicles, setVehicles] = useState([]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -30,74 +32,89 @@ const VehicleList = (props) => {
         price,
       };
 
-      axios
-        .post("http://127.0.0.1:8000/api/parkinglots/", data)
-        .then((res) => getParkingLots());
-      console.log(data);
+      swal({
+        title: "Confimación",
+        text: `Una vez que lo inserte, no podrá cambiarlo. ¿Seguro?`,
+        buttons: true,
+        dangerMode: true,
+      }).then((willInsert) => {
+        if (willInsert) {
+          axios
+            .post("http://127.0.0.1:8000/api/vehicles/", data)
+            .then((res) => getVehicles());
+        } else {
+          swal("No ha ocurrido nada", { dangerMode: true });
+        }
+      });
+
     }
   };
 
-  const getParkingLots = async () => {
-    const res = await axios.get(
-      `http://127.0.0.1:8000/api/parkinglots/?parking=${props.branchId}`
-    );
-    setParkingLots(res.data);
+  const getVehicles = async () => {
+    const res = await axios.get(`http://127.0.0.1:8000/api/vehicles/`);
+    setVehicles(res.data);
   };
 
   useEffect(() => {
-    getParkingLots();
+    getVehicles();
   }, []);
 
   return (
-    <div className="col">
-      <div>
+    <div>
+      <Banner name="Vehiculos" />
+      <div className="container-fluid p-3 text-center">
         {/* Se integra un formulario sencillo para agregar estacionamientos */}
         <form method="post" className="pb-0">
           <div className="form-group">
-            <label htmlFor="capacity">Capacidad</label>
+            <label htmlFor="model">Modelo</label>
             <input
-              type="number"
-              className="form-field"
-              value={capacity}
-              name="capacity"
-              id="capacity"
+              type="text"
+              className="form-field w-75"
+              value={model}
+              name="model"
+              id="model"
               onChange={(e) => handleChange(e)}
             ></input>
           </div>
-          <div className="btn-group"></div>
+          <div className="form-group">
+            <label htmlFor="price">Precio ($)</label>
+            <input
+              type="number"
+              className="form-field w-75"
+              value={price}
+              name="price"
+              id="price"
+              onChange={(e) => handleChange(e)}
+            ></input>
+          </div>
+          <button type="submit" className="btn-add mt-4" onClick={handleSubmit}>
+            Agregar modelo
+          </button>
         </form>
-        {/* Un buton para que pueda agregar estacionamientos a esa sucursal */}
-        <button type="submit" className="btn-add" onClick={handleSubmit}>
-          Agregar estacionamiento
-        </button>
-      </div>
 
-      <div className="mx-md-3 my-5 text-center">
-        {/* Tabla de los estacionamientos */}
-        {parkingLots ? (
-          <table className="table table-responsive-sm table-hover table-dark list">
-            <thead>
-              <tr className="bg-danger">
-                <th scope="col">Número</th>
-                <th scope="col">Sucursal</th>
-                <th scope="col">Capacidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              {parkingLots
-                ? parkingLots.map((parkingLot) => (
-                    <tr key={parkingLot.parking_id}>
-                      <th scope="row">{parkingLot.parking_id}</th>
-                      <td className="text-capitalize">
-                        {parkingLot.branch.zone} - {parkingLot.branch.place}
-                      </td>
-                      <td className="text-capitalize">{parkingLot.capacity}</td>
-                    </tr>
-                  ))
-                : null}
-            </tbody>
-          </table>
-        ) : null}
+        <div className="mx-md-3 p-4 my-5 text-center">
+          {/* Tabla de los estacionamientos */}
+          {vehicles ? (
+            <table className="table table-responsive-sm table-hover table-dark list">
+              <thead>
+                <tr className="bg-danger">
+                  <th scope="col">ID</th>
+                  <th scope="col">Modelo de vehiculo</th>
+                  <th scope="col">Precio de entrada por el vehiculo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vehicles.map((vehicle) => (
+                  <tr key={vehicle.vehicle_id}>
+                    <th scope="row">{vehicle.vehicle_id}</th>
+                    <th className="text-capitalize">{vehicle.model}</th>
+                    <th>{vehicle.price}$</th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : null}
+        </div>
       </div>
     </div>
   );

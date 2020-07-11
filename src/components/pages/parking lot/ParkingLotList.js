@@ -23,15 +23,28 @@ const ParkingLotList = (props) => {
       // Se valida que ningun campo este vacio o erroneo
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
+
       const data = {
         branch: props.branchId,
         capacity,
       };
 
-      axios
-        .post("http://127.0.0.1:8000/api/parkinglots/", data)
-        .then((res) => getParkingLots());
-      console.log(data);
+      swal({
+        title: "Confimación",
+        text: `Una vez que lo inserte, no podrá cambiarlo. ¿Seguro?`,
+        buttons: true,
+        dangerMode: true,
+      }).then((willInsert) => {
+        if (willInsert) {
+
+          axios
+            .post("http://127.0.0.1:8000/api/parkinglots/", data)
+            .then((res) => getParkingLots())
+        } else {
+          swal("No ha ocurrido nada", { dangerMode: true });
+        }
+      });
+
     }
   };
 

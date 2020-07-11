@@ -19,6 +19,7 @@ import EmployeeTable from './components/pages/employees/EmployeeTable';
 import EmployeeForm from './components/pages/employees/EmployeeForm';
 import RecordTable from './components/pages/orders/RecordTable';
 import LangGenre from './components/pages/lang-genr/LangGenre';
+import VehicleList from './components/pages/vehicles/VehicleList';
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
             <Route path='/admin/orders' component={OrdersList} />
             <Route path='/admin/record' component={RecordTable} />
             <Route path='/admin/clients' component={ClientsList} />
+            <Route path='/admin/vehicles' component={VehicleList} />
           </Switch>
 
         </div>

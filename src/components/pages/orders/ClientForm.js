@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
@@ -11,6 +11,7 @@ const ClientForm = (props) => {
   const [phone, setPhone] = useState(0);
   const [vehicleType, setVehicleType] = useState("1");
   const [id, setId] = useState(0);
+  const [vehicles, setVehicles] = useState([]);
   const history = useHistory();
   const functionId = props.functionId;
 
@@ -72,6 +73,12 @@ const ClientForm = (props) => {
       });
     }
   };
+
+  useEffect(() => {
+    // axios
+    //   .get("http://127.0.0.1:8000/api/vehicles/")
+    //   .then((res) => setVehicles(res.data));
+  });
 
   const insertOrder = (clientId) => {
     let price = vehicleType === "1" ? 20 : 25;
@@ -207,12 +214,14 @@ const ClientForm = (props) => {
               id="vehicleType"
               onChange={(e) => handleChange(e)}
             >
-              <option value="1">Sedan (20$)</option>
+              {/* <option value="1">Sedan (20$)</option>
               <option value="1">Compacto (20$)</option>
-              <option value="1">Coupe (20$)</option>
-              <option value="2">SUV (25$)</option>
-              <option value="2">Pickup (25$)</option>
-              <option value="2">Familiar (25$)</option>
+              <option value="1">Coupe (20$)</option> */}
+              <option value="1">Carro/Auto (20$)</option>
+              <option value="2">Camioneta (25$)</option>
+              {/* <option value="2">SUV (25$)</option> */}
+              {/* <option value="2">Pickup (25$)</option>
+              <option value="2">Familiar (25$)</option> */}
             </select>
           </div>
           {/* Botones de accion */}
