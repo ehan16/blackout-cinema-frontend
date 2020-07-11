@@ -70,6 +70,18 @@ const MovieForm = (props) => {
     ) {
       // Se valida que ningun campo este vacio
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
+      const data = {
+        title: title.toLowerCase(),
+        date,
+        year,
+        genre,
+        duration,
+        language_field: language,
+        subtitle: subtitles,
+        state_now: mode,
+        synopsys,
+      };
+      console.log(data)
     } else {
       const data = {
         title: title.toLowerCase(),
@@ -169,6 +181,7 @@ const MovieForm = (props) => {
             className="form-field text-capitalize"
             onChange={(e) => handleChange(e)}
           >
+            <option value={""}>Ninguno</option>
             {genres.map((genre) => (
               <option value={genre.genre_id} key={genre.genre_id}>
                 {genre.genre}
@@ -225,6 +238,7 @@ const MovieForm = (props) => {
             className="form-field text-capitalize"
             onChange={(e) => handleChange(e)}
           >
+            <option value={""}>Ninguno</option>
             {languages.map((language) => (
               <option value={language.lang_id} key={language.lang_id}>
                 {language.lang}
