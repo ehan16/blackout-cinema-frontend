@@ -6,14 +6,11 @@ import Banner from "../../Banner";
 const OrdersList = () => {
   // Se consiguen las fechas
   const curr = new Date();
-  const aux = curr;
-  aux.setMonth(aux.getMonth() - 1);
   const today = curr.toISOString().substr(0, 10);
-  const past = aux.toISOString().substr(0, 10);
 
   // Variables de la clase
   const [orders, setOrders] = useState([]);
-  const [startDate, setStartDate] = useState(past);
+  const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
 
   const getOrders = async (search) => {
@@ -72,8 +69,8 @@ const OrdersList = () => {
               <input
                 type="date"
                 className="form-field w-50 m-2 p-0"
-                value={today}
-                max={startDate}
+                value={startDate}
+                max={endDate}
                 name="startDate"
                 id="startDate"
                 onChange={(e) => handleChange(e)}

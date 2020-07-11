@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import swal from "sweetalert";
 import Banner from "../../Banner";
 
 const BestClient = () => {
@@ -26,7 +25,7 @@ const BestClient = () => {
         <div className="col mx-md-3 my-5 text-center">
 
           {/* Tabla */}
-          <table className="table table-responsive-sm table-hover table-dark list">
+          <table className="table table-hover table-dark list">
             <thead>
               <tr className="bg-danger">
                 <th scope="col">Cliente ID</th>
