@@ -100,6 +100,12 @@ class Navbar extends React.Component {
                 >
                   Lenguajes / Géneros
                 </Link>
+                <Link
+                  to="/admin/total-client"
+                  className="dropdown-item text-white newHover"
+                >
+                  Mejores clientes
+                </Link>
               </div>
             </div>
           </div>
