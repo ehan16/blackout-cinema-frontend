@@ -71,7 +71,7 @@ const ProductForm = (props) => {
         }
       }
 
-      // window.location.replace("http://localhost:3000/admin/products");
+      window.location.replace("http://localhost:3000/admin/products");
     }
   };
 

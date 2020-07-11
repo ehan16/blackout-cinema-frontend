@@ -5,15 +5,15 @@ function BranchItem(props) {
   return (
     <div className="card branch">
       <div>
-        <h4>{props.branch.place}</h4>
+        <h4 className="text-capitalize">{props.branch.place}</h4>
         <ul
           className="mb-0"
           style={{ listStyleType: "none", paddingBottom: "10px" }}
         >
           {props.admin ? <li>ID: {props.branch.branchs_id}</li> : null}
-          <li>Edo. {props.branch.state_field}</li>
-          <li>{props.branch.city}</li>
-          <li>{props.branch.zone}</li>
+          <li className="text-capitalize">Edo. {props.branch.state_field}</li>
+          <li className="text-capitalize">{props.branch.city}</li>
+          <li className="text-capitalize">{props.branch.zone}</li>
           <li>{props.branch.number_field}</li>
           <li>{props.branch.enable ? "Activo" : "Inactivo"}</li>
         </ul>

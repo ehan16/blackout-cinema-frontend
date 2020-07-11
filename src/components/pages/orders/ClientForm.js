@@ -74,7 +74,7 @@ const ClientForm = (props) => {
   };
 
   const insertOrder = (clientId) => {
-    let price = vehicleType === "1" ? 10 : 20;
+    let price = vehicleType === "1" ? 20 : 25;
     const amount = parseInt(props.amount, 10) + price; // El precio de los productos se convierte en un int
     const order = {
       movie_id: props.movieId,
@@ -207,12 +207,12 @@ const ClientForm = (props) => {
               id="vehicleType"
               onChange={(e) => handleChange(e)}
             >
-              <option value="1">Sedan</option>
-              <option value="1">Compacto</option>
-              <option value="1">Coupe</option>
-              <option value="2">SUV</option>
-              <option value="2">Pickup</option>
-              <option value="2">Familiar</option>
+              <option value="1">Sedan (20$)</option>
+              <option value="1">Compacto (20$)</option>
+              <option value="1">Coupe (20$)</option>
+              <option value="2">SUV (25$)</option>
+              <option value="2">Pickup (25$)</option>
+              <option value="2">Familiar (25$)</option>
             </select>
           </div>
           {/* Botones de accion */}

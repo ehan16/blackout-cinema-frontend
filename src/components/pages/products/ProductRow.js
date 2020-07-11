@@ -5,6 +5,7 @@ import axios from "axios";
 export default function ProductRow(props) {
   // Variables de la clase
   let item;
+  // Para poder identificar si es la lista de compra o los productos ya
   props.item.product !== undefined
     ? (item = props.item.product)
     : (item = props.item);
@@ -13,10 +14,17 @@ export default function ProductRow(props) {
   const [comboP, setComboP] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/combo-product/?combo=2")
-      .then((res) => setComboP(res.data));
+    getProducts();
   }, []);
+
+  const getProducts = async () => {
+    if (item.combo_id !== undefined) {
+      const res = await axios.get(
+        `http://127.0.0.1:8000/api/combo-product/?combo=${item.combo_id}`
+      );
+      setComboP(res.data);
+    }
+  };
 
   return (
     <tr>
@@ -31,7 +39,6 @@ export default function ProductRow(props) {
         <th className="text-capitalize">
           {comboP.map((item) => (
             <p
-              key={item.product_id.product_id}
               style={{ fontSize: "0.8rem", marginBottom: "5px" }}
             >
               {item.product_id.name}
@@ -47,7 +54,13 @@ export default function ProductRow(props) {
       {/* Dependiendo si es producto o combo, se muestra su status o su cantidad */}
       {!props.buy ? (
         <th>
-          {!props.combo ? (item.availability) : item.enable ? (<i className="fa fa-check"></i>) : (<i className="fa fa-times"></i>)}
+          {!props.combo ? (
+            item.availability
+          ) : item.enable ? (
+            <i className="fa fa-check"></i>
+          ) : (
+            <i className="fa fa-times"></i>
+          )}
         </th>
       ) : (
         <th>{props.item.qty}</th>

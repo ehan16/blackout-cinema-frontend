@@ -10,9 +10,9 @@ const MovieForm = (props) => {
 
   // Variables para el formulario
   const [title, setTitle] = useState("");
-  const [genre, setGenre] = useState("1");
+  const [genre, setGenre] = useState("");
   const [duration, setDuration] = useState(0);
-  const [language, setLanguage] = useState("1");
+  const [language, setLanguage] = useState("");
   const [subtitles, setSubtitles] = useState(false);
   const [date, setDate] = useState(today);
   const [mode, setMode] = useState("estreno");
@@ -64,7 +64,9 @@ const MovieForm = (props) => {
       title.trim() === "" ||
       duration < 1 ||
       synopsys.trim() === "" ||
-      year < 2000
+      year < 2000 ||
+      genre === "" ||
+      language === ""
     ) {
       // Se valida que ningun campo este vacio
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });

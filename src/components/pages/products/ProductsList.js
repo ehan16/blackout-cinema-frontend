@@ -104,7 +104,7 @@ export class ProductsList extends Component {
                 />
                 <button
                   className="continue"
-                  style={continueStyle}
+                  style={{ margin: "20px 0px" }}
                   onClick={this.showModal}
                 >
                   Continuar
@@ -201,9 +201,7 @@ export class ProductsList extends Component {
           .put(`http://127.0.0.1:8000/api/${mode}/${id}/`, data)
           .then((res) => {
             this.getProducts(); // Se actualiza la informacion mostrada
-            swal("Exitoso", "¡Se ha eliminado el producto!", "info", {
-              dangerMode: true,
-            });
+            swal("Exitoso", "¡Se ha eliminado el producto!", "info", { dangerMode: true });
           });
       } else {
         swal("No ha ocurrido nada", { dangerMode: true });
@@ -219,9 +217,5 @@ export class ProductsList extends Component {
     this.setState({ show: false });
   };
 }
-
-const continueStyle = {
-  margin: "20px 0px",
-};
 
 export default ProductsList;
