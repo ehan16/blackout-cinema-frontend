@@ -2,30 +2,32 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 
-const ParkingLotList = (props) => {
+const VehicleList = (props) => {
   // Variables de la clase
-  const [parkingLots, setParkingLots] = useState();
-  const [capacity, setCapacity] = useState(50);
+  const [model, setModel] = useState("");
+  const [price, setPrice] = useState(35);
 
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
     switch (name) {
-      case "capacity":
-        setCapacity(value);
+      case "model":
+        setModel(value);
         break;
+      case "price":
+        setPrice(value);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (capacity < 20) {
+    if (price < 20 || model.trim() === "") {
       // Se valida que ningun campo este vacio o erroneo
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
       const data = {
-        branch: props.branchId,
-        capacity,
+        model: model.toLowerCase(),
+        price,
       };
 
       axios
@@ -101,4 +103,4 @@ const ParkingLotList = (props) => {
   );
 };
 
-export default ParkingLotList;
+export default VehicleList;

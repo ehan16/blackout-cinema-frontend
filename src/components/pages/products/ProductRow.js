@@ -38,9 +38,7 @@ export default function ProductRow(props) {
       {props.combo ? (
         <th className="text-capitalize">
           {comboP.map((item) => (
-            <p
-              style={{ fontSize: "0.8rem", marginBottom: "5px" }}
-            >
+            <p style={{ fontSize: "0.8rem", marginBottom: "5px" }}>
               {item.product_id.name}
             </p>
           ))}
@@ -82,7 +80,7 @@ export default function ProductRow(props) {
               <button
                 className="btn"
                 style={btnStyle}
-                onClick={() => props.addProduct(item)}
+                onClick={() => props.addProduct(item, index)}
                 disabled={item.availability === 0 || !item.enable}
               >
                 <i className="fa fa-plus"></i>
@@ -94,13 +92,7 @@ export default function ProductRow(props) {
         {/* Cuando es administrador */}
         {props.admin ? (
           <div className="btn-group btn-group-sm">
-            {props.combo ? (
-              <Link to={`/admin/combos/${item.combo_id}`}>
-                <button className="btn" style={btnStyle}>
-                  <i className="fa fa-pencil"></i>
-                </button>
-              </Link>
-            ) : (
+            {props.combo ? null : (
               <Link to={`/admin/products/${item.product_id}`}>
                 <button className="btn" style={btnStyle}>
                   <i className="fa fa-pencil"></i>

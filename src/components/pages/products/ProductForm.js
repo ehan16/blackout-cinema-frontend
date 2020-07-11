@@ -40,7 +40,13 @@ const ProductForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.trim() === "" || price < 1 || availability < 1) {
+    if (
+      name.trim() === "" ||
+      price < 1 ||
+      availability < 1 ||
+      (category === "combo" && productInputs.length === 0) ||
+      invalidCombo()
+    ) {
       // Se valida que ningun campo este vacio
       swal("ERROR", "Existen campos inválidos", "error", { dangerMode: true });
     } else {
@@ -87,44 +93,62 @@ const ProductForm = (props) => {
 
   const getProduct = async () => {
     const productId = props.match.params.productId; // Se identifica el id del producto a editar
-    if (props.combo) {
-      const res = await axios.get(
-        `http://127.0.0.1:8000/api/combos/${productId}/`
-      );
-      setName(res.data.name);
-      setPrice(res.data.price);
-      setAvailability(100);
-      setCategory("combo");
-    } else {
-      const res = await axios.get(
-        `http://127.0.0.1:8000/api/products/${productId}/`
-      );
-      setName(res.data.name);
-      setPrice(res.data.price);
-      setAvailability(res.data.availability);
-      setCategory(res.data.category);
-    }
+
+    const res = await axios.get(
+      `http://127.0.0.1:8000/api/products/${productId}/`
+    );
+    setName(res.data.name);
+    setPrice(res.data.price);
+    setAvailability(res.data.availability);
+    setCategory(res.data.category);
   };
 
   const addNewProduct = () => {
     setProductInputs((prevProducts) => [...prevProducts, { id: "" }]);
+    console.log(productInputs);
+  };
+
+  const deleteProduct = (index) => {
+    setProductInputs((prevProducts) =>
+      prevProducts.filter((item, i) => index !== i)
+    );
+    console.log(productInputs);
   };
 
   const insertProducts = (combo_id) => {
     console.log(combo_id);
     console.log(productInputs);
-    productInputs.map(product => {
-
+    productInputs.map((product) => {
       const data = {
         product_id: product.id,
         combo_id,
-      }
+      };
 
       console.log(data);
 
-      axios.post('http://127.0.0.1:8000/api/combo-product/', data );
-    })
-  }
+      axios.post("http://127.0.0.1:8000/api/combo-product/", data);
+    });
+  };
+
+  const invalidCombo = () => {
+    let invalid = false;
+
+    productInputs.forEach((product) => {
+      if (product.id === "") {
+        invalid = true;
+      }
+    });
+
+    return invalid;
+  };
+
+  const deleteBtn = {
+    backgroundColor: "#373d42",
+    border: "1px solid #373d42",
+    color: "red",
+    width: "46px",
+    margin: "0 0 0 10px",
+  };
 
   return (
     <div>
@@ -193,21 +217,33 @@ const ProductForm = (props) => {
             </button>
             <div className="form-group">
               {productInputs.map((item, index) => (
-                <select
-                  key={index}
-                  value={item.id}
-                  data-id={index}
-                  className="form-field my-2"
-                  name="id"
-                  onChange={handleProductChange}
-                >
-                  <option value={""}>Ninguno</option>
-                  {products.map((product) => (
-                    <option key={product.product_id} value={product.product_id}>
-                      {product.name}
-                    </option>
-                  ))}
-                </select>
+                <div className="flex my-2 text-center">
+                  <select
+                    key={index}
+                    value={item.id}
+                    data-id={index}
+                    className="form-field w-75"
+                    name="id"
+                    onChange={handleProductChange}
+                  >
+                    <option value={""}>Ninguno</option>
+                    {products.map((product) => (
+                      <option
+                        key={product.product_id}
+                        value={product.product_id}
+                      >
+                        {product.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    style={deleteBtn}
+                    onClick={() => deleteProduct(index)}
+                  >
+                    <i className="fa fa-trash"></i>
+                  </button>
+                </div>
               ))}
             </div>
           </div>

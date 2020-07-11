@@ -117,11 +117,31 @@ export class ProductsList extends Component {
     );
   }
 
-  addProduct = (newProduct) => {
+  addProduct = (newProduct, productIndex) => {
     const newAmount = this.state.amount + parseInt(newProduct.price, 10);
     const index = this.state.buyList.findIndex(
-      (item) => item.product === newProduct
+      (item) => item.product.name === newProduct.name
     );
+    
+    if (newProduct.product_id !== undefined) {
+      
+      const ogProduct = {
+        product_id: newProduct.product_id,
+        name: newProduct.name,
+        category: newProduct.category,
+        price: newProduct.price,
+        availability: parseInt(newProduct.availability, 10) - 1,
+        enable: newProduct.enable,
+      };
+
+      this.setState({
+        products: [
+          ...this.state.products.slice(0, productIndex),
+          ogProduct,
+          ...this.state.products.slice(productIndex + 1),
+        ],
+      });
+    }
 
     if (index === -1) {
       // Si el indice es -1, se inserta por primera vez el producto
@@ -131,7 +151,6 @@ export class ProductsList extends Component {
       });
     } else {
       // De resto, se actualiza la cantidad
-      // Se convierte en entero para evitar errores
       const newQty = parseInt(this.state.buyList[index].qty, 10) + 1;
 
       this.setState({
@@ -196,12 +215,14 @@ export class ProductsList extends Component {
     }).then((willDelete) => {
       if (willDelete) {
         const id = isProduct ? product.product_id : product.combo_id;
-        const mode = isProduct ? 'products' : 'combos';
+        const mode = isProduct ? "products" : "combos";
         axios
           .put(`http://127.0.0.1:8000/api/${mode}/${id}/`, data)
           .then((res) => {
             this.getProducts(); // Se actualiza la informacion mostrada
-            swal("Exitoso", "¡Se ha eliminado el producto!", "info", { dangerMode: true });
+            swal("Exitoso", "¡Se ha eliminado el producto!", "info", {
+              dangerMode: true,
+            });
           });
       } else {
         swal("No ha ocurrido nada", { dangerMode: true });
